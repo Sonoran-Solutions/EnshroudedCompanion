@@ -22,9 +22,11 @@ Purpose: establish load/disable/restart and fail-closed behavior of the single c
 Prerequisites:
 
 1. Owner has confirmed NPC embodiment, this-machine testing and investigation cap. One client is available: two-client scenarios remain NOT_RUN. Establish the exact local launch topology.
-2. Select the disposable world; record a consistent stopped-world backup and demonstrate restoration. Keep private saves outside Git. No restoration of a valued/shared world.
+2. Use the owner-authorized default-character shared world in OFFLINE mode. Verify its reported reset on exit/reopen and character-state isolation; record template identity and baseline. This supersedes the original new-world prerequisite. Keep any private save evidence outside Git.
 3. Capture current client and server hashes independently, toolchain and compatibility-layer version, source SHA, exact launch/configuration and existing processes.
 4. Resolve source-review safety blockers. Unknown builds and required missing symbols must refuse activation before unsafe hooks. No structural-revalidation override or guessed address to get past a gate.
 5. Review the exact runtime configuration and permitted native actions. The present repo contains no loadable module or native action implementation.
 
 Run only the smallest applicable rows in [scenario matrix](SCENARIOS.md). Capture timestamped expected/actual results, command and process ownership, exit status and cleanup. Record absent APIs as unresolved; do not substitute raw writes, teleportation, visual labels, or save edits. Subsequent read-only, actor and construction jobs remain gated as specified in the tickets. Stop after P0; P1 requires a separate owner disposition.
+
+Follow-up: Steam update in progress and source-confirmed startup safety blockers prevent launch. See [runtime preflight](RUNTIME_PREFLIGHT.md) and the [disabled lifecycle package](../../probes/shroudforge/README.md). Refresh identities only after the update completes.

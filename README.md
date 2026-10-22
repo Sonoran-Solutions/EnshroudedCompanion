@@ -2,7 +2,7 @@
 
 An experimental AI companion for Enshrouded: someone who can adventure and fight alongside you, help with building, and roleplay using what is actually happening in your game. The intended backend can be local, such as Qwen or Gemma, or hosted through OpenRouter.
 
-**Status: P0 HOLD.** Source investigation and offline client fingerprint collection are complete; all five live capabilities remain NOT_RUN. The owner approved bounded Phase 0 and native NPC embodiment. Live tests await a disposable world and demonstrated restore; only one test client is available. See the [Phase 0 checkpoint](docs/p0/REPORT.md).
+**Status: P0 HOLD.** Source investigation and offline client fingerprint collection are complete; all live tests remain NOT_RUN; RUNTIME is HOLD on inspected startup guard blockers. The owner approved bounded Phase 0 and native NPC embodiment. The owner authorized offline disposable shared worlds; reset and strict runtime guards remain unverified; only one test client is available. See the [Phase 0 checkpoint](docs/p0/REPORT.md).
 
 The main uncertainty is the **game bridge**, not the chat model. An LLM can suggest a plan and speak in character; dependable movement, combat, quests, and construction require verified access to Enshrouded's runtime. Loading a mod or reading an asset is not proof that those actions are available.
 
@@ -24,7 +24,7 @@ The main uncertainty is the **game bridge**, not the chat model. An LLM can sugg
 
 ## Recommended first step
 
-Create the owner-designated disposable world and resume the authorized bounded Phase 0 investigation with a demonstrated restore. Prove live state access and control of one companion actor before building the larger runtime. Evaluate native construction separately. If the required hooks are unavailable, stop with evidence and choose a reduced scope or another integration route explicitly.
+After Steam finishes updating, recapture the installed build identity, resolve runtime guard blockers and verify the owner-authorized offline world reset. Prove live state access and control of one companion actor before building the larger runtime. Evaluate native construction separately. If the required hooks are unavailable, stop with evidence and choose a reduced scope or another integration route explicitly.
 
 The proposed first playable is **one companion that follows, stops, assists in a limited fight, and talks about verified events and the player's selected objective**. It is not an autonomous player that can already handle every dungeon, jump, puzzle, or building style.
 

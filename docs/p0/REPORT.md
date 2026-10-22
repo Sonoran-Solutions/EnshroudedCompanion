@@ -2,6 +2,18 @@
 
 Date: 2026-10-22. P0 was explicitly authorized. This bounded session completed source investigation and offline identity tooling; live feasibility is **not established**. Owner disposition on continuation beyond P0: **PENDING**. P1 and all later phases remain held.
 
+## Follow-up checkpoint — disposable sessions and active update
+
+The owner clarified that shared-player worlds can be loaded OFFLINE using the default character, are disposable, and return to their baseline after exiting and reopening. This is the authorized test-world/reset approach; a new local world is no longer required. Reset behavior remains owner-reported, not observed. Verify it before experimental mutation, including whether character state is isolated. Available computer tools do not control native game menus, so menu interactions/reset observations require a human operator.
+
+Steam began updating Enshrouded during preflight. The fingerprint below is **historical**, not current launch authorization. No new fingerprint was captured during the update. Installed Proton Experimental version file reads `1791989105 experimental-11.0-20261014-x86_64`; its actual use and runtime compatibility remain untested.
+
+**Current RUNTIME verdict: HOLD from inspected startup safety blockers; all live runtime assertions remain NOT_RUN.** [Detailed preflight](RUNTIME_PREFLIGHT.md) shows the selected stock loader patches the entrypoint before exact-profile checks and does not propagate all required initialization failures. No guards were bypassed. The other four capabilities remain NOT_RUN. No loadable native artifact was installed or launched.
+
+An [inert lifecycle probe](../../probes/shroudforge/README.md) is now prepared and disabled. It only logs lifecycle callbacks. JSON syntax passed; Lua/native/package runtime validation NOT_RUN. It cannot repair or substitute for the underlying loader guards. Toolchain inspection found no ready documented Windows build toolchain on PATH. A bounded guard-hardening effort is within approved P0 but cannot be deployed without a runnable native negative-test route.
+
+Follow-up effort: approximately 10 minutes elapsed, about 15 aggregate agent-minutes estimated. No executable downloads, game launches, builds, saves, Steam settings or update state were changed. The approved cap remains largely unspent. Next engineering task is strict loader startup/refusal hardening and its native negative tests, after fresh post-update identity; default-character/offline reset verification is also still required. The earlier 0.5–1-day load-test estimate is conditional on resolving this newly confirmed safety blocker, not a promise that stock deployment can proceed.
+
 ## Owner decisions and environment
 
 The owner confirmed in this session: native NPC embodiment is acceptable; test only on this machine with the Steam installation; only one authorized client is available; the owner will create a disposable world (none exists yet); the proposed 5–10 focused developer-day maximum and runtime installation/mutation permissions are approved. This supersedes the planning-only authorization boundary for P0, not for later phases or valued saves.
@@ -14,11 +26,11 @@ The local client manifest is Steam app `1203620`, build `26082781`; executable S
 
 | Capability | Verdict | Evidence | Blockers |
 | --- | --- | --- | --- |
-| RUNTIME | NOT_RUN | Installed client file identity matches a pinned upstream profile; no load attempt | Disposable world absent; restore not demonstrated; startup fallback and missing-symbol refusal not certified; Proton runtime untested |
+| RUNTIME | HOLD (source); live NOT_RUN | Historical file/profile match; inspected startup guard failures | Active Steam update; pre-hook exact-build refusal and required-symbol propagation absent; reset not demonstrated; Proton runtime untested |
 | OBSERVATION | NOT_RUN | Source contains bounded ECS readers; no actual snapshots collected | RUNTIME gate; owner/entity/world identity, health/position semantics, sustained freshness and reload behavior unproven |
 | QUEST | NOT_RUN | No scoped quest API established by targeted source review | Runtime/observation gates; personal/world scope unresolved; second client unavailable |
 | ACTOR | NOT_RUN | Generic candidate SpawnEntity path inspected as building-prop operation, not NPC control | Identity/authority gate; NPC ownership, navigation, combat and cleanup path unproven; second client unavailable |
-| BUILDING | NOT_RUN — voxels and props separately | Source has native voxel and prop operations; no operation attempted | No disposable area or restore; native material debit/permissions/recovery unproven; second client unavailable |
+| BUILDING | NOT_RUN — voxels and props separately | Source has native voxel and prop operations; no operation attempted | Offline disposable reset unverified; native material debit/permissions/recovery unproven; second client unavailable |
 
 Overall HOLD reflects missing test prerequisites and unresolved technical surfaces, not proof that the game cannot support a companion. No passing core subset exists from which to approve a reduced-scope implementation. Single-client testing, once possible, cannot satisfy the required multiplayer and two-client quest assertions. Do not silently reduce those criteria.
 
@@ -45,7 +57,7 @@ Network clones were bounded at 30 seconds each; fingerprint and targeted tests w
 
 ## Recommended next task
 
-**Resume DYL-136 only after the owner creates the disposable world.** Establish and demonstrate its consistent backup/restore on this machine, pin the exact Proton/runtime toolchain, and resolve strict unsupported-build/missing-symbol behavior for the selected ShroudForge probe before a short load/disable/restart test. Expected initial engineering effort: 0.5–1 focused developer-day, conditional on toolchain and guard complexity; stop/report rather than exceed the subsystem limit. Record the exact job command, output, timeout, process owner and safety assertions before launch.
+**Resume DYL-136 using the owner-authorized offline disposable sessions, after the update and strict runtime guard blockers are resolved.** Establish and demonstrate its consistent backup/restore on this machine, pin the exact Proton/runtime toolchain, and resolve strict unsupported-build/missing-symbol behavior for the selected ShroudForge probe before a short load/disable/restart test. Expected initial engineering effort: 0.5–1 focused developer-day, conditional on toolchain and guard complexity; stop/report rather than exceed the subsystem limit. Record the exact job command, output, timeout, process owner and safety assertions before launch.
 
 Only after RUNTIME passes, attempt the smallest read-only identity/snapshot slice of DYL-137. Two-client quest/replication coverage remains blocked unless authorized second-client access becomes available or the owner explicitly approves a precisely documented reduced verification scope. Neither an observer-only product nor second-client automation is implemented here. No P1 task is recommended to start yet.
 

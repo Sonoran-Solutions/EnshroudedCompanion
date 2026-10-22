@@ -79,3 +79,5 @@ No legal permission, license compatibility, anti-cheat status or public-server a
 [Exact pinned implementation review](p0/SOURCE_REVIEW.md) supersedes the initial high-level loader assessment for this checkpoint. EML's inspected runtime DLL loop is commented; Ember's inspected loader/signature/entity surfaces are prose, not implemented functions. Shroudtopia supplies a generic loader. ShroudForge has implemented ECS and world operation code plus a profile matching the installed client; it is the selected investigation route. Its startup fallback and native-action semantics require further proof. No scoped quest or companion-control route has been established.
 
 The [report](p0/REPORT.md) records all capabilities NOT_RUN, including voxel and prop construction independently. Matching a binary profile is not passing runtime validation.
+
+The follow-up [runtime preflight](p0/RUNTIME_PREFLIGHT.md) establishes source-level RUNTIME HOLD for the stock selected loader's startup ordering/refusal behavior. No runtime result is inferred. A Steam update makes the earlier local identity historical until re-collected.
