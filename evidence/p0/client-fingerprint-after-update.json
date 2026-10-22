@@ -1,0 +1,18 @@
+{
+  "schema": "p0-file-identity-v1",
+  "steam": {
+    "appid": "1203620",
+    "buildid": "26082781"
+  },
+  "executable": {
+    "bytes": 35338312,
+    "sha256": "d64966e23b1a458ee6f147bcbceac0b577fa7e39a212f371287d8cc119817882",
+    "pe_machine": "AMD64"
+  },
+  "runtime_verdict": "NOT_RUN",
+  "compatibility": "NOT_VERIFIED",
+  "limitations": [
+    "Manifest and binary association is supplied by the operator.",
+    "No game revision, symbol availability, load or compatibility is proven."
+  ]
+}

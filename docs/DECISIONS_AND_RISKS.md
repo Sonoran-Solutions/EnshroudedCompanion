@@ -69,3 +69,25 @@ Resolve only when needed; do not block source research on every future preferenc
 Append the choice, date, owner instruction, affected documents and consequences. Keep superseded decisions with a replacement reference. Never rewrite a HOLD as PASS because the roadmap would otherwise be blocked.
 
 Source evidence belongs in [research](FEASIBILITY_AND_RESEARCH.md); execution evidence belongs in [validation](VALIDATION_AND_OPERATIONS.md); current phase/gate state belongs in [status](STATUS.md).
+
+## P0 kickoff decisions — 2026-10-22
+
+The owner explicitly authorized P0 and Sol/Luna orchestration, accepted a native NPC companion, restricted tests to this machine's Steam installation, confirmed only one client, and approved the proposed 5–10 focused developer-day ceiling plus runtime installation/mutation permissions. No disposable world exists yet; the owner will create one. This supersedes R004 for bounded P0 only. No P1, alternate embodiment, valued-world changes, merge or auto-merge is authorized.
+
+ShroudForge `3ed90de1` is the single selected investigation candidate based on inspected source and matching local client fingerprint. It is not runtime-verified. Unknown-build fallback paths, scoped quests, actor control and material accounting remain risks; see [P0 report](p0/REPORT.md). All live capabilities are NOT_RUN. Single-client availability cannot satisfy multiplayer or two-client quest acceptance. Further owner disposition is PENDING.
+
+## P0 disposable-session clarification and update
+
+Owner authorizes the default character and any shared-player world loaded OFFLINE, reporting that these sessions reset to baseline on exit/reopen. This supersedes waiting for a newly created world. Reset is not yet observed; actor/construction gates still require demonstrated recovery and character-state isolation. Steam is updating Enshrouded, so previous file identities are historical. Source inspection establishes RUNTIME HOLD for strict startup refusal in stock ShroudForge; live tests remain NOT_RUN. See [runtime preflight](p0/RUNTIME_PREFLIGHT.md). No runtime installed, guard disabled or game launched.
+
+## Guard fix request and outcome
+
+Owner requested resolving loader guards before being guided through the offline reset. Guard patch `4919b51` now checks identity before startup patching, requires exact execution profiles, propagates required initialization failures and cleans up attach failures. Focused native/fixture checks pass; no game test implied. Updated Steam identity is unchanged, but the matching profile is read-only and lacks execution definitions. Full DLL cross-build also remains unvalidated. RUNTIME stays HOLD; no reset check requested yet. No fallback, old-offset reuse or provenance promotion is authorized by a guard fix.
+
+P0 build/profile continuation: complete selected-path binaries now build. An initial self-forwarding bootstrap was rejected; final exact absolute system-DLL forwarders passed synthetic invocation. Current hook signatures all fail, and descriptor registration alone does not establish scheduler/query ABI, world ownership or safe phase. Keep RUNTIME HOLD without fabricating an execution profile; defer offline reset until a defensible no-op hook test exists.
+
+
+Scheduler continuation: the exact-build original descriptor/registry/batch/indirect-call path now establishes a static iterator → query-frame → manager relationship, with both inline and worker execution. The traced Scene shared-lock path cannot acquire the existing exclusive `EcsWriteGuard`; it is not a general write-dispatch location. Keep the production profile refusing execution. A separate fixture-only bounded concurrent telemetry core prepares observation without granting action authority. Entry replay, ABI preservation, unwind and lifetime validation remain prerequisites to a no-op install; no game launch or reset check yet. [Evidence](../evidence/p0/profile-investigation/README.md), [safety review](../evidence/p0/scheduler-safety-review.md).
+
+
+Diagnostic checkpoint: the separate strict-identity bootstrap, current-entry adapter and bounded telemetry now build and pass synthetic integration/refusal checks. Adapter evidence includes 301 virtual-unwind contexts and signed -200 displacement; this is not raised-exception or game compatibility evidence. Production profile refusal remains unchanged. The private copy backup and empty-folder restore hashes passed without touching source saves. Next gate is owner-observed offline world and character reset, then a specified bounded diagnostic session. RUNTIME HOLD; all other capabilities NOT_RUN. See [current report](p0/REPORT.md) and [probe plan](p0/NOOP_HOOK_PLAN.md).

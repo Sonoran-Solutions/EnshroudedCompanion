@@ -1,0 +1,34 @@
+[
+  {
+    "profile": "enshrouded/client/1076226.json",
+    "sha256": "af2f5a1227911d8aa06b3908d6bd0211838211cae14ea91099cb57d0df990781",
+    "provenance": "legacy",
+    "has_hooks": true,
+    "has_ecsLayout": true,
+    "has_ecsReadLayout": false
+  },
+  {
+    "profile": "enshrouded/client/25966634.json",
+    "sha256": "4d6d43ea4a91e71c82d60b045dde932179c99e32e40657efe374688b2933589a",
+    "provenance": "read-validated",
+    "has_hooks": false,
+    "has_ecsLayout": false,
+    "has_ecsReadLayout": true
+  },
+  {
+    "profile": "enshrouded/client/25988036.json",
+    "sha256": "82e5020a8736348cd0374f004b2f5e5ef456b5bd27aa5420df34c7dd241cfeeb",
+    "provenance": "read-validated",
+    "has_hooks": false,
+    "has_ecsLayout": false,
+    "has_ecsReadLayout": true
+  },
+  {
+    "profile": "enshrouded/client/26082781.json",
+    "sha256": "d64966e23b1a458ee6f147bcbceac0b577fa7e39a212f371287d8cc119817882",
+    "provenance": "read-validated",
+    "has_hooks": false,
+    "has_ecsLayout": false,
+    "has_ecsReadLayout": true
+  }
+]

@@ -1,0 +1,2 @@
+PASS: actual Rust DLL load, four exports, null-input refusal, unload; no game root supplied
+exit=0

@@ -1,6 +1,6 @@
 # Phase 0 implementation handoff
 
-Status: ready as a **proposed task brief**, not permission to execute. Use after the owner explicitly authorizes Phase 0 and provides an appropriate test environment. This document can be handed to an orchestrator without starting the rest of the roadmap.
+Status: **P0 authorized; loader binaries built, live execution held on current execution-hook context before disposable-world reset verification.** See [checkpoint](p0/REPORT.md). This remains the bounded task brief. Use after the owner explicitly authorizes Phase 0 and provides an appropriate test environment. This document can be handed to an orchestrator without starting the rest of the roadmap.
 
 ## Mission
 

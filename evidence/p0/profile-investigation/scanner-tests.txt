@@ -1,0 +1,9 @@
+........
+----------------------------------------------------------------------
+Ran 8 tests in 0.002s
+
+OK
+
+Final recheck: timeout 30 python3 tools/p0_profile_test.py
+Ran 8 tests in 0.001s: OK
+Invocation note: python3 -m unittest tools/p0_profile_test.py from repo root failed import resolution for p0_profile_inspect; direct script invocation above is the supported command and passed.

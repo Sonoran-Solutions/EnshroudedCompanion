@@ -1,0 +1,26 @@
+[
+  {
+    "package": "rustc",
+    "target": "x86_64-unknown-linux-gnu",
+    "url": "https://static.rust-lang.org/dist/2026-10-15/rustc-1.99.1-x86_64-unknown-linux-gnu.tar.xz",
+    "sha256": "2ff05ff9c08a90861e7f6e4065b40a8b87463b4576186fd613871c3e37f2091f"
+  },
+  {
+    "package": "cargo",
+    "target": "x86_64-unknown-linux-gnu",
+    "url": "https://static.rust-lang.org/dist/2026-10-15/cargo-1.99.1-x86_64-unknown-linux-gnu.tar.xz",
+    "sha256": "53f3521949404d595efb06a55c12c5658d4ed1c75566f33d3d514eaebe70bd8a"
+  },
+  {
+    "package": "rust-std",
+    "target": "x86_64-unknown-linux-gnu",
+    "url": "https://static.rust-lang.org/dist/2026-10-15/rust-std-1.99.1-x86_64-unknown-linux-gnu.tar.xz",
+    "sha256": "109b074225bf5b9ea3820890876bfdf4ed161adbfaf94b2b4b5984c85ee5d958"
+  },
+  {
+    "package": "rust-std",
+    "target": "x86_64-pc-windows-gnu",
+    "url": "https://static.rust-lang.org/dist/2026-10-15/rust-std-1.99.1-x86_64-pc-windows-gnu.tar.xz",
+    "sha256": "b17e3bc962ff24b3bc47a750d838defed85b280746250e3a3ad029e6c1a29dd7"
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "schema": "p0-copy-only-backup-rehearsal-v1",
+  "utc": "20261022T221655Z",
+  "source_directories": 1,
+  "files": 35,
+  "bytes": 2349782,
+  "backup_hash_verified": true,
+  "restore_to_separate_directory_hash_verified": true,
+  "active_save_restore": "NOT_RUN",
+  "in_game_load_of_restored_save": "NOT_RUN",
+  "shared_world_reset": "NOT_RUN",
+  "source_files_written": false,
+  "private_backup_location": "~/.local/share/EnshroudedCompanion/p0-backups/20261022T221655Z",
+  "limitations": [
+    "Steam Cloud behavior and game-level recovery are not verified by a byte-copy rehearsal."
+  ]
+}

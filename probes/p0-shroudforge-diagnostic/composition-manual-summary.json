@@ -1,0 +1,23 @@
+{
+  "diagnosticOnly": true,
+  "disabled": true,
+  "capacity": 8192,
+  "samples": [
+    {
+      "elapsedMs": 0,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    }
+  ],
+  "afterDisable": {
+    "elapsedMs": 97,
+    "reserved": 10,
+    "dropped": 0,
+    "published": 10,
+    "uniqueThreads": 1
+  },
+  "quiescenceProven": false,
+  "pendingCapturesMayFinish": true
+}

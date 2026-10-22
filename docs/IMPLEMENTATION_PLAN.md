@@ -1,8 +1,8 @@
 # Implementation plan
 
-Status: **PROPOSED; all phases NOT_STARTED**. This is a task plan, not evidence that the underlying game hooks exist. Task IDs below are document identifiers, not created GitHub issues.
+Status: **P0 authorized; source checkpoint HOLD, live gates NOT_RUN. P1–P6 NOT_STARTED.** See [P0 report](p0/REPORT.md). This is a task plan, not evidence that the underlying game hooks exist. Task IDs below are document identifiers, not created GitHub issues.
 
-The owner authorized the documentation package. Starting experiments, choosing a paid provider, accessing a game installation or proceeding to a later phase requires the corresponding task authorization. Do not treat a roadmap dependency as permission to run it.
+The owner authorized the documentation package and subsequently bounded P0; see the recorded kickoff decisions. Starting experiments, choosing a paid provider, accessing a game installation or proceeding to a later phase requires the corresponding task authorization. Do not treat a roadmap dependency as permission to run it.
 
 ## Sequence and gates
 

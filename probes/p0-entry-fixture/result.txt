@@ -1,0 +1,18 @@
+Ubuntu clang version 21.1.8 (6ubuntu1)
+Target: x86_64-pc-linux-gnu
+Thread model: posix
+InstalledDir: /tmp/enshrouded-p0-toolchain/root/usr/lib/llvm-21/bin
+GNU ld (GNU Binutils) 2.45.90.20260125
+Copyright (C) 2026 Free Software Foundation, Inc.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License version 3 or (at your option) a later version.
+This program has absolutely no warranty.
+wine-11.0
+Synthetic fixture EXE SHA256: 5844e9e28de94e34fb0f0c526e98ef23ddbb6b84b4c9e223134e5a5827775769
+wine: created the configuration directory '/tmp/p0-entry-fixture.hb9daO/prefix'
+wineserver: using server-side synchronization.
+PASS: reusable fixture builder; 26 contract refusals before executable allocation
+PASS: volatile GPR/XMM0-5/flags, raw RCX, alignment and 32-byte shadow space
+PASS: copied synthetic 2/1/8 RBP/RBX/LEA prologue and shadow-slot continuation jump; 7 signed displacements including -200, 301 unwind checks
+PASS: return/home/stack-argument canaries; rejected RIP-indirect unwind hazard reproduced separately
+LIMIT: synthetic only; no raised SEH/native Windows/game/installer/general relocation/teardown proof

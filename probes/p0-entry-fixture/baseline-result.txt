@@ -1,0 +1,5 @@
+wine: created the configuration directory '/tmp/p0-entry-fixture.30a4xQ/prefix'
+wineserver: using server-side synchronization.
+PASS: volatile GPR/XMM0-5/flags, raw RCX, aligned call and 32-byte shadow space
+PASS: dynamic lookup and RtlVirtualUnwind at 12 adapter/copied-prologue boundaries
+LIMIT: synthetic fixture, no SEH exception dispatch, no game/installer/relocator/teardown proof

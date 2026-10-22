@@ -1,6 +1,6 @@
 # Feasibility and research
 
-Research checked: **2026-10-22**. Scope: public primary documentation, project repositories, and official game announcements. No installed game binaries were examined and no game hooks were tested for this documentation package.
+Research checked: **2026-10-22**. Scope: public primary documentation, project repositories, and official game announcements. The initial documentation package examined no installed binaries or game hooks. The subsequent [P0 source review](p0/SOURCE_REVIEW.md) inspected current source and local client identity; no game hooks were tested.
 
 ## Bottom line
 
@@ -73,3 +73,21 @@ S1–S20 above form the source register for the initial assessment. They are dir
 Refresh the source register when the game, loader, API, or model route changes. Do not copy a compatibility claim from an old research date into a release. Record what was actually tested in the [validation evidence](VALIDATION_AND_OPERATIONS.md), even if upstream documentation says it should work.
 
 No legal permission, license compatibility, anti-cheat status or public-server acceptability is inferred from community tooling existing. Review applicable terms and component licenses before distribution; never bypass access restrictions.
+
+## P0 source refresh — 2026-10-22
+
+[Exact pinned implementation review](p0/SOURCE_REVIEW.md) supersedes the initial high-level loader assessment for this checkpoint. EML's inspected runtime DLL loop is commented; Ember's inspected loader/signature/entity surfaces are prose, not implemented functions. Shroudtopia supplies a generic loader. ShroudForge has implemented ECS and world operation code plus a profile matching the installed client; it is the selected investigation route. Its startup fallback and native-action semantics require further proof. No scoped quest or companion-control route has been established.
+
+The [report](p0/REPORT.md) records all capabilities NOT_RUN, including voxel and prop construction independently. Matching a binary profile is not passing runtime validation.
+
+The follow-up [runtime preflight](p0/RUNTIME_PREFLIGHT.md) establishes source-level RUNTIME HOLD for the stock selected loader's startup ordering/refusal behavior. No runtime result is inferred. A Steam update makes the earlier local identity historical until re-collected.
+
+Guard work clarified the profile distinction: `client/26082781.json` is `read-validated` with no `hooks`/`ecsLayout`. The only client execution profile in the pinned source is older `1076226.json`. A matching executable hash therefore establishes read-profile identity, not executable action support. The [strict patch](../patches/shroudforge/README.md) must refuse it. Fresh post-update identity is unchanged; see [guard evidence](../evidence/p0/guards/VALIDATION.md).
+
+Current follow-up: selected-path native and Rust binaries cross-build and pass isolated synthetic load/refusal checks. All six historical full hook signatures have zero current-build matches. Current descriptor registration is traced to a mutable record, but scheduler invocation/query ABI and owner lifetime remain unresolved. See [hook evidence](../evidence/p0/profile-investigation/README.md) and [build evidence](../evidence/p0/build-investigation/README.md). No live capability is established.
+
+
+Scheduler continuation: the exact-build original descriptor/registry/batch/indirect-call path now establishes a static iterator → query-frame → manager relationship, with both inline and worker execution. The traced Scene shared-lock path cannot acquire the existing exclusive `EcsWriteGuard`; it is not a general write-dispatch location. Keep the production profile refusing execution. A separate fixture-only bounded concurrent telemetry core prepares observation without granting action authority. Entry replay, ABI preservation, unwind and lifetime validation remain prerequisites to a no-op install; no game launch or reset check yet. [Evidence](../evidence/p0/profile-investigation/README.md), [safety review](../evidence/p0/scheduler-safety-review.md).
+
+
+Diagnostic checkpoint: the separate strict-identity bootstrap, current-entry adapter and bounded telemetry now build and pass synthetic integration/refusal checks. Adapter evidence includes 301 virtual-unwind contexts and signed -200 displacement; this is not raised-exception or game compatibility evidence. Production profile refusal remains unchanged. The private copy backup and empty-folder restore hashes passed without touching source saves. Next gate is owner-observed offline world and character reset, then a specified bounded diagnostic session. RUNTIME HOLD; all other capabilities NOT_RUN. See [current report](p0/REPORT.md) and [probe plan](p0/NOOP_HOOK_PLAN.md).

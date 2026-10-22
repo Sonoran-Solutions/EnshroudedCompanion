@@ -1,0 +1,2 @@
+PASS: production SHA/PE predicate, ECS required-hook propagation, provider failure/exception cleanup fixtures
+NOT_RUN: Windows DLL build, actual symbol scan, startup entrypoint guard, game/runtime acceptance

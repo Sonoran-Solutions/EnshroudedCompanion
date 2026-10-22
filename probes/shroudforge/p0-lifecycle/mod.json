@@ -1,0 +1,8 @@
+{
+  "id": "enshrouded-companion.p0-lifecycle",
+  "name": "Enshrouded Companion P0 Lifecycle Probe",
+  "version": "0.0.1",
+  "description": "P0 lifecycle logging only. No game-state access or native actions.",
+  "capabilities": ["runtime"],
+  "dependencies": []
+}

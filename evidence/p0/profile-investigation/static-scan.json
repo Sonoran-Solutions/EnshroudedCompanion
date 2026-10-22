@@ -1,0 +1,430 @@
+{
+  "schema": "p0-static-execution-investigation-v1",
+  "executable": {
+    "sha256": "d64966e23b1a458ee6f147bcbceac0b577fa7e39a212f371287d8cc119817882",
+    "bytes": 35338312,
+    "pe_timestamp": 1792507660,
+    "image_size": 44163072
+  },
+  "historical_profile": {
+    "id": "enshrouded-client-1076226",
+    "sha256": "f93f490e60ec13f3b229a509e43507179db23b4062fe974e210ad4c1aa6329d3"
+  },
+  "executable_sections": [
+    {
+      "name": ".text",
+      "rva": 4096,
+      "size": 20645888
+    },
+    {
+      "name": ".bind",
+      "rva": 43925504,
+      "size": 234056
+    }
+  ],
+  "hook_scans": [
+    {
+      "name": "game_thread",
+      "full_signature_count": 0,
+      "full_signature_rvas": [],
+      "historical_overwrite_count": 0,
+      "historical_overwrite_first_rvas": [],
+      "verdict": "NOT_VALIDATED"
+    },
+    {
+      "name": "entity_manager",
+      "full_signature_count": 0,
+      "full_signature_rvas": [],
+      "historical_overwrite_count": 18,
+      "historical_overwrite_first_rvas": [
+        2614840,
+        4681892,
+        8450837,
+        8463366,
+        10703684,
+        13525324,
+        13683569,
+        14217036
+      ],
+      "verdict": "NOT_VALIDATED"
+    },
+    {
+      "name": "world_prop_update",
+      "full_signature_count": 0,
+      "full_signature_rvas": [],
+      "historical_overwrite_count": 56,
+      "historical_overwrite_first_rvas": [
+        2245924,
+        2962402,
+        2969843,
+        2972714,
+        3353909,
+        3676870,
+        3979980,
+        3980651
+      ],
+      "verdict": "NOT_VALIDATED"
+    },
+    {
+      "name": "world_actor_placement",
+      "full_signature_count": 0,
+      "full_signature_rvas": [],
+      "historical_overwrite_count": 0,
+      "historical_overwrite_first_rvas": [],
+      "verdict": "NOT_VALIDATED"
+    },
+    {
+      "name": "world_building_dispatch",
+      "full_signature_count": 0,
+      "full_signature_rvas": [],
+      "historical_overwrite_count": 4491,
+      "historical_overwrite_first_rvas": [
+        194112,
+        194757,
+        195648,
+        195792,
+        196565,
+        196784,
+        207941,
+        213584
+      ],
+      "verdict": "NOT_VALIDATED"
+    },
+    {
+      "name": "world_cursor",
+      "full_signature_count": 0,
+      "full_signature_rvas": [],
+      "historical_overwrite_count": 0,
+      "historical_overwrite_first_rvas": [],
+      "verdict": "NOT_VALIDATED"
+    }
+  ],
+  "named_descriptor_count": 722,
+  "descriptor_reference_candidates": [
+    {
+      "name": "actor_simulation_end",
+      "descriptor_rva": 31217888,
+      "rip_reference_candidate_rva": 19720640,
+      "direct_call_candidate_rvas": [
+        4881776
+      ],
+      "authority": "BYTE_LEVEL_CANDIDATE_REQUIRES_DECODE"
+    },
+    {
+      "name": "actor_simulation_start",
+      "descriptor_rva": 31218544,
+      "rip_reference_candidate_rva": 19720656,
+      "direct_call_candidate_rvas": [
+        4881320
+      ],
+      "authority": "BYTE_LEVEL_CANDIDATE_REQUIRES_DECODE"
+    }
+  ],
+  "descriptor_candidates": [
+    {
+      "name": "actor_locomotion",
+      "callback_rva": 2521200,
+      "descriptor_rva": 31215648,
+      "dependency_slots": [
+        {
+          "descriptor_offset": 24,
+          "names": []
+        },
+        {
+          "descriptor_offset": 40,
+          "names": [
+            "Enemy01BehaviorState"
+          ]
+        },
+        {
+          "descriptor_offset": 56,
+          "names": [
+            "ActorInput",
+            "CurrentTransform"
+          ]
+        },
+        {
+          "descriptor_offset": 72,
+          "names": [
+            "DynamicEnemy01BehaviorState",
+            "Gravity"
+          ]
+        },
+        {
+          "descriptor_offset": 88,
+          "names": [
+            "Actor",
+            "DynamicLocomotion",
+            "Velocity"
+          ]
+        },
+        {
+          "descriptor_offset": 104,
+          "names": [
+            "Impulse",
+            "ServerAnimationGraphInput"
+          ]
+        }
+      ],
+      "callable": false,
+      "semantic_status": "STATIC_CANDIDATE"
+    },
+    {
+      "name": "actor_simulation_end",
+      "callback_rva": 2555984,
+      "descriptor_rva": 31217888,
+      "dependency_slots": [
+        {
+          "descriptor_offset": 24,
+          "names": []
+        },
+        {
+          "descriptor_offset": 40,
+          "names": []
+        },
+        {
+          "descriptor_offset": 56,
+          "names": []
+        },
+        {
+          "descriptor_offset": 72,
+          "names": []
+        },
+        {
+          "descriptor_offset": 88,
+          "names": [
+            "Actor",
+            "ActorInput"
+          ]
+        },
+        {
+          "descriptor_offset": 104,
+          "names": []
+        }
+      ],
+      "callable": false,
+      "semantic_status": "STATIC_CANDIDATE"
+    },
+    {
+      "name": "actor_simulation_start",
+      "callback_rva": 2556384,
+      "descriptor_rva": 31218544,
+      "dependency_slots": [
+        {
+          "descriptor_offset": 24,
+          "names": []
+        },
+        {
+          "descriptor_offset": 40,
+          "names": [
+            "EntityTagContainer"
+          ]
+        },
+        {
+          "descriptor_offset": 56,
+          "names": []
+        },
+        {
+          "descriptor_offset": 72,
+          "names": [
+            "FogResistance",
+            "Health",
+            "Mana",
+            "ManaCostMod",
+            "SpecialAbility",
+            "Stamina"
+          ]
+        },
+        {
+          "descriptor_offset": 88,
+          "names": [
+            "Actor",
+            "ActorInput"
+          ]
+        },
+        {
+          "descriptor_offset": 104,
+          "names": [
+            "SlotSelection"
+          ]
+        }
+      ],
+      "callable": false,
+      "semantic_status": "STATIC_CANDIDATE"
+    },
+    {
+      "name": "actor_spawn_entity",
+      "callback_rva": 2245488,
+      "descriptor_rva": 31258544,
+      "dependency_slots": [
+        {
+          "descriptor_offset": 24,
+          "names": []
+        },
+        {
+          "descriptor_offset": 40,
+          "names": []
+        },
+        {
+          "descriptor_offset": 56,
+          "names": [
+            "CurrentTransform"
+          ]
+        },
+        {
+          "descriptor_offset": 72,
+          "names": [
+            "DynamicAggro",
+            "CritChance",
+            "CritDamageMod",
+            "CustomPlayerString",
+            "DamageMod",
+            "DamageModAgainst",
+            "Dexterity",
+            "DynamicEnemy01BehaviorState",
+            "Equipment",
+            "Faction",
+            "ImpactHierarchy",
+            "Intelligence",
+            "InventorySetup",
+            "LastTransform",
+            "Level",
+            "PlayerInput",
+            "PlayerSkillsUi",
+            "PlayerState",
+            "RandomLoot",
+            "RandomLootContainer",
+            "RandomLootSlotCount",
+            "RangedWeapon",
+            "DynamicSafePlayerPosition",
+            "SceneLootNodeId",
+            "SelectedTargets",
+            "ServerAnimationGraphSlotComponent",
+            "ServerCursor",
+            "SlotSelection",
+            "SpawnedByLogicSystem",
+            "StaminaDamageMod",
+            "Strength",
+            "ToolDamageMod"
+          ]
+        },
+        {
+          "descriptor_offset": 88,
+          "names": [
+            "Actor"
+          ]
+        },
+        {
+          "descriptor_offset": 104,
+          "names": [
+            "DynamicEnemyAiming"
+          ]
+        }
+      ],
+      "callable": false,
+      "semantic_status": "STATIC_CANDIDATE"
+    },
+    {
+      "name": "client_cursor_entity",
+      "callback_rva": 2693552,
+      "descriptor_rva": 31292768,
+      "dependency_slots": [
+        {
+          "descriptor_offset": 24,
+          "names": []
+        },
+        {
+          "descriptor_offset": 40,
+          "names": []
+        },
+        {
+          "descriptor_offset": 56,
+          "names": [
+            "ClientPlayerInput",
+            "NetworkCursor",
+            "PlayerState"
+          ]
+        },
+        {
+          "descriptor_offset": 72,
+          "names": []
+        },
+        {
+          "descriptor_offset": 88,
+          "names": [
+            "ClientCursor"
+          ]
+        },
+        {
+          "descriptor_offset": 104,
+          "names": []
+        }
+      ],
+      "callable": false,
+      "semantic_status": "STATIC_CANDIDATE"
+    },
+    {
+      "name": "player_control",
+      "callback_rva": 2976880,
+      "descriptor_rva": 31431024,
+      "dependency_slots": [
+        {
+          "descriptor_offset": 24,
+          "names": [
+            "FallDamage",
+            "MovementColliderConfig"
+          ]
+        },
+        {
+          "descriptor_offset": 40,
+          "names": []
+        },
+        {
+          "descriptor_offset": 56,
+          "names": [
+            "CurrentTransform",
+            "DynamicFallDamage",
+            "InertialFrame",
+            "DynamicLocomotion",
+            "MovementCollider",
+            "PlayerInput",
+            "RangedWeapon",
+            "SlopeConfig"
+          ]
+        },
+        {
+          "descriptor_offset": 72,
+          "names": [
+            "ServerSubmerge"
+          ]
+        },
+        {
+          "descriptor_offset": 88,
+          "names": [
+            "Actor",
+            "ActorInput",
+            "PlayerState",
+            "SelectedTargets",
+            "ServerConsumedPlayerInput",
+            "ServerCursor",
+            "SlotSelection"
+          ]
+        },
+        {
+          "descriptor_offset": 104,
+          "names": []
+        }
+      ],
+      "callable": false,
+      "semantic_status": "STATIC_CANDIDATE"
+    }
+  ],
+  "execution_profile_verdict": "HOLD",
+  "live_runtime": "NOT_RUN",
+  "limitations": [
+    "Static file scan only; no runtime mapping/thread/lifetime validation.",
+    "Unwind entries identify code extents, not ABI or safe patch boundaries.",
+    "Descriptor names/dependencies do not authorize arbitrary callback execution.",
+    "Historical overwrite snippets are diagnostics, never replacement signatures."
+  ]
+}

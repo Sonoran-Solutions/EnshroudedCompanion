@@ -1,0 +1,122 @@
+warning: modules/mod-runtime/Cargo.toml: file `<PINNED_SOURCE>/modules/mod-runtime/../../dev/profiles/inspect/export_kfc_resources.rs` found to be present in multiple build targets:
+  * `example` target `export_kfc_resources`
+  * `example` target `inspect_attribute_resources`
+  * `example` target `inspect_building_inputs`
+warning: `shroudforge-api` (manifest) generated 1 warning
+warning: unused import: `collections::HashMap`
+ --> kfc-parser/crates/kfc-base/src/container/writer.rs:1:27
+  |
+1 | use std::{borrow::Borrow, collections::HashMap, fs::File, io::{BufWriter, Cursor, Seek, SeekFrom, Write}, path::{Path, PathBuf}};
+  |                           ^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused import: `Hash32`
+ --> kfc-parser/crates/kfc-base/src/container/writer.rs:3:13
+  |
+3 | use crate::{Hash32, container::header::ResourceChunkInfo, guid::{ContentHash, ResourceId}, io::{WriteExt, WriteSeekExt}, reflection::...
+  |             ^^^^^^
+
+warning: `kfc-base` (lib) generated 2 warnings (run `cargo fix --lib -p kfc-base` to apply 2 suggestions)
+warning: unused import: `kfc::guid::ContentHash`
+ --> kfc-parser/crates/kfc-content/src/impact/object.rs:2:5
+  |
+2 | use kfc::guid::ContentHash;
+  |     ^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: hiding a lifetime that's elided elsewhere is confusing
+  --> kfc-parser/crates/kfc-content/src/impact/nodes.rs:65:25
+   |
+65 |     fn get_impact_nodes(&self) -> HashMap<u32, ImpactNode>;
+   |                         ^^^^^                  ^^^^^^^^^^ the same lifetime is hidden here
+   |                         |
+   |                         the lifetime is elided here
+   |
+   = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+   = note: `#[warn(mismatched_lifetime_syntaxes)]` on by default
+help: use `'_` for type paths
+   |
+65 |     fn get_impact_nodes(&self) -> HashMap<u32, ImpactNode<'_>>;
+   |                                                          ++++
+
+warning: hiding a lifetime that's elided elsewhere is confusing
+  --> kfc-parser/crates/kfc-content/src/impact/nodes.rs:91:25
+   |
+91 |     fn get_impact_nodes(&self) -> HashMap<u32, ImpactNode> {
+   |                         ^^^^^                  ^^^^^^^^^^ the same lifetime is hidden here
+   |                         |
+   |                         the lifetime is elided here
+   |
+   = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+help: use `'_` for type paths
+   |
+91 |     fn get_impact_nodes(&self) -> HashMap<u32, ImpactNode<'_>> {
+   |                                                          ++++
+
+warning: hiding a lifetime that's elided elsewhere is confusing
+   --> kfc-parser/crates/kfc-content/src/impact/bytecode/parser.rs:260:13
+    |
+260 |     fn next(&self) -> Token {
+    |             ^^^^^     ^^^^^ the same lifetime is hidden here
+    |             |
+    |             the lifetime is elided here
+    |
+    = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+help: use `'_` for type paths
+    |
+260 |     fn next(&self) -> Token<'_> {
+    |                            ++++
+
+warning: hiding a lifetime that's elided elsewhere is confusing
+   --> kfc-parser/crates/kfc-content/src/impact/bytecode/parser.rs:265:15
+    |
+265 |     fn expect(&self, kind: TokenKind) -> Result<Token, ParseError> {
+    |               ^^^^^ the lifetime is elided here ^^^^^ the same lifetime is hidden here
+    |
+    = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+help: use `'_` for type paths
+    |
+265 |     fn expect(&self, kind: TokenKind) -> Result<Token<'_>, ParseError> {
+    |                                                      ++++
+
+warning: hiding a lifetime that's elided elsewhere is confusing
+   --> kfc-parser/crates/kfc-content/src/impact/bytecode/parser.rs:300:14
+    |
+300 |     fn next0(&self) -> Token {
+    |              ^^^^^     ^^^^^ the same lifetime is hidden here
+    |              |
+    |              the lifetime is elided here
+    |
+    = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+help: use `'_` for type paths
+    |
+300 |     fn next0(&self) -> Token<'_> {
+    |                             ++++
+
+warning: hiding a lifetime that's elided elsewhere is confusing
+   --> kfc-parser/crates/kfc-content/src/impact/bytecode/text.rs:120:22
+    |
+120 |     fn get_call_type(&self, index: Hash32) -> Option<&ImpactNode> {
+    |                      ^^^^^                           ^^^^^^^^^^^
+    |                      |                               ||
+    |                      |                               |the same lifetime is hidden here
+    |                      |                               the same lifetime is elided here
+    |                      the lifetime is elided here
+    |
+    = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+help: use `'_` for type paths
+    |
+120 |     fn get_call_type(&self, index: Hash32) -> Option<&ImpactNode<'_>> {
+    |                                                                 ++++
+
+warning: `kfc-content` (lib) generated 7 warnings (run `cargo fix --lib -p kfc-content` to apply 7 suggestions)
+   Compiling shroudforge-modloader v1.0.0 (<PINNED_SOURCE>/modules/entrypoints/loader)
+   Compiling shroudforge-updater v1.0.0 (<PINNED_SOURCE>/modules/updater)
+   Compiling shroudforge-api v1.0.0 (<PINNED_SOURCE>/modules/mod-runtime)
+   Compiling mod-loader-bridge v0.2.0 (<PINNED_SOURCE>/kfc-parser/crates/mod-loader-bridge)
+   Compiling shroudforge-world-editor-ui v1.0.0 (<PINNED_SOURCE>/modules/world-editor)
+   Compiling shroudforge-debug-console v1.0.0 (<PINNED_SOURCE>/modules/debug-console)
+   Compiling shroudforge-commands v1.0.0 (<PINNED_SOURCE>/modules/commands)
+    Finished `release` profile [optimized] target(s) in 1m 08s

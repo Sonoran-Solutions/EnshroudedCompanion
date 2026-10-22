@@ -1,0 +1,41 @@
+{
+  "rust": "1.99.1 (58cf8f9c3 2026-10-13)",
+  "node": "24.19.0",
+  "npm": "12.2.1",
+  "npm_tarball": {
+    "shasum": "2a2765aa5b36f68006ea7132bd3f20b095a85c6e",
+    "tarball": "https://registry.npmjs.org/npm/-/npm-12.2.1.tgz",
+    "fileCount": 1942,
+    "integrity": "sha512-bKCmFRVT/BB+YPEYbZwQ1XUI3N5t4xKSpU1MxOjo7z3iWzKBJ0ZXRC1xFdEN+TC7N5TdywaBzf2dMXGJq/e2PQ==",
+    "signatures": [
+      {
+        "sig": "MEQCIAsXcHTrdTysebaa+LWvu1F6tjSlwyXRr3eG/smzppVnAiApJq1ELms3QE7/aTlQmEt/Yf24Tz5G7sygrUXYS8khng==",
+        "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+      },
+      {
+        "sig": "MEUCIB++SZIIe5GkkDK2W7U+6Nvp9MXNjpqHUviecw480OMCAiEAnJUNjH2EnEyZgrFQz0nM8A81An7XUuu08GR5KXWHgmo=",
+        "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+      }
+    ],
+    "unpackedSize": 12430582
+  },
+  "parser_commit": "2cf45e36cd4575fa3867761864a36e1883c82add",
+  "files": {
+    "Cargo.lock": {
+      "sha256": "acf2086afafc3b8540884ead2984992874db1e5c3defd84e52af810346e4fb1d",
+      "bytes": 138716
+    },
+    "modules/modloader/ui/package-lock.json": {
+      "sha256": "8f2715b7d7999ea3fe07e602a74667500ee7d9c3bfc7747e303d47527675d9ed",
+      "bytes": 37794
+    },
+    "build/ui/modloader/index.html": {
+      "sha256": "2d45ce58fe713b80140a891dbab6c55aa358d305c8b7b62c2152725f32611fbd",
+      "bytes": 2337568
+    },
+    "build/ui/updater/updater.html": {
+      "sha256": "5b7593a4fc7eb813c4c96222963713ae198a2628d0fee669bf43b6a87fbcc93d",
+      "bytes": 528930
+    }
+  }
+}

@@ -1,0 +1,8 @@
+test_ambiguous_or_wrong_manifest_refused (test_p0_fingerprint.FingerprintTest.test_ambiguous_or_wrong_manifest_refused) ... ok
+test_identity_without_private_fields_or_compatibility_claim (test_p0_fingerprint.FingerprintTest.test_identity_without_private_fields_or_compatibility_claim) ... ok
+test_invalid_binary_refused (test_p0_fingerprint.FingerprintTest.test_invalid_binary_refused) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.001s
+
+OK
