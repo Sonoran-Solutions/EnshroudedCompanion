@@ -1,0 +1,730 @@
+diff --git a/dev/tests/p0-bootstrap-attach/check.py b/dev/tests/p0-bootstrap-attach/check.py
+new file mode 100644
+index 0000000..09c3f5a
+--- /dev/null
++++ b/dev/tests/p0-bootstrap-attach/check.py
+@@ -0,0 +1,66 @@
++#!/usr/bin/env python3
++"""Compile production DllMain body with explicit non-Windows failure fixtures."""
++from pathlib import Path
++import subprocess
++import tempfile
++root=Path(__file__).resolve().parents[3]
++bootstrap=root/'modules/entrypoints/windows-bootstrap'
++text=(bootstrap/'startup.cpp').read_text()
++start=text.index('BOOL APIENTRY DllMain(')
++body=text[text.index('{',start):]
++# DllMain is the final definition in the production translation unit.
++assert body.rstrip().endswith('}')
++lifecycle=(bootstrap/'runtime_lifecycle.cpp').read_text()
++init=lifecycle.index('if (!EcsRuntime::Initialize())')
++assert init < lifecycle.index('start_modloader_ui(root);')
++assert init < lifecycle.index('start_world_editor_ui(root);')
++assert init < lifecycle.index('if (!prepare_startup(root.c_str()))') < lifecycle.index('startup.release();')
++source=r'''
++#include <cassert>
++#include <cstddef>
++#include <vector>
++using BOOL=int; using DWORD=unsigned; using HMODULE=void*; using LPVOID=void*; using HANDLE=void*;
++constexpr int TRUE=1, FALSE=0; constexpr unsigned DLL_PROCESS_ATTACH=1, DLL_PROCESS_DETACH=0;
++HMODULE self_module{}; HANDLE stop_event{},runtime_thread{};
++bool supported=true, verified=true,event_ok=true,gate_ok=true,thread_ok=true;
++unsigned verify_calls{},event_calls{},gate_calls{},thread_calls{},cancel_calls{},file_closes{},handle_closes{},signals{};
++bool file_open{}; std::vector<int> order;
++void DisableThreadLibraryCalls(HMODULE){}
++bool is_supported_game_process(){return supported;}
++namespace StrictBuildIdentity {
++ bool VerifyProcessImage(){++verify_calls;order.push_back(1);file_open=verified;return verified;}
++ void Close(){++file_closes;file_open=false;order.push_back(6);}
++}
++namespace StartupGate {
++ bool Install(){++gate_calls;order.push_back(3);return gate_ok;}
++ void CancelInstallation(){++cancel_calls;order.push_back(5);}
++}
++HANDLE CreateEventW(void*,BOOL,BOOL,void*){++event_calls;order.push_back(2);return event_ok?reinterpret_cast<HANDLE>(2):nullptr;}
++DWORD run(void*){return 0;}
++HANDLE CreateThread(void*,std::size_t,DWORD(*)(void*),void*,DWORD,void*){++thread_calls;order.push_back(4);return thread_ok?reinterpret_cast<HANDLE>(3):nullptr;}
++void CloseHandle(HANDLE handle){assert(handle);++handle_closes;}
++void SetEvent(HANDLE handle){assert(handle);++signals;}
++BOOL DllMain(HMODULE module,DWORD reason,LPVOID reserved) BODY
++void reset(){supported=verified=event_ok=gate_ok=thread_ok=true;verify_calls=event_calls=gate_calls=thread_calls=cancel_calls=file_closes=handle_closes=signals=0;file_open=false;stop_event=runtime_thread=nullptr;order.clear();}
++int main(){
++ reset();supported=false;assert(DllMain(nullptr,DLL_PROCESS_ATTACH,nullptr)==TRUE);assert(!verify_calls&&!event_calls&&!gate_calls&&!thread_calls);
++ reset();verified=false;assert(DllMain(nullptr,DLL_PROCESS_ATTACH,nullptr)==FALSE);assert(verify_calls==1&&!event_calls&&!gate_calls&&!thread_calls&&!file_open);
++ reset();event_ok=false;assert(DllMain(nullptr,DLL_PROCESS_ATTACH,nullptr)==FALSE);assert(event_calls==1&&!gate_calls&&!thread_calls&&file_closes==1&&!file_open);
++ reset();gate_ok=false;assert(DllMain(nullptr,DLL_PROCESS_ATTACH,nullptr)==FALSE);assert(gate_calls==1&&!thread_calls&&cancel_calls==1&&handle_closes==1&&file_closes==1&&!file_open&&!stop_event);
++ assert((order==std::vector<int>{1,2,3,5,6}));
++ reset();thread_ok=false;assert(DllMain(nullptr,DLL_PROCESS_ATTACH,nullptr)==FALSE);assert(thread_calls==1&&cancel_calls==1&&handle_closes==1&&file_closes==1&&!file_open&&!stop_event);
++ assert((order==std::vector<int>{1,2,3,4,5,6}));
++ reset();assert(DllMain(nullptr,DLL_PROCESS_ATTACH,nullptr)==TRUE);assert(file_open&&stop_event&&runtime_thread&&!cancel_calls&&!file_closes);
++ assert((order==std::vector<int>{1,2,3,4}));
++ assert(DllMain(nullptr,DLL_PROCESS_DETACH,nullptr)==TRUE);assert(signals==1&&file_closes==1&&!file_open);
++ reset();assert(DllMain(nullptr,DLL_PROCESS_DETACH,nullptr)==TRUE);assert(!signals&&file_closes==1);
++ reset();file_open=true;assert(DllMain(nullptr,DLL_PROCESS_DETACH,reinterpret_cast<void*>(1))==TRUE);assert(!signals&&!file_closes&&file_open);
++}
++'''.replace('BODY',body)
++with tempfile.TemporaryDirectory(prefix='p0-bootstrap-attach-') as tmp:
++ p=Path(tmp);cpp=p/'test.cpp';exe=p/'test';cpp.write_text(source)
++ subprocess.run(['g++','-std=c++20','-Wall','-Wextra','-Werror',str(cpp),'-o',str(exe)],check=True,timeout=30)
++ subprocess.run([str(exe)],check=True,timeout=30)
++print('PASS: production DllMain unknown-image/event/gate/thread failures, success, detach, cleanup order')
++print('PASS: static native-init before UI/prepare_startup and startup.release ordering')
++print('NOT_RUN: actual WinAPI file handles, loader lock, native gate rollback, Windows DLL/game acceptance')
+diff --git a/dev/tests/p0-bootstrap-identity/check.py b/dev/tests/p0-bootstrap-identity/check.py
+new file mode 100644
+index 0000000..dff1a5c
+--- /dev/null
++++ b/dev/tests/p0-bootstrap-identity/check.py
+@@ -0,0 +1,16 @@
++#!/usr/bin/env python3
++"""Portable SHA known-answer checks; the actual header is compiled, not simulated."""
++from pathlib import Path
++import hashlib
++import subprocess
++import tempfile
++source=Path(__file__).with_name('hash_driver.cpp')
++with tempfile.TemporaryDirectory(prefix='p0-sha-') as temporary:
++    exe=Path(temporary)/'sha'
++    subprocess.run(['g++','-std=c++20','-Wall','-Wextra','-Werror',str(source),'-o',str(exe)],check=True,timeout=30)
++    vectors=[b'',b'abc',b'a'*1_000_000]
++    vectors += [bytes((i*37+11)%256 for i in range(n)) for n in [1,55,56,57,63,64,65,119,120,127,128,8192]]
++    for data in vectors:
++        actual=subprocess.run([str(exe)],input=data,capture_output=True,check=True,timeout=10).stdout.decode().strip()
++        assert actual==hashlib.sha256(data).hexdigest(),len(data)
++print(f'PASS: SHA-256 production header vs hashlib, {len(vectors)} vectors, incremental 7-byte updates')
+diff --git a/dev/tests/p0-bootstrap-identity/gate_cancel_dll.cpp b/dev/tests/p0-bootstrap-identity/gate_cancel_dll.cpp
+new file mode 100644
+index 0000000..26447d8
+--- /dev/null
++++ b/dev/tests/p0-bootstrap-identity/gate_cancel_dll.cpp
+@@ -0,0 +1,11 @@
++#include "../../../modules/entrypoints/windows-bootstrap/startup_gate.h"
++extern "C" __declspec(dllexport) int GateVerified() {
++    return !StartupGate::patched && !StartupGate::entered && !StartupGate::completed &&
++        std::memcmp(StartupGate::entrypoint,StartupGate::original,sizeof(StartupGate::original))==0;
++}
++BOOL WINAPI DllMain(HMODULE, DWORD reason, LPVOID) {
++    if (reason!=DLL_PROCESS_ATTACH) return TRUE;
++    if (!StartupGate::Install()) return FALSE;
++    StartupGate::CancelInstallation();
++    return TRUE;
++}
+diff --git a/dev/tests/p0-bootstrap-identity/hash_driver.cpp b/dev/tests/p0-bootstrap-identity/hash_driver.cpp
+new file mode 100644
+index 0000000..e4bf4a0
+--- /dev/null
++++ b/dev/tests/p0-bootstrap-identity/hash_driver.cpp
+@@ -0,0 +1,10 @@
++#include "../../../modules/entrypoints/windows-bootstrap/sha256_digest.h"
++#include <cstdio>
++int main() {
++    StrictBuildIdentity::Sha256 hash;
++    unsigned char data[7];
++    for (std::size_t size; (size=std::fread(data,1,sizeof(data),stdin))!=0;) hash.update(data,size);
++    if (std::ferror(stdin)) return 1;
++    for (const auto byte:hash.finish()) std::printf("%02x",byte);
++    std::puts("");
++}
+diff --git a/dev/tests/p0-bootstrap-identity/native_checks.py b/dev/tests/p0-bootstrap-identity/native_checks.py
+new file mode 100644
+index 0000000..f6ef326
+--- /dev/null
++++ b/dev/tests/p0-bootstrap-identity/native_checks.py
+@@ -0,0 +1,57 @@
++#!/usr/bin/env python3
++"""Build/run synthetic Windows guard fixtures in a fresh, disposable Wine prefix."""
++import argparse
++import os
++from pathlib import Path
++import subprocess
++import tempfile
++
++parser=argparse.ArgumentParser(description=__doc__)
++parser.add_argument('--cxx',required=True)
++parser.add_argument('--wine',required=True)
++parser.add_argument('--wineserver',required=True)
++a=parser.parse_args()
++source=Path(__file__).resolve().parent
++bootstrap=source.parents[2]/'modules/entrypoints/windows-bootstrap'
++
++def build(*args):
++    subprocess.run([a.cxx,'-std=c++20','-static',*map(str,args)],check=True,timeout=30)
++
++with tempfile.TemporaryDirectory(prefix='p0-windows-guards-') as tmp:
++    tmp=Path(tmp)
++    prefix=tmp/'prefix'; prefix.mkdir()
++    env={**os.environ,'WINEPREFIX':str(prefix),'WINEDEBUG':'-all'}
++    env.pop('SF_GATE_TEST_FAIL',None)
++    def run(exe,expected=0,fail=False):
++        test_env={**env}
++        if fail: test_env['SF_GATE_TEST_FAIL']='1'
++        result=subprocess.run([a.wine,str(exe)],env=test_env,capture_output=True,text=True,timeout=30)
++        assert result.returncode==expected,(exe.name,result.returncode,result.stdout,result.stderr)
++        print(f'PASS: {exe.name}, preparation_failure={fail}, exit={result.returncode}')
++    try:
++        unknown=tmp/'unknown.exe'
++        build(source/'unknown_image.cpp','-o',unknown)
++        run(unknown)
++        padded=tmp/'unknown-same-size.exe'
++        padded.write_bytes(unknown.read_bytes())
++        with padded.open('ab') as stream: stream.truncate(35338312)
++        run(padded)
++        library=tmp/'startup_gate_test.dll'; imports=tmp/'libstartup_gate_test.a'
++        build('-shared',bootstrap/'tests/startup_gate_dll.cpp','-o',library,f'-Wl,--out-implib,{imports}')
++        gate=tmp/'startup_gate_test.exe'
++        build(bootstrap/'tests/startup_gate_exe.cpp',imports,'-o',gate)
++        run(gate)
++        run(gate,expected=1114%256,fail=True)
++        cancel=tmp/'cancel'; cancel.mkdir()
++        imports=cancel/'libstartup_gate_test.a'
++        build('-shared',source/'gate_cancel_dll.cpp','-o',cancel/'startup_gate_test.dll',f'-Wl,--out-implib,{imports}')
++        build(bootstrap/'tests/startup_gate_exe.cpp',imports,'-o',cancel/'startup_gate_test.exe')
++        run(cancel/'startup_gate_test.exe')
++    finally:
++        # This prefix is created by this job and never points at a game/user prefix.
++        stopped=subprocess.run([a.wineserver,'-k'],env=env,timeout=10)
++        # Exit 1 also means the per-prefix server already exited after its clients.
++        if stopped.returncode not in (0,1):
++            raise RuntimeError(f'wineserver cleanup failed: {stopped.returncode}')
++        subprocess.run([a.wineserver,'-w'],env=env,check=True,timeout=10)
++print('NOT_RUN: production DLL bundle and Enshrouded; no game files or prefix used')
+diff --git a/dev/tests/p0-bootstrap-identity/unknown_image.cpp b/dev/tests/p0-bootstrap-identity/unknown_image.cpp
+new file mode 100644
+index 0000000..c8f4635
+--- /dev/null
++++ b/dev/tests/p0-bootstrap-identity/unknown_image.cpp
+@@ -0,0 +1,9 @@
++#include "../../../modules/entrypoints/windows-bootstrap/verify_bootstrap_image.h"
++#include <cstdio>
++int main() {
++    // Real Win32 file API test on this synthetic test executable, never the game.
++    if (StrictBuildIdentity::VerifyProcessImage()) return 10;
++    if (StrictBuildIdentity::verified_file!=INVALID_HANDLE_VALUE) return 11;
++    std::puts("PASS: unsupported executable refused; no verified file handle retained");
++    return 0;
++}
+diff --git a/dev/tests/p0-strict-guards/check.py b/dev/tests/p0-strict-guards/check.py
+new file mode 100644
+index 0000000..7da44c6
+--- /dev/null
++++ b/dev/tests/p0-strict-guards/check.py
+@@ -0,0 +1,104 @@
++#!/usr/bin/env python3
++"""Compile unchanged production guard expressions/lifecycle bodies against explicit fixtures.
++Does not compile the Windows DLL or prove signature recovery on a game binary.
++"""
++from pathlib import Path
++import subprocess
++import tempfile
++
++root = Path(__file__).resolve().parents[3]
++native = root / 'modules/game-runtime/native'
++def body(path, signature):
++    text = path.read_text()
++    start = text.index(signature)
++    brace = text.index('{', start)
++    depth = 1
++    end = brace + 1
++    while depth:
++        depth += (text[end] == '{') - (text[end] == '}')
++        end += 1
++    return text[brace:end]
++profile = (native / 'profiles/select_game_profile.cpp').read_text()
++start = profile.index('const bool matches =')
++match = profile[start:profile.index(';', start)+1]
++assert 'fallback_profile' not in profile and 'allowStructuralRevalidation' not in profile
++assert 'exact_count != 1' in profile
++assert 'exact_build_match = false;' in profile.split('catch (const std::exception& error)')[1]
++ecs_body = body(native / 'ecs/bind_world_entities.cpp', 'bool Initialize()')
++provider_body = body(native / 'host/manage_runtime_lifecycle.cpp', 'KFC_RUNTIME_API bool __cdecl KfcRuntimeInitialize()')
++source = r'''
++#include <cassert>
++#include <atomic>
++#include <cstdint>
++#include <map>
++#include <stdexcept>
++#include <string>
++struct Json {
++ std::map<std::string, Json> children; std::string text; unsigned number{};
++ const Json& at(const std::string& key) const { return children.at(key); }
++ bool contains(const std::string& key) const { return children.count(key); }
++ template<class T> T get() const { return text; }
++ bool operator==(unsigned value) const { return number == value; }
++};
++struct Nt { struct { unsigned TimeDateStamp; } FileHeader; struct { unsigned SizeOfImage; } OptionalHeader; } nt_value{{10},{20}};
++bool matches(const Json& candidate, const std::string& process_hash) {
++ auto nt = &nt_value;
++ MATCH
++ return matches;
++}
++namespace ecs_test {
++struct IMAGE_DOS_HEADER { unsigned e_magic; int e_lfanew; };
++struct IMAGE_NT_HEADERS64 { unsigned Signature; struct { unsigned SizeOfImage; } OptionalHeader; };
++struct Image { IMAGE_DOS_HEADER dos; IMAGE_NT_HEADERS64 nt; } image;
++constexpr unsigned IMAGE_DOS_SIGNATURE=123, IMAGE_NT_SIGNATURE=456;
++std::uintptr_t image_base{}; unsigned image_size{};
++std::atomic<bool> stop_requested{true};
++bool have_module=true, load_ok=true, hook_ok=true;
++unsigned shutdowns{}, installs{};
++void* GetModuleHandleW(void*) { return have_module ? &image : nullptr; }
++namespace KfcRuntimeCompatibility::EnshroudedClient { bool Load(){ return load_ok; } }
++namespace EngineHooks { bool Install(){ ++installs; return hook_ok; } }
++void Shutdown(){ ++shutdowns; stop_requested=true; }
++bool Initialize() ECS_BODY
++void reset(){ image.dos={IMAGE_DOS_SIGNATURE, sizeof(IMAGE_DOS_HEADER)}; image.nt={IMAGE_NT_SIGNATURE,{88}}; have_module=load_ok=hook_ok=true; shutdowns=installs=0; stop_requested=false; }
++void test(){
++ reset(); load_ok=false; assert(!Initialize() && installs==0 && stop_requested);
++ reset(); have_module=false; assert(!Initialize() && installs==0 && stop_requested);
++ reset(); image.dos.e_magic=0; assert(!Initialize() && installs==0 && stop_requested);
++ reset(); image.nt.Signature=0; assert(!Initialize() && installs==0 && stop_requested);
++ reset(); hook_ok=false; assert(!Initialize() && installs==1 && shutdowns==2 && stop_requested);
++ reset(); assert(Initialize() && installs==1 && !stop_requested);
++}
++}
++namespace provider_test {
++std::atomic<bool> provider_initialized{true};
++bool ecs_ok=true, resource_ok=true, throws=false;
++unsigned ecs_stops{}, resource_stops{}, resource_starts{};
++namespace EcsRuntime { bool Initialize(){ if(throws) throw std::runtime_error("fixture"); return ecs_ok; } void Shutdown(){ ++ecs_stops; } }
++namespace ResourceRuntime { bool Initialize(){ ++resource_starts; return resource_ok; } void Shutdown(){ ++resource_stops; } }
++bool Initialize() PROVIDER_BODY
++void reset(){ ecs_ok=resource_ok=true; throws=false; ecs_stops=resource_stops=resource_starts=0; provider_initialized=true; }
++void test(){
++ reset(); ecs_ok=false; assert(!Initialize() && !provider_initialized && resource_starts==0 && ecs_stops==1 && resource_stops==1);
++ reset(); resource_ok=false; assert(!Initialize() && !provider_initialized && ecs_stops==1 && resource_stops==1);
++ reset(); throws=true; assert(!Initialize() && !provider_initialized && ecs_stops==1 && resource_stops==1);
++ reset(); assert(Initialize() && provider_initialized && resource_starts==1);
++}
++}
++int main(){
++ Json candidate; auto& image=candidate.children["image"]; image.children["timestamp"].number=10; image.children["size"].number=20;
++ const std::string hash(64,'a');
++ assert(!matches(candidate,hash));
++ image.children["sha256"].text=hash; assert(matches(candidate,hash));
++ assert(!matches(candidate,"")); assert(!matches(candidate,std::string(64,'b')));
++ image.children["timestamp"].number=11; assert(!matches(candidate,hash)); image.children["timestamp"].number=10;
++ image.children["size"].number=21; assert(!matches(candidate,hash));
++ ecs_test::test(); provider_test::test();
++}
++'''.replace('MATCH', match).replace('ECS_BODY', ecs_body).replace('PROVIDER_BODY', provider_body)
++with tempfile.TemporaryDirectory(prefix='p0-strict-guards-') as tmp:
++    cpp=Path(tmp)/'test.cpp'; exe=Path(tmp)/'test'; cpp.write_text(source)
++    subprocess.run(['g++','-std=c++20','-Wall','-Wextra','-Werror',str(cpp),'-o',str(exe)], check=True,timeout=30)
++    subprocess.run([str(exe)],check=True,timeout=30)
++print('PASS: production SHA/PE predicate, ECS required-hook propagation, provider failure/exception cleanup fixtures')
++print('NOT_RUN: Windows DLL build, actual symbol scan, startup entrypoint guard, game/runtime acceptance')
+diff --git a/modules/entrypoints/windows-bootstrap/ShroudForge.Bootstrap.vcxproj b/modules/entrypoints/windows-bootstrap/ShroudForge.Bootstrap.vcxproj
+index a6b96cd..ef133f8 100644
+--- a/modules/entrypoints/windows-bootstrap/ShroudForge.Bootstrap.vcxproj
++++ b/modules/entrypoints/windows-bootstrap/ShroudForge.Bootstrap.vcxproj
+@@ -53,6 +53,8 @@
+     <ClInclude Include="runtime_bridge.h" />
+     <ClInclude Include="logging_config.h" />
+     <ClInclude Include="startup_gate.h" />
++    <ClInclude Include="sha256_digest.h" />
++    <ClInclude Include="verify_bootstrap_image.h" />
+     <ClInclude Include="..\..\game-runtime\native\abi\runtime_api.h" />
+   </ItemGroup>
+   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+diff --git a/modules/entrypoints/windows-bootstrap/runtime_lifecycle.cpp b/modules/entrypoints/windows-bootstrap/runtime_lifecycle.cpp
+index 4346668..b67a76c 100644
+--- a/modules/entrypoints/windows-bootstrap/runtime_lifecycle.cpp
++++ b/modules/entrypoints/windows-bootstrap/runtime_lifecycle.cpp
+@@ -77,20 +77,28 @@ DWORD WINAPI run(void*) {
+         return 1;
+     }
+     startup_stage(root, "runtime-exports-resolved");
++    // Install native hooks while the executable entrypoint is still parked.
++    // Releasing it first races hook writes against short-lived startup threads.
++    startup_stage(root, "native-provider-init");
++    if (!EcsRuntime::Initialize()) {
++        startup_failed(root, "native-provider-init", "KFC Runtime initialization refused: " + EcsRuntime::Status());
++        EcsRuntime::Shutdown();
++        stop_debug_console();
++        FreeLibrary(runtime);
++        return 1;
++    }
+     start_modloader_ui(root);
+     start_world_editor_ui(root);
+     startup_stage(root, "startup-assets");
+     if (!prepare_startup(root.c_str())) {
+         startup_failed(root, "startup-assets", "Asset preparation and baseline recovery failed. Game startup stopped before loading inconsistent assets");
++        EcsRuntime::Shutdown();
++        stop_world_editor_ui();
++        stop_modloader_ui();
++        stop_debug_console();
+         FreeLibrary(runtime);
+         return 1;
+     }
+-    // Install native hooks while the executable entrypoint is still parked.
+-    // Releasing it first races hook writes against short-lived startup threads.
+-    startup_stage(root, "native-provider-init");
+-    if (!EcsRuntime::Initialize()) {
+-        log('W', "KFC Runtime initialization failed: " + EcsRuntime::Status());
+-    }
+     log("Startup assets and native-provider setup complete. Releasing the game entrypoint");
+     startup.release();
+     startup_stage(root, "runtime-create");
+diff --git a/modules/entrypoints/windows-bootstrap/sha256_digest.h b/modules/entrypoints/windows-bootstrap/sha256_digest.h
+new file mode 100644
+index 0000000..a519261
+--- /dev/null
++++ b/modules/entrypoints/windows-bootstrap/sha256_digest.h
+@@ -0,0 +1,67 @@
++#pragma once
++#include <array>
++#include <cstddef>
++#include <cstdint>
++
++// Allocation-free SHA-256 for identity checks before the bootstrap worker exists.
++// No provider DLL loading or crypto-provider initialization under the loader lock.
++namespace StrictBuildIdentity {
++class Sha256 {
++    std::array<std::uint32_t, 8> state_{0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,
++        0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19};
++    std::array<std::uint8_t, 64> block_{};
++    std::size_t used_{};
++    std::uint64_t bytes_{};
++    static constexpr std::uint32_t rotate(std::uint32_t x, unsigned n) {
++        return (x >> n) | (x << (32 - n));
++    }
++    void compress() {
++        static constexpr std::uint32_t constants[64]{
++            0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,
++            0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,
++            0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,
++            0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,
++            0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,
++            0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,
++            0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,
++            0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2};
++        std::uint32_t words[64]{};
++        for (unsigned i=0; i<16; ++i)
++            for (unsigned j=0; j<4; ++j) words[i]=(words[i]<<8)|block_[4*i+j];
++        for (unsigned i=16; i<64; ++i) {
++            const auto x=words[i-15], y=words[i-2];
++            words[i]=words[i-16]+(rotate(x,7)^rotate(x,18)^(x>>3))+words[i-7]+
++                (rotate(y,17)^rotate(y,19)^(y>>10));
++        }
++        auto a=state_[0], b=state_[1], c=state_[2], d=state_[3];
++        auto e=state_[4], f=state_[5], g=state_[6], h=state_[7];
++        for (unsigned i=0; i<64; ++i) {
++            const auto t1=h+(rotate(e,6)^rotate(e,11)^rotate(e,25))+((e&f)^(~e&g))+constants[i]+words[i];
++            const auto t2=(rotate(a,2)^rotate(a,13)^rotate(a,22))+((a&b)^(a&c)^(b&c));
++            h=g; g=f; f=e; e=d+t1; d=c; c=b; b=a; a=t1+t2;
++        }
++        state_[0]+=a; state_[1]+=b; state_[2]+=c; state_[3]+=d;
++        state_[4]+=e; state_[5]+=f; state_[6]+=g; state_[7]+=h;
++    }
++public:
++    void update(const std::uint8_t* data, std::size_t size) {
++        bytes_ += size;
++        for (std::size_t i=0; i<size; ++i) {
++            block_[used_++]=data[i];
++            if (used_==64) { compress(); used_=0; }
++        }
++    }
++    std::array<std::uint8_t,32> finish() {
++        const auto bits=bytes_*8;
++        block_[used_++]=0x80;
++        if (used_>56) { while(used_<64) block_[used_++]=0; compress(); used_=0; }
++        while(used_<56) block_[used_++]=0;
++        for (unsigned i=0; i<8; ++i) block_[56+i]=static_cast<std::uint8_t>(bits>>(56-8*i));
++        compress();
++        std::array<std::uint8_t,32> result{};
++        for (unsigned i=0; i<8; ++i)
++            for (unsigned j=0; j<4; ++j) result[4*i+j]=static_cast<std::uint8_t>(state_[i]>>(24-8*j));
++        return result;
++    }
++};
++}
+diff --git a/modules/entrypoints/windows-bootstrap/startup.cpp b/modules/entrypoints/windows-bootstrap/startup.cpp
+index c27f596..e566521 100644
+--- a/modules/entrypoints/windows-bootstrap/startup.cpp
++++ b/modules/entrypoints/windows-bootstrap/startup.cpp
+@@ -1,4 +1,5 @@
+ #include "bootstrap_state.h"
++#include "verify_bootstrap_image.h"
+ 
+ using namespace BootstrapImplementation;
+ 
+@@ -70,14 +71,28 @@ BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID reserved) {
+         // The bundled ShroudForge UI also runs there, but must never bootstrap
+         // another runtime or race Enshrouded's asset startup.
+         if (!is_supported_game_process()) return TRUE;
++        // Reject unsupported images before any startup patch, worker, or DLL load.
++        if (!StrictBuildIdentity::VerifyProcessImage()) return FALSE;
+         stop_event = CreateEventW(nullptr, TRUE, FALSE, nullptr);
+-        if (!stop_event) return FALSE;
+-        if (!StartupGate::Install()) return FALSE;
++        if (!stop_event) { StrictBuildIdentity::Close(); return FALSE; }
++        if (!StartupGate::Install()) {
++            StartupGate::CancelInstallation();
++            CloseHandle(stop_event); stop_event = nullptr;
++            StrictBuildIdentity::Close();
++            return FALSE;
++        }
+         runtime_thread = CreateThread(nullptr, 0, run, nullptr, 0, nullptr);
+-        return runtime_thread != nullptr;
++        if (!runtime_thread) {
++            StartupGate::CancelInstallation();
++            CloseHandle(stop_event); stop_event = nullptr;
++            StrictBuildIdentity::Close();
++            return FALSE;
++        }
++        return TRUE;
+     }
+-    if (reason == DLL_PROCESS_DETACH && reserved == nullptr && stop_event) {
+-        SetEvent(stop_event);
++    if (reason == DLL_PROCESS_DETACH && reserved == nullptr) {
++        if (stop_event) SetEvent(stop_event);
++        StrictBuildIdentity::Close();
+     }
+     return TRUE;
+ }
+diff --git a/modules/entrypoints/windows-bootstrap/startup_gate.h b/modules/entrypoints/windows-bootstrap/startup_gate.h
+index ccedcca..73c165c 100644
+--- a/modules/entrypoints/windows-bootstrap/startup_gate.h
++++ b/modules/entrypoints/windows-bootstrap/startup_gate.h
+@@ -11,6 +11,29 @@ inline HANDLE completed{};
+ inline unsigned char* entrypoint{};
+ inline unsigned char original[14]{};
+ inline volatile LONG succeeded{};
++inline bool patched{};
++
++inline bool RestoreEntryPoint() {
++    if (!patched) return true;
++    DWORD protection{};
++    if (!VirtualProtect(entrypoint, sizeof(original), PAGE_EXECUTE_READWRITE, &protection)) return false;
++    std::memcpy(entrypoint, original, sizeof(original));
++    DWORD ignored{};
++    if (!VirtualProtect(entrypoint, sizeof(original), protection, &ignored) ||
++        !FlushInstructionCache(GetCurrentProcess(), entrypoint, sizeof(original))) return false;
++    patched = false;
++    return true;
++}
++
++// Only for attach failure before a worker exists. Never unload a live trampoline.
++inline void CancelInstallation() {
++    if (!RestoreEntryPoint()) {
++        TerminateProcess(GetCurrentProcess(), ERROR_DLL_INIT_FAILED);
++        ExitProcess(ERROR_DLL_INIT_FAILED); // Also fail-stop if termination was denied.
++    }
++    if (entered) { CloseHandle(entered); entered = nullptr; }
++    if (completed) { CloseHandle(completed); completed = nullptr; }
++}
+ 
+ inline void Complete(bool success) {
+     InterlockedExchange(&succeeded, success ? 1 : 0);
+@@ -23,14 +46,7 @@ inline int __cdecl Run() {
+         InterlockedCompareExchange(&succeeded, 0, 0) != 1) {
+         ExitProcess(ERROR_DLL_INIT_FAILED);
+     }
+-    DWORD protection{};
+-    if (!VirtualProtect(entrypoint, sizeof(original), PAGE_EXECUTE_READWRITE, &protection))
+-        ExitProcess(ERROR_DLL_INIT_FAILED);
+-    std::memcpy(entrypoint, original, sizeof(original));
+-    DWORD ignored{};
+-    if (!VirtualProtect(entrypoint, sizeof(original), protection, &ignored) ||
+-        !FlushInstructionCache(GetCurrentProcess(), entrypoint, sizeof(original)))
+-        ExitProcess(ERROR_DLL_INIT_FAILED);
++    if (!RestoreEntryPoint()) ExitProcess(ERROR_DLL_INIT_FAILED);
+     return reinterpret_cast<int (__cdecl*)()>(entrypoint)();
+ }
+ 
+@@ -61,6 +77,7 @@ inline bool Install() {
+     if (!VirtualProtect(entrypoint, sizeof(jump), PAGE_EXECUTE_READWRITE, &protection)) return false;
+     std::memcpy(original, entrypoint, sizeof(original));
+     std::memcpy(entrypoint, jump, sizeof(jump));
++    patched = true;
+     DWORD ignored{};
+     return VirtualProtect(entrypoint, sizeof(jump), protection, &ignored) &&
+         FlushInstructionCache(GetCurrentProcess(), entrypoint, sizeof(jump));
+diff --git a/modules/entrypoints/windows-bootstrap/verify_bootstrap_image.h b/modules/entrypoints/windows-bootstrap/verify_bootstrap_image.h
+new file mode 100644
+index 0000000..c8960df
+--- /dev/null
++++ b/modules/entrypoints/windows-bootstrap/verify_bootstrap_image.h
+@@ -0,0 +1,55 @@
++#pragma once
++#include <windows.h>
++#include "sha256_digest.h"
++
++// P0 strict client-only policy pinned to profile 26082781 at 3ed90de1.
++// No settings/environment overrides; new binaries require explicit review/build.
++namespace StrictBuildIdentity {
++inline constexpr DWORD approved_timestamp=1792507660;
++inline constexpr DWORD approved_image_size=44163072;
++inline constexpr LONGLONG approved_file_size=35338312;
++inline constexpr std::array<std::uint8_t,32> approved_digest{
++    0xd6,0x49,0x66,0xe2,0x3b,0x1a,0x45,0x8e,0xe6,0xf1,0x47,0xbc,0xbc,0xea,0xc0,0xb5,
++    0x77,0xfa,0x7e,0x39,0xa2,0x12,0xf3,0x71,0x28,0x7d,0x8c,0xc1,0x19,0x81,0x78,0x82};
++// Keep the verified file open without write/delete sharing for the process lifetime.
++inline HANDLE verified_file=INVALID_HANDLE_VALUE;
++inline void Close() {
++    if (verified_file!=INVALID_HANDLE_VALUE) { CloseHandle(verified_file); verified_file=INVALID_HANDLE_VALUE; }
++}
++inline bool VerifyProcessImage() {
++    if (verified_file!=INVALID_HANDLE_VALUE) return false;
++    wchar_t path[32768]{};
++    const DWORD length=GetModuleFileNameW(nullptr,path,32768);
++    if (!length || length>=32768) return false;
++    HANDLE file=CreateFileW(path,GENERIC_READ,FILE_SHARE_READ,nullptr,OPEN_EXISTING,FILE_ATTRIBUTE_NORMAL,nullptr);
++    if (file==INVALID_HANDLE_VALUE) return false;
++    struct CloseOnFailure { HANDLE file; bool keep=false; ~CloseOnFailure(){ if(!keep) CloseHandle(file); } } guard{file};
++    LARGE_INTEGER size{};
++    if (!GetFileSizeEx(file,&size) || size.QuadPart!=approved_file_size) return false;
++    Sha256 hash;
++    std::uint8_t chunk[8192]{};
++    LONGLONG total=0;
++    for (;;) {
++        DWORD count{};
++        if (!ReadFile(file,chunk,sizeof(chunk),&count,nullptr)) return false;
++        if (!count) break;
++        total+=count;
++        if (total>approved_file_size) return false;
++        hash.update(chunk,count);
++    }
++    if (total!=approved_file_size || hash.finish()!=approved_digest) return false;
++    // Disk identity precedes dereferencing loaded PE metadata or any patch.
++    const auto* base=reinterpret_cast<const unsigned char*>(GetModuleHandleW(nullptr));
++    if (!base) return false;
++    const auto* dos=reinterpret_cast<const IMAGE_DOS_HEADER*>(base);
++    if (dos->e_magic!=IMAGE_DOS_SIGNATURE || dos->e_lfanew<=0 || dos->e_lfanew>4096) return false;
++    const auto* nt=reinterpret_cast<const IMAGE_NT_HEADERS64*>(base+dos->e_lfanew);
++    if (nt->Signature!=IMAGE_NT_SIGNATURE || nt->FileHeader.Machine!=IMAGE_FILE_MACHINE_AMD64 ||
++        nt->OptionalHeader.Magic!=IMAGE_NT_OPTIONAL_HDR64_MAGIC ||
++        nt->FileHeader.TimeDateStamp!=approved_timestamp || nt->OptionalHeader.SizeOfImage!=approved_image_size)
++        return false;
++    verified_file=file;
++    guard.keep=true;
++    return true;
++}
++}
+diff --git a/modules/game-runtime/native/ecs/bind_world_entities.cpp b/modules/game-runtime/native/ecs/bind_world_entities.cpp
+index cf486a2..b15e738 100644
+--- a/modules/game-runtime/native/ecs/bind_world_entities.cpp
++++ b/modules/game-runtime/native/ecs/bind_world_entities.cpp
+@@ -168,7 +168,10 @@ bool MarkSessionWriteUncertain(std::uint64_t expected_session, const char* reaso
+ }
+ 
+ bool Initialize() {
+-    const bool execution_profile = KfcRuntimeCompatibility::EnshroudedClient::Load();
++    // P0 strict variant: discovery is not a substitute for runtime acceptance.
++    // Reset any prior binding before validating a new image and its hooks.
++    Shutdown();
++    if (!KfcRuntimeCompatibility::EnshroudedClient::Load()) return false;
+     image_base = reinterpret_cast<std::uintptr_t>(GetModuleHandleW(nullptr));
+     if (!image_base) return false;
+     const auto dos = reinterpret_cast<const IMAGE_DOS_HEADER*>(image_base);
+@@ -176,10 +179,11 @@ bool Initialize() {
+     const auto nt = reinterpret_cast<const IMAGE_NT_HEADERS64*>(image_base + dos->e_lfanew);
+     if (nt->Signature != IMAGE_NT_SIGNATURE) return false;
+     image_size = nt->OptionalHeader.SizeOfImage;
++    if (!EngineHooks::Install()) {
++        Shutdown();
++        return false;
++    }
+     stop_requested.store(false, std::memory_order_release);
+-    if (execution_profile) EngineHooks::Install();
+-    // Metadata discovery remains available when a build lacks proven native
+-    // execution adapters. Original-owner entity reads do not authorize writes.
+     return true;
+ }
+ 
+diff --git a/modules/game-runtime/native/host/manage_runtime_lifecycle.cpp b/modules/game-runtime/native/host/manage_runtime_lifecycle.cpp
+index d6d3ba4..b9d5e2a 100644
+--- a/modules/game-runtime/native/host/manage_runtime_lifecycle.cpp
++++ b/modules/game-runtime/native/host/manage_runtime_lifecycle.cpp
+@@ -17,11 +17,15 @@ extern "C" {
+ KFC_RUNTIME_API unsigned __cdecl KfcRuntimeAbi() { return KFC_RUNTIME_ABI_VERSION; }
+ 
+ KFC_RUNTIME_API bool __cdecl KfcRuntimeInitialize() {
++    provider_initialized.store(false, std::memory_order_release);
+     try {
+-        const auto initialized = EcsRuntime::Initialize();
+-        ResourceRuntime::Initialize();
++        if (!EcsRuntime::Initialize() || !ResourceRuntime::Initialize()) {
++            ResourceRuntime::Shutdown();
++            EcsRuntime::Shutdown();
++            return false;
++        }
+         provider_initialized.store(true, std::memory_order_release);
+-        return initialized;
++        return true;
+     } catch (...) {
+         provider_initialized.store(false, std::memory_order_release);
+         ResourceRuntime::Shutdown();
+diff --git a/modules/game-runtime/native/profiles/select_game_profile.cpp b/modules/game-runtime/native/profiles/select_game_profile.cpp
+index 250ad64..fc079a9 100644
+--- a/modules/game-runtime/native/profiles/select_game_profile.cpp
++++ b/modules/game-runtime/native/profiles/select_game_profile.cpp
+@@ -11,6 +11,8 @@
+ namespace KfcRuntimeCompatibility::EnshroudedClient {
+ 
+ bool Load() {
++    // P0 strict variant: a failed reload must never retain prior authorization.
++    exact_build_match = false;
+     try {
+         HMODULE self{};
+         if (!GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,
+@@ -22,8 +24,8 @@ bool Load() {
+         if (!IdentifyGameImage(process_path, base, nt)) return false;
+         const auto& process = image_target;
+         const auto& process_hash = image_sha256;
+-        nlohmann::json exact_profile, fallback_profile;
+-        unsigned exact_count{}, fallback_count{};
++        nlohmann::json exact_profile;
++        unsigned exact_count{};
+         std::string requested_profile_id;
+         const auto game_root = std::filesystem::path(process_path).parent_path();
+         const auto loader_config_path = game_root / L"shroudforge" / L"config" / L"modloader-config.json";
+@@ -102,8 +104,8 @@ bool Load() {
+                 candidate.at("provenance").value("status", std::string{}) != "approved") continue;
+             const bool matches = candidate.at("image").at("timestamp") == nt->FileHeader.TimeDateStamp &&
+                 candidate.at("image").at("size") == nt->OptionalHeader.SizeOfImage &&
+-                (!candidate.at("image").contains("sha256") ||
+-                 (!process_hash.empty() && candidate.at("image").at("sha256").get<std::string>() == process_hash));
++                (candidate.at("image").contains("sha256") && process_hash.size() == 64 &&
++                 candidate.at("image").at("sha256").get<std::string>() == process_hash);
+             if (candidate.contains("provenance")) {
+                 const auto& provenance = candidate.at("provenance");
+                 if (provenance.value("status", std::string{}) != "approved" ||
+@@ -117,28 +119,21 @@ bool Load() {
+             if (matches) {
+                 ++exact_count;
+                 exact_profile = std::move(candidate);
+-            } else if (!requested_profile_id.empty() || candidate.value("allowStructuralRevalidation", false)) {
+-                ++fallback_count;
+-                fallback_profile = std::move(candidate);
+             }
+         }
+-        // Exact image identity always takes precedence over every opt-in
+-        // structural fallback, regardless of file enumeration order.
+-        const bool exact = exact_count == 1;
+-        if (exact_count > 1) {
+-            status = "ambiguous-exact-profile"; return false;
++        // P0 strict variant: neither manual selection nor structural matches
++        // authorize a different image. Preserve all later signature/byte guards.
++        if (exact_count != 1) {
++            status = exact_count > 1 ? "ambiguous-exact-profile" : "missing-exact-sha256-profile";
++            return false;
+         }
+-        if (exact_count == 0 && fallback_count != 1) {
+-            status = "missing-or-ambiguous-profile"; return false;
+-        }
+-        const auto& selected = exact ? exact_profile : fallback_profile;
+-        exact_build_match = exact;
++        const auto& selected = exact_profile;
+         if (!kfc_format) kfc_format = static_cast<std::uint8_t>(selected.at("kfcFormat").get<unsigned>());
+-        // Identity is a lookup hint. Both hooks still require unique executable
+-        // matches and exact overwritten instructions before any patch is made.
+-        ReadGameProfile(selected, exact, base);
++        exact_build_match = true;
++        ReadGameProfile(selected, true, base);
+         return true;
+     } catch (const std::exception& error) {
++        exact_build_match = false;
+         status = std::string("profile-error:") + error.what();
+         OutputDebugStringA(status.c_str());
+         return false;

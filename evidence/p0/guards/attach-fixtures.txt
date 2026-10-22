@@ -1,0 +1,3 @@
+PASS: production DllMain unknown-image/event/gate/thread failures, success, detach, cleanup order
+PASS: static native-init before UI/prepare_startup and startup.release ordering
+NOT_RUN: actual WinAPI file handles, loader lock, native gate rollback, Windows DLL/game acceptance
