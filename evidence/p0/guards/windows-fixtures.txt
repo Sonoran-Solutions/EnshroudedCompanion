@@ -9,3 +9,5 @@ PASS: per-prefix Wine server cleanup; no game prefix used
 First unified run passed all five assertions but its cleanup wrapper treated already-exited wineserver (-k exit 1) as failure. Wrapper corrected to accept no-server status, then require -w success. Rerun passed including cleanup.
 Initial manual invocation needed an explicitly created user-owned prefix directory; no game was launched by that failed invocation.
 NOT_RUN: complete production DLL bundle, actual game symbol scan, injected VirtualProtect failure, game acceptance.
+
+Final revision: cancellation also verifies original page protection with VirtualQuery; all five assertions and prefix cleanup PASS.

@@ -4,7 +4,7 @@ Source: ShroudForge `3ed90de1df266c4f0c217523a02a71dfa67243de` plus the committe
 strict guard patch. Test source is included in that patch. Source clones and
 build packages remain outside the project; no proprietary data is included.
 
-Patch SHA-256: `d16d80887d5cc30d0fa4c28266837dd275a3a76a7d1a687901ecc2df5d814787`.
+Patch SHA-256: `50e4916940ff2e1e83bef3d5f797f43f6f4d243c9ce555ee7170f941f9a52296`.
 Clean-checkout apply and byte comparison of all 16 changed files: PASS.
 
 Logs: [SHA](hash-tests.txt), [provider fixtures](provider-fixtures.txt),
@@ -71,3 +71,5 @@ The retained isolated toolchain definition is local at
 No owned build or game processes remain. A complete supported Windows artifact
 is still required; the exact-execution-profile absence independently prevents
 live testing even if the cross-build issue is solved.
+
+Final rollback correction retains the original page protection even if installation failed while restoring protection. The native cancellation fixture now checks `VirtualQuery` protection as well as original bytes/events. All five Windows cases reran successfully.

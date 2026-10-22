@@ -94,12 +94,15 @@ index 0000000..dff1a5c
 +print(f'PASS: SHA-256 production header vs hashlib, {len(vectors)} vectors, incremental 7-byte updates')
 diff --git a/dev/tests/p0-bootstrap-identity/gate_cancel_dll.cpp b/dev/tests/p0-bootstrap-identity/gate_cancel_dll.cpp
 new file mode 100644
-index 0000000..26447d8
+index 0000000..a199929
 --- /dev/null
 +++ b/dev/tests/p0-bootstrap-identity/gate_cancel_dll.cpp
-@@ -0,0 +1,11 @@
+@@ -0,0 +1,14 @@
 +#include "../../../modules/entrypoints/windows-bootstrap/startup_gate.h"
 +extern "C" __declspec(dllexport) int GateVerified() {
++    MEMORY_BASIC_INFORMATION info{};
++    if (!VirtualQuery(StartupGate::entrypoint, &info, sizeof(info)) ||
++        info.Protect != StartupGate::original_protection) return 0;
 +    return !StartupGate::patched && !StartupGate::entered && !StartupGate::completed &&
 +        std::memcmp(StartupGate::entrypoint,StartupGate::original,sizeof(StartupGate::original))==0;
 +}
@@ -483,14 +486,15 @@ index c27f596..e566521 100644
      return TRUE;
  }
 diff --git a/modules/entrypoints/windows-bootstrap/startup_gate.h b/modules/entrypoints/windows-bootstrap/startup_gate.h
-index ccedcca..73c165c 100644
+index ccedcca..66f6400 100644
 --- a/modules/entrypoints/windows-bootstrap/startup_gate.h
 +++ b/modules/entrypoints/windows-bootstrap/startup_gate.h
-@@ -11,6 +11,29 @@ inline HANDLE completed{};
+@@ -11,6 +11,30 @@ inline HANDLE completed{};
  inline unsigned char* entrypoint{};
  inline unsigned char original[14]{};
  inline volatile LONG succeeded{};
 +inline bool patched{};
++inline DWORD original_protection{};
 +
 +inline bool RestoreEntryPoint() {
 +    if (!patched) return true;
@@ -498,7 +502,7 @@ index ccedcca..73c165c 100644
 +    if (!VirtualProtect(entrypoint, sizeof(original), PAGE_EXECUTE_READWRITE, &protection)) return false;
 +    std::memcpy(entrypoint, original, sizeof(original));
 +    DWORD ignored{};
-+    if (!VirtualProtect(entrypoint, sizeof(original), protection, &ignored) ||
++    if (!VirtualProtect(entrypoint, sizeof(original), original_protection, &ignored) ||
 +        !FlushInstructionCache(GetCurrentProcess(), entrypoint, sizeof(original))) return false;
 +    patched = false;
 +    return true;
@@ -516,7 +520,7 @@ index ccedcca..73c165c 100644
  
  inline void Complete(bool success) {
      InterlockedExchange(&succeeded, success ? 1 : 0);
-@@ -23,14 +46,7 @@ inline int __cdecl Run() {
+@@ -23,14 +47,7 @@ inline int __cdecl Run() {
          InterlockedCompareExchange(&succeeded, 0, 0) != 1) {
          ExitProcess(ERROR_DLL_INIT_FAILED);
      }
@@ -532,8 +536,11 @@ index ccedcca..73c165c 100644
      return reinterpret_cast<int (__cdecl*)()>(entrypoint)();
  }
  
-@@ -61,6 +77,7 @@ inline bool Install() {
+@@ -59,8 +76,10 @@ inline bool Install() {
+     std::memcpy(jump + 6, &destination, sizeof(destination));
+     DWORD protection{};
      if (!VirtualProtect(entrypoint, sizeof(jump), PAGE_EXECUTE_READWRITE, &protection)) return false;
++    original_protection = protection;
      std::memcpy(original, entrypoint, sizeof(original));
      std::memcpy(entrypoint, jump, sizeof(jump));
 +    patched = true;
