@@ -69,3 +69,9 @@ Resolve only when needed; do not block source research on every future preferenc
 Append the choice, date, owner instruction, affected documents and consequences. Keep superseded decisions with a replacement reference. Never rewrite a HOLD as PASS because the roadmap would otherwise be blocked.
 
 Source evidence belongs in [research](FEASIBILITY_AND_RESEARCH.md); execution evidence belongs in [validation](VALIDATION_AND_OPERATIONS.md); current phase/gate state belongs in [status](STATUS.md).
+
+## P0 kickoff decisions — 2026-10-22
+
+The owner explicitly authorized P0 and Sol/Luna orchestration, accepted a native NPC companion, restricted tests to this machine's Steam installation, confirmed only one client, and approved the proposed 5–10 focused developer-day ceiling plus runtime installation/mutation permissions. No disposable world exists yet; the owner will create one. This supersedes R004 for bounded P0 only. No P1, alternate embodiment, valued-world changes, merge or auto-merge is authorized.
+
+ShroudForge `3ed90de1` is the single selected investigation candidate based on inspected source and matching local client fingerprint. It is not runtime-verified. Unknown-build fallback paths, scoped quests, actor control and material accounting remain risks; see [P0 report](p0/REPORT.md). All live capabilities are NOT_RUN. Single-client availability cannot satisfy multiplayer or two-client quest acceptance. Further owner disposition is PENDING.

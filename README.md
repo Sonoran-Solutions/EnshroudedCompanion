@@ -2,7 +2,7 @@
 
 An experimental AI companion for Enshrouded: someone who can adventure and fight alongside you, help with building, and roleplay using what is actually happening in your game. The intended backend can be local, such as Qwen or Gemma, or hosted through OpenRouter.
 
-**Status: PLAN_ONLY.** This repository currently contains research and an implementation proposal, not a playable mod. No game integration, model benchmark, or in-game acceptance gate has passed. All implementation phases are NOT_STARTED.
+**Status: P0 HOLD.** Source investigation and offline client fingerprint collection are complete; all five live capabilities remain NOT_RUN. The owner approved bounded Phase 0 and native NPC embodiment. Live tests await a disposable world and demonstrated restore; only one test client is available. See the [Phase 0 checkpoint](docs/p0/REPORT.md).
 
 The main uncertainty is the **game bridge**, not the chat model. An LLM can suggest a plan and speak in character; dependable movement, combat, quests, and construction require verified access to Enshrouded's runtime. Loading a mod or reading an asset is not proof that those actions are available.
 
@@ -24,7 +24,7 @@ The main uncertainty is the **game bridge**, not the chat model. An LLM can sugg
 
 ## Recommended first step
 
-Authorize the bounded Phase 0 feasibility investigation, using a disposable world. Prove live state access and control of one companion actor before building the larger runtime. Evaluate native construction separately. If the required hooks are unavailable, stop with evidence and choose a reduced scope or another integration route explicitly.
+Create the owner-designated disposable world and resume the authorized bounded Phase 0 investigation with a demonstrated restore. Prove live state access and control of one companion actor before building the larger runtime. Evaluate native construction separately. If the required hooks are unavailable, stop with evidence and choose a reduced scope or another integration route explicitly.
 
 The proposed first playable is **one companion that follows, stops, assists in a limited fight, and talks about verified events and the player's selected objective**. It is not an autonomous player that can already handle every dungeon, jump, puzzle, or building style.
 
