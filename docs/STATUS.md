@@ -26,3 +26,5 @@ Next: owner-assisted offline template and character reset verification, followed
 Guard patch/evidence: `4919b51e0acc5d7a2a75b7215af654946ae45f28`; [reproduction](../patches/shroudforge/README.md).
 
 Current build/profile code and evidence commit: `158ec77`. This supersedes the earlier unbuilt-artifact limitation, while retaining RUNTIME HOLD and all live checks NOT_RUN.
+
+Scheduler/adapter/diagnostic code and evidence: `a209ecf55b99ffd5302734c26be764b240c2eec9`. The follow-up report commit normalizes Windows log line endings to LF without changing results. Offline reset remains owner-observed NOT_RUN.

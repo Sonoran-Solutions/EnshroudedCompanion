@@ -107,3 +107,5 @@ Only after RUNTIME passes, attempt the smallest read-only identity/snapshot slic
 The evidence PR must remain open and unmerged with auto-merge disabled. This report closes the present blocked checkpoint, not the unexecuted live acceptance work. Linear tickets retain unresolved acceptance criteria and link to the evidence; none is represented as a capability pass.
 
 Current build/profile code and evidence commit: `158ec77`. This supersedes the earlier unbuilt-artifact limitation, while retaining RUNTIME HOLD and all live checks NOT_RUN.
+
+Scheduler/adapter/diagnostic code and evidence: `a209ecf55b99ffd5302734c26be764b240c2eec9`. The follow-up report commit normalizes Windows log line endings to LF without changing results. Offline reset remains owner-observed NOT_RUN.
