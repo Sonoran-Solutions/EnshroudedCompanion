@@ -94,3 +94,75 @@ The unresolved boundary is now precise: the runtime-created system-record callba
 Next bounded static step: trace uses of the registration record's callback slot into the scheduler's plan/task record and inspect the full indirect call-site preparation, including chained function ranges. If this remains unresolved, the minimal read-only runtime observation should capture **the existing original** record/descriptor relationship and caller/query-frame provenance under validated owner guards, without calling or replacing the callback. Such observation is already within the owner's P0 authorization once static review, a bounded job and verified offline reset prerequisites are met. No renewed permission requirement is inferred.
 
 No trampoline was implemented and no profile was promoted. The all-zero historical full-signature results remain unchanged. All follow-up commands completed within 30 seconds, no game/native processes started, and no process remains.
+
+## Scheduler-context continuation: original indirect call and query frame
+
+A further bounded static pass on the same exact executable resolved the earlier mutable-record indirection. This is a stronger source/file result, **not a runtime pass or a ready execution profile**. The scanner's new `--scheduler-relations` mode invokes `objdump` locally and checks 24 selected operand relations against this exact hash. It exports match booleans and RVAs, not instruction/code dumps. All 24 matched; [scheduler-relations.json](scheduler-relations.json) records them. Seven synthetic collector tests now pass, including refusing this relation map for another binary.
+
+```sh
+timeout 60 python3 tools/p0_profile_inspect.py \
+  --executable /home/dq/.local/share/Steam/steamapps/common/Enshrouded/enshrouded.exe \
+  --scheduler-relations \
+  > evidence/p0/profile-investigation/scheduler-relations.json
+```
+
+### Registry to batch to original callback
+
+The original scheduler block at `0x9a271e` selects a system record with stride `0x1f20`; `0x9a2733` obtains registry owner from `[manager]`, adds its system-array offset `0x745a28`, then the selected stride. This agrees arithmetically with the earlier registration address: registry owner offset `0x928` within the outer execution owner plus `0x745a28` equals registration's `0x746350`. This is a static address relation; actual runtime owner pointers remain unobserved here.
+
+The scheduler constructs batches of size `0x38`. At `0x9a27b0` through `0x9a27d3`, a batch receives the manager's task-record array from `manager+0x528`, its count from `manager+0x530`, and the selected system-record pointer at batch offset `0x10`. The same batch is passed directly to `0x9a3400` at `0x9a2b5f` or through original worker callback `0x9e2c80`. That worker receives a job frame containing manager at offset zero, batch array at `+8`, batch index at `+0x10` and task index at `+0x14`, selects the batch by stride `0x38`, and calls `0x9a3400` at `0x9e2cd4`. It then notifies original completion using the system ID (`0x9e2ce4`/`0x9e2ce8`). The submission path includes per-job wait `0x8e5c00` and queue wait `0x8e5e20` before return (`0x9a2c73`/`0x9a2c84`). These decoded joins are evidence for that original path, not a general promise that an injected callback may retain stack pointers after returning.
+
+`0x9a3400` selects one task record at base plus task-index times `0xe0`. It builds a stack-local query frame and iterator. Specifically, manager RCX is saved at `frame+0` (`0x9a34ae`, frame at stack `+0x40`); the iterator's first word is set to that frame pointer and its uint32 cursor at `+8` starts at zero (`0x9a39eb` through `0x9a39f4`). The engine then sets callback RCX to the iterator address, loads the selected system record from `batch+0x10`, loads its original callback from `record+0x28`, and **calls it indirectly at `0x9a3a06`**. The alternate dispatcher `0x9a2d30` has the corresponding original indirect call at `0x9a332a`.
+
+This closes the original descriptor → registered callback slot → batch → callback-iterator relation. It also explains why the current actor callbacks' common helper reads `[incoming RCX]`: that word points to the query frame whose first word is the manager. An arbitrary RCX object or the old generic trampoline's R15 does not have this proven relationship.
+
+### Thread and lifetime boundaries
+
+The original engine has both inline and job-based system-dispatch paths. A remembered thread ID cannot stand in for a current execution phase. A hook must preserve the original register/stack contract, must not retain the iterator/frame beyond the original call, and must not invoke blocking transport, allocate unbounded state or run arbitrary queued gameplay operations merely because this callback fires.
+
+The current upstream `ecsWriteLayout` names the exact `GameServer` thread callback `0xe3bad0` and original scene context at Scene `+0xa0`; `lock_scene_access.cpp` validates thread-registry membership, callback/context identity, local-authority mode and owner/Scene identity under original guards. Independently inspected code shows that thread callback reads its stored context at thread `+0x78` and calls the frame loop; the frame loop's shared lock at context `+0x538` equals Scene `+0x5d8`. The parent investigator separately follows the complete Scene → execution → scheduling path. This worker does **not** claim that all worker/exception/cancellation branches have been proven to retain that Scene gate through every callback, or that the actual current session exhibits the recorded owner chain.
+
+A related later drain job at `0x9e6a30` uses another explicit original job frame: owner at `+0`, item-pointer array at `+8`, uint32 index at `+0x10`. Its caller `0xa1fb20` submits a stack-local descriptor through `0x8e2820` then waits via `0x8e5e20`. It resolves the manager at owner `+0xe15dc0` for the command-drain path. This is useful original lifetime/context evidence, but it is **not** the actor-system iterator ABI and must not be substituted for it.
+
+### Narrow candidate scope and remaining gap
+
+The static relation now supports designing a current-build **counter/context-only** observation hook at a named actor-system entry, using the incoming RCX iterator and its manager provenance. It does not yet establish that such a hook will load safely: the exact entry instruction boundaries/relocation and register-preserving stub still require review and fixtures, and the complete main scheduler join/Scene lifetime path must be reconciled with the parent investigation. An existing aligned-entry stub is a starting implementation pattern, not proof that unwinding, concurrency and callback cleanup work for this hook.
+
+Before any no-op test, bind the adapter to the exact digest and independently validated source, verify offline reset, define the bounded job, keep all actor/inventory/construction dispatch disabled, and log only a bounded counter plus validated identity/context metadata. Actual callback cadence, multiple-worker behavior, session ownership, enable/disable and restart/cleanup must be observed. No game launch, process-memory read or hook execution occurred in this continuation. Execution-profile and all live gate statuses remain unchanged.
+
+All temporary disassembly remained outside the repository under `/tmp/enshrouded-p0-source-review/`; no proprietary instruction bytes or disassembly files were added to evidence. No source checkout modifications or commits; all commands completed and no process remains.
+
+## Scene-to-scheduler bridge and normal-path joins
+
+The next bounded pass independently decoded the parent's Scene anchors and connected them to the actor dispatch already recorded. [scheduler-relations.json](scheduler-relations.json) now contains **46 selected matching static operand checks** on the same exact SHA. Decode ranges start at actual inspected function boundaries (`0x9a1310`, `0xa1fd40`, `0xe3bad0`, `0xe48b60`, `0xe4a200`, `0x8e5c00`); the prior broad range starting at `0x9a1300` was replaced. These checks are selected relations, not a complete control-flow, exception or lifetime proof.
+
+The normal original path is:
+
+1. Registered `GameServer` callback `0xe3bad0` loads its context from the original thread object's `+0x78` (`0xe3bae4`). It passes that context to `0xe4a200` (`0xe3bcdb`/`0xe3bcde`). The profile associates this context with Scene `+0xa0`.
+2. `0xe4a200` acquires a shared gate at context `+0x538` (`0xe4a215`/`0xe4a22f`), corresponding to Scene `+0x5d8`. Its scene-entry loop passes entry context in R8 to `0xe48b60` (`0xe4a30d`/`0xe4a324`). The callee retains it in R14 at `0xe48b89`.
+3. `0xe48b60` reads outer execution owner from scene-context `+0x1d0` and calls `0xa1fd40` at `0xe49752` or `0xe4980d`, depending on the original branch. `0xa1fd40` computes its embedded manager at outer-owner `+0xe15dc0` and calls `0xa1fe10` (`0xa1fd77`/`0xa1fd7e`). This agrees with the current profile's independently recorded manager offset.
+4. `0xa1fe10` retains manager RCX, runs prepass `0x9a1310` at `0xa2000a`, tests manager mode byte `+0x518`, then calls `0x9a21e0` at `0xa2001b` or alternate `0x9a3ae0` at `0xa20022`. The first selected scheduler contains the registry/batch construction and direct/worker dispatch to `0x9a3400` already proven above; the alternate contains dispatch to `0x9a2d30`.
+5. In the first scheduler's normal join path, it waits on queued job handles via `0x8e5c00` (`0x9a2c73`) and on the job queue via `0x8e5e20` (`0x9a2c84`) before returning. Inspecting the queue-wait body confirms it repeatedly examines pending count at queue `+0x1c0` and outstanding-list state at `+0x1a0`, releases/reacquires its own gate while working/waiting, and loops while work remains. The handle-wait entry tailcalls the original wait implementation `0x8e0630`. On normal completion, the Scene frame loop eventually releases its shared gate with the original locked decrement at `0xe4a5b6`.
+
+This closes a concrete normal original Scene → manager → scheduler → original actor-callback path and identifies normal joins before Scene gate release. **Other entrants, all alternate branch joins, timeout/error propagation, asynchronous cancellation, SEH/unwind and teardown paths have not been exhaustively proven.** Runtime active-Scene/session matching and actual thread/cadence still remain NOT_RUN. Do not infer lifetime for a borrowed pointer retained by new mod code merely from the original engine's synchronous normal path.
+
+The gate also creates a concrete action restriction. Upstream `EngineContext::try_exclusive` in `lock_scene_access.cpp` requires Scene lock value zero to acquire `EcsWriteGuard`. A callback entered under the same original Scene shared lock cannot acquire that exclusive guard and receives `ecs-scene-frame-busy`. It must never spin/retry while holding the callback's shared gate, bypass the guard, or dispatch general gameplay writes there. This observation path is not a general write dispatcher. The parent separately reviewed the actor entry's first complete stack-only instructions; a proper trampoline/unwind/preservation review remains necessary and is not replaced by this call-chain result.
+
+### Collector consistency correction
+
+The scheduler scanner previously hashed bytes read from the installed path and then let `objdump` reopen that path, leaving a change-between-reads window. It now reads once, verifies the pinned SHA of those bytes, writes a private temporary **read-only** snapshot outside the repository, and decodes that snapshot only. The snapshot and directory are removed on completion. The evidence states `decode_input=private_read_only_snapshot_of_hashed_bytes`. A new synthetic test verifies the decoder receives exactly the supplied bytes at a private mode-0400 path and that the snapshot is removed afterward. **Eight collector tests pass.** No live game bytes or executable snapshots are retained in the repository.
+
+This follow-up changed only the existing scanner/tests and this evidence package, made no upstream edits, and ran no live operations. No processes remain. All live gates remain NOT_RUN, and an execution profile remains HOLD pending the precisely scoped no-op adapter and runtime evidence.
+
+### Actor entry metadata (NOT_INSTALLABLE)
+
+The same private-snapshot decoder inspected `actor_simulation_start` at RVA `0x2701e0`. Its first four complete instruction lengths are **2, 1, 8, 7** bytes. A five-byte detour would therefore require an **11-byte** whole-instruction overwrite. The first 11 bytes have SHA256 `a56ec9d01e457fd7fe4292c7ef3ac531df2a4e21640412124b4a437ed1760f40` and occur once in the executable sections. No instruction bytes are exported. This uniqueness is a candidate guard, not a validated hook.
+
+The original entry has an unwind-table fragment ending at RVA `0x270220`; its unwind header reports version 1, flags 0, prologue size 18, four unwind-code slots and no frame-register designation. That original metadata covers original code addresses, not a copied trampoline. Copying stack-changing prologue instructions without correctly registered trampoline unwind metadata would leave exception/unwind behavior unsupported. The evidence explicitly labels this candidate **NOT_INSTALLABLE** until trampoline unwind, ABI/register preservation and relocation fixtures exist, followed by actual session/cadence/cleanup evidence. No detour or hook was installed.
+
+
+### Caller stack and home-space check
+
+A parent static pass inspected both original dispatch functions (`0x9a2d30` and `0x9a3400`) from their entries through the indirect calls. Each saves five eight-byte registers and allocates `0x890` bytes, with no further explicit RSP mutation before the selected callback call. Given ordinary Windows x64 entry alignment, this produces an aligned caller stack; the actor callback receives entry RSP modulo 16 = 8. The iterator lives at caller RSP `+0x30`, and its query frame starts at `+0x40`, beyond the 32-byte callee home area. The separate fixture's continuation scratch word at actor entry RSP `+8` therefore maps to caller RSP `+0`, not to the iterator or query frame on these inspected paths. The normal callee-owned home-slot contract supports this use; other hypothetical entrants and actual live ownership remain unobserved.
+
+The collector now records **60** matching selected relations, adding the two stack prologues and alternate iterator argument. This supersedes the earlier 46-check count. The current [entry adapter fixture](../../probes/p0-entry-fixture/README.md) tests signed displacement `-200`, preserves RBP/RBX through stack-based unwind metadata with no frame-register designation, and uses the home-slot continuation transfer. Its negative control reproduces the unsafe RIP-indirect epilogue interpretation. This is fixture/static evidence, not installation approval.

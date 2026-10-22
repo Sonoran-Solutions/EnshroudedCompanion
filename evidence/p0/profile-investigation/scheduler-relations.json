@@ -1,0 +1,346 @@
+{
+  "schema": "p0-static-scheduler-relations-v1",
+  "executable_sha256": "d64966e23b1a458ee6f147bcbceac0b577fa7e39a212f371287d8cc119817882",
+  "actor_entry_candidate": {
+    "name": "actor_simulation_start",
+    "entry_rva": 2556384,
+    "first_instruction_lengths": [
+      2,
+      1,
+      8,
+      7
+    ],
+    "minimum_five_byte_detour_overwrite": 11,
+    "overwrite_sha256": "a56ec9d01e457fd7fe4292c7ef3ac531df2a4e21640412124b4a437ed1760f40",
+    "overwrite_executable_match_count": 1,
+    "unwind_entry_end_rva": 2556448,
+    "unwind_info_rva": 31985172,
+    "unwind_header": {
+      "version": 1,
+      "flags": 0,
+      "prologue_size": 18,
+      "code_count": 4,
+      "frame_register": 0,
+      "frame_offset_scaled": 0
+    },
+    "installation_status": "NOT_INSTALLABLE",
+    "missing": [
+      "Registered trampoline unwind metadata",
+      "ABI/preservation/relocation fixtures",
+      "Live session ownership, cadence and cleanup evidence"
+    ]
+  },
+  "all_selected_relations_match": true,
+  "decode_input": "private_read_only_snapshot_of_hashed_bytes",
+  "checks": [
+    {
+      "relation": "caller_9a2d30_stack_0",
+      "rva": 10104112,
+      "matched": true
+    },
+    {
+      "relation": "caller_9a2d30_stack_2",
+      "rva": 10104114,
+      "matched": true
+    },
+    {
+      "relation": "caller_9a2d30_stack_3",
+      "rva": 10104115,
+      "matched": true
+    },
+    {
+      "relation": "caller_9a2d30_stack_4",
+      "rva": 10104116,
+      "matched": true
+    },
+    {
+      "relation": "caller_9a2d30_stack_6",
+      "rva": 10104118,
+      "matched": true
+    },
+    {
+      "relation": "caller_9a2d30_stack_16",
+      "rva": 10104128,
+      "matched": true
+    },
+    {
+      "relation": "caller_9a3400_stack_0",
+      "rva": 10105856,
+      "matched": true
+    },
+    {
+      "relation": "caller_9a3400_stack_2",
+      "rva": 10105858,
+      "matched": true
+    },
+    {
+      "relation": "caller_9a3400_stack_3",
+      "rva": 10105859,
+      "matched": true
+    },
+    {
+      "relation": "caller_9a3400_stack_4",
+      "rva": 10105860,
+      "matched": true
+    },
+    {
+      "relation": "caller_9a3400_stack_6",
+      "rva": 10105862,
+      "matched": true
+    },
+    {
+      "relation": "caller_9a3400_stack_16",
+      "rva": 10105872,
+      "matched": true
+    },
+    {
+      "relation": "alternate_iterator_frame_store",
+      "rva": 10105624,
+      "matched": true
+    },
+    {
+      "relation": "alternate_iterator_argument",
+      "rva": 10105629,
+      "matched": true
+    },
+    {
+      "relation": "registered_thread_context",
+      "rva": 14924516,
+      "matched": true
+    },
+    {
+      "relation": "thread_frame_context",
+      "rva": 14925019,
+      "matched": true
+    },
+    {
+      "relation": "thread_frame_loop_call",
+      "rva": 14925022,
+      "matched": true
+    },
+    {
+      "relation": "shared_scene_gate_address",
+      "rva": 14983701,
+      "matched": true
+    },
+    {
+      "relation": "shared_scene_gate_acquire",
+      "rva": 14983727,
+      "matched": true
+    },
+    {
+      "relation": "scene_entry_context_argument",
+      "rva": 14983949,
+      "matched": true
+    },
+    {
+      "relation": "scene_entry_execution_call",
+      "rva": 14983972,
+      "matched": true
+    },
+    {
+      "relation": "scene_context_retained",
+      "rva": 14977929,
+      "matched": true
+    },
+    {
+      "relation": "scene_outer_execution_owner",
+      "rva": 14980939,
+      "matched": true
+    },
+    {
+      "relation": "scene_execution_call",
+      "rva": 14980946,
+      "matched": true
+    },
+    {
+      "relation": "alternate_scene_outer_execution_owner",
+      "rva": 14981126,
+      "matched": true
+    },
+    {
+      "relation": "alternate_scene_execution_call",
+      "rva": 14981133,
+      "matched": true
+    },
+    {
+      "relation": "execution_manager_address",
+      "rva": 10616183,
+      "matched": true
+    },
+    {
+      "relation": "execution_manager_tick_call",
+      "rva": 10616190,
+      "matched": true
+    },
+    {
+      "relation": "manager_prepass",
+      "rva": 10616842,
+      "matched": true
+    },
+    {
+      "relation": "manager_scheduler_mode",
+      "rva": 10616850,
+      "matched": true
+    },
+    {
+      "relation": "manager_scheduler_mode_branch",
+      "rva": 10616857,
+      "matched": true
+    },
+    {
+      "relation": "manager_selected_scheduler",
+      "rva": 10616859,
+      "matched": true
+    },
+    {
+      "relation": "manager_alternate_scheduler",
+      "rva": 10616866,
+      "matched": true
+    },
+    {
+      "relation": "shared_scene_gate_release",
+      "rva": 14984630,
+      "matched": true
+    },
+    {
+      "relation": "job_handle_wait_redirect",
+      "rva": 9329666,
+      "matched": true
+    },
+    {
+      "relation": "queue_pending_count_check",
+      "rva": 9330273,
+      "matched": true
+    },
+    {
+      "relation": "registry_from_manager",
+      "rva": 10102579,
+      "matched": true
+    },
+    {
+      "relation": "registry_system_array",
+      "rva": 10102586,
+      "matched": true
+    },
+    {
+      "relation": "registry_system_stride",
+      "rva": 10102558,
+      "matched": true
+    },
+    {
+      "relation": "registry_selected_record",
+      "rva": 10102603,
+      "matched": true
+    },
+    {
+      "relation": "batch_task_array_source",
+      "rva": 10102704,
+      "matched": true
+    },
+    {
+      "relation": "batch_task_array_store",
+      "rva": 10102717,
+      "matched": true
+    },
+    {
+      "relation": "batch_system_record_store",
+      "rva": 10102739,
+      "matched": true
+    },
+    {
+      "relation": "inline_dispatch_call",
+      "rva": 10103647,
+      "matched": true
+    },
+    {
+      "relation": "worker_task_index",
+      "rva": 10366151,
+      "matched": true
+    },
+    {
+      "relation": "worker_dispatch_call",
+      "rva": 10366164,
+      "matched": true
+    },
+    {
+      "relation": "frame_manager_store",
+      "rva": 10106030,
+      "matched": true
+    },
+    {
+      "relation": "iterator_frame_address",
+      "rva": 10107371,
+      "matched": true
+    },
+    {
+      "relation": "iterator_frame_store",
+      "rva": 10107380,
+      "matched": true
+    },
+    {
+      "relation": "callback_iterator_argument",
+      "rva": 10107385,
+      "matched": true
+    },
+    {
+      "relation": "callback_record_load",
+      "rva": 10107390,
+      "matched": true
+    },
+    {
+      "relation": "registered_callback_load",
+      "rva": 10107394,
+      "matched": true
+    },
+    {
+      "relation": "registered_callback_indirect_call",
+      "rva": 10107398,
+      "matched": true
+    },
+    {
+      "relation": "alternate_callback_record_load",
+      "rva": 10105634,
+      "matched": true
+    },
+    {
+      "relation": "alternate_registered_callback_load",
+      "rva": 10105638,
+      "matched": true
+    },
+    {
+      "relation": "alternate_registered_callback_indirect_call",
+      "rva": 10105642,
+      "matched": true
+    },
+    {
+      "relation": "worker_completion_system_id",
+      "rva": 10366180,
+      "matched": true
+    },
+    {
+      "relation": "worker_completion_notify",
+      "rva": 10366184,
+      "matched": true
+    },
+    {
+      "relation": "job_handle_wait",
+      "rva": 10103923,
+      "matched": true
+    },
+    {
+      "relation": "job_queue_wait",
+      "rva": 10103940,
+      "matched": true
+    }
+  ],
+  "authority": "STATIC_OPERAND_RELATIONS_ONLY",
+  "live_runtime": "NOT_RUN",
+  "execution_profile_verdict": "HOLD",
+  "limitations": [
+    "No code bytes or disassembly exported.",
+    "Selected instructions do not prove every control-flow path.",
+    "Original engine dispatch is not authority to inject arbitrary jobs.",
+    "Runtime owner/session identity, no-op cadence and cleanup remain untested."
+  ]
+}

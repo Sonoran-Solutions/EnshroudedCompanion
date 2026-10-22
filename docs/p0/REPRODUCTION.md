@@ -34,3 +34,11 @@ Follow-up: Steam update in progress and source-confirmed startup safety blockers
 Current checkpoint: update completed and identity is unchanged. Follow the [guard-patch reproduction](../../patches/shroudforge/README.md) for synthetic tests only. Current-build execution symbols are missing from the pinned source, so no game launch/reset is requested.
 
 Latest continuation: [native build](../../evidence/p0/build-investigation/README.md), [Rust build](../../evidence/p0/build-investigation/RUST_BUILD.md), and [static profile scanner](../../evidence/p0/profile-investigation/README.md) contain bounded reproduction commands. Selected-path binaries build; game testing remains held on scheduler/query ABI evidence.
+
+## Current scheduler diagnostic checkpoint
+
+Use [entry adapter reproduction](../../probes/p0-entry-fixture/README.md), [telemetry reproduction](../../probes/p0-scheduler-fixture/README.md), and [diagnostic bootstrap reproduction](../../probes/p0-shroudforge-diagnostic/README.md) for the synthetic-only checks. The whole automatic-expiry composition run has a 210-second cap; its expiry case has a 135-second cap and exercises the real 120-second interval. All Wine fixtures use isolated temporary prefixes, never the Steam game prefix. Exact source, tool and artifact hashes are recorded beside those probes.
+
+`timeout 30 python3 tools/p0_backup_rehearsal.py` makes a private copy-only backup and verifies a restore into a separate empty folder; it never restores over active saves. Its output is sanitized, while the source-path/hash manifest and saved content remain private under `~/.local/share/EnshroudedCompanion/p0-backups/`. Require the game closed. This is not an active-save or in-game recovery test.
+
+Do not copy the diagnostic artifact into the game from these build instructions. Complete the [offline reset and live-job gates](NOOP_HOOK_PLAN.md) first. The current production execution profile still refuses this build.

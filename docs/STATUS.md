@@ -1,6 +1,6 @@
 # Project status
 
-Updated: 2026-10-22. **P0 HOLD — loader binaries built and synthetic checks pass; execution-hook context unresolved; live acceptance NOT_RUN.**
+Updated: 2026-10-22. **P0 HOLD — loader binaries built and synthetic checks pass; scheduler context statically traced; diagnostic adapter and synthetic composition tested; offline reset and live acceptance outstanding.**
 
 See [Phase 0 report](p0/REPORT.md) for evidence, exact code/source/build identities, time, blockers and next task.
 
@@ -21,7 +21,7 @@ See [Phase 0 report](p0/REPORT.md) for evidence, exact code/source/build identit
 | Owner go/hold disposition beyond P0 | PENDING |
 | Project license | NOT_SELECTED |
 
-Next: resolve the current scheduler/query-frame contract and validate a current execution adapter. Required selected-path loader binaries now build and pass synthetic load/refusal checks; see [build evidence](../evidence/p0/build-investigation/README.md). The guard patch correctly refuses the current read-only profile. Offline reset check waits until a safe runtime candidate exists. Do not consume downstream dependencies as if they passed. Two-client quests and multiplayer assertions remain untested without another authorized client or an explicitly accepted reduced verification scope.
+Next: owner-assisted offline template and character reset verification, followed by a separately specified bounded diagnostic session. The diagnostic remains uninstalled and labelled NOT_INSTALLABLE until operational gates are complete. [Adapter fixtures](../probes/p0-entry-fixture/README.md), [diagnostic evidence](../probes/p0-shroudforge-diagnostic/README.md) and [copy-only backup rehearsal](../evidence/p0/backup-rehearsal.json) are available. The traced shared Scene lock prevents general exclusive-write dispatch at this callback. Production execution selection still refuses the read-only profile. Two-client quests and multiplayer assertions remain untested without another authorized client or an explicitly accepted reduced verification scope.
 
 Guard patch/evidence: `4919b51e0acc5d7a2a75b7215af654946ae45f28`; [reproduction](../patches/shroudforge/README.md).
 

@@ -1,0 +1,856 @@
+{
+  "diagnosticOnly": true,
+  "disabled": true,
+  "capacity": 8192,
+  "samples": [
+    {
+      "elapsedMs": 1000,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 2000,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 3000,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 4000,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 5000,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 6000,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 7000,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 8001,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 9001,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 10001,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 11001,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 12001,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 13001,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 14001,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 15001,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 16001,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 17002,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 18002,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 19002,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 20002,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 21002,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 22002,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 23002,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 24002,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 25002,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 26003,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 27003,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 28003,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 29003,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 30003,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 31003,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 32003,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 33003,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 34003,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 35004,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 36004,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 37004,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 38004,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 39004,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 40004,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 41004,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 42004,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 43004,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 44005,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 45005,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 46005,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 47005,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 48005,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 49005,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 50005,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 51005,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 52005,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 53006,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 54006,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 55006,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 56006,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 57006,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 58006,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 59006,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 60006,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 61007,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 62007,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 63007,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 64007,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 65007,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 66007,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 67007,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 68007,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 69008,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 70008,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 71008,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 72008,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 73008,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 74008,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 75008,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 76008,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 77009,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 78009,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 79009,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 80009,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 81009,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 82010,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 83010,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 84010,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 85010,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 86010,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 87010,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 88010,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 89010,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 90011,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 91011,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 92011,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 93011,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 94011,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 95011,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 96011,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 97011,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 98011,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 99012,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 100012,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 101012,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 102012,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 103012,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 104012,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 105012,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 106012,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 107012,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 108013,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 109013,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 110013,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 111013,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 112013,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 113013,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 114013,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 115014,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 116014,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 117014,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 118014,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 119014,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    },
+    {
+      "elapsedMs": 120014,
+      "reserved": 10,
+      "dropped": 0,
+      "published": 10,
+      "uniqueThreads": 1
+    }
+  ],
+  "afterDisable": {
+    "elapsedMs": 120111,
+    "reserved": 10,
+    "dropped": 0,
+    "published": 10,
+    "uniqueThreads": 1
+  },
+  "quiescenceProven": false,
+  "pendingCapturesMayFinish": true
+}

@@ -2,7 +2,11 @@
 """Synthetic-PE regression tests for the static evidence collector."""
 import struct
 import unittest
-from p0_profile_inspect import PE
+import tempfile
+from pathlib import Path
+from types import SimpleNamespace
+from unittest.mock import patch
+from p0_profile_inspect import PE, inspect_scheduler_relations, decode_snapshot
 
 
 def fixture():
@@ -56,6 +60,25 @@ class StaticTests(unittest.TestCase):
         self.assertEqual(pe.rip_reference_candidates(0x2040),[0x1010])
         self.assertEqual(pe.relative_call_candidates(0x1010),[0x1030])
         self.assertEqual(pe.relative_call_candidates(0x1000),[])
+
+    def test_decoder_uses_private_snapshot_then_removes_it(self):
+        payload=fixture()
+        observed=[]
+        def decode(command, **options):
+            snapshot=Path(command[-1])
+            self.assertEqual(snapshot.read_bytes(),payload)
+            self.assertEqual(snapshot.stat().st_mode & 0o777,0o400)
+            self.assertEqual(options['timeout'],60)
+            observed.append(snapshot)
+            return SimpleNamespace(stdout='  140001000: ret\n')
+        with patch('p0_profile_inspect.subprocess.run',side_effect=decode):
+            self.assertEqual(decode_snapshot(payload,[(0x1000,0x1001)]),{0x1000:'ret'})
+        self.assertFalse(observed[0].exists())
+
+    def test_scheduler_map_refuses_other_binary(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path=Path(directory)/'synthetic.exe';path.write_bytes(fixture())
+            with self.assertRaises(ValueError):inspect_scheduler_relations(path)
 
     def test_invalid_descriptor_pointer_rejected(self):
         broken=bytearray(fixture())

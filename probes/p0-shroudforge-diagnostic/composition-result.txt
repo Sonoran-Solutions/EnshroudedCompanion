@@ -1,0 +1,7 @@
+wine: created the configuration directory '/tmp/p0-diagnostic-composition.yHWq18/prefix'
+wineserver: using server-side synchronization.
+PASS: synthetic-only identity StartupGate/hook composition, 10 captures, disable, continuation and count-only summary
+SUMMARY_FILE: shroudforge-p0-360-20261022-222058-782.json
+PASS: 120-second automatic disable without explicit disable; mainElapsedMs=120014 afterDisableElapsedMs=120111; continuation and count-only summary
+SUMMARY_FILE: shroudforge-p0-380-20261022-222259-169.json
+PASS: unchanged production diagnostic DLL refuses the same synthetic composition host exit=66

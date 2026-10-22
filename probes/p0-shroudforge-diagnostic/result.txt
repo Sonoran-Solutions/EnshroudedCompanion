@@ -1,0 +1,7 @@
+PASS: 180 exact system32 forwarders; only typed disable/status additional exports; system DLL imports only
+PASS: unrelated synthetic host inert exit=0; named wrong-image host refused exit=66
+wineserver: using server-side synchronization.
+PASS: missing/duplicate/metadata/expected-byte refusal; occupied RIP refusal and suspend-count preservation
+PASS: shared adapter synthetic publication/execution, one-way disable and retained unwind storage
+LIMIT: no positive exact-image admission, game, real exception, timeout failure injection or DLL lifetime proof
+Artifact: /tmp/enshrouded-p0-toolchain/diagnostic-review/winmm-diagnostic-NOT_INSTALLABLE.dll

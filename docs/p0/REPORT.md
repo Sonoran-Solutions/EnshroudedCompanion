@@ -2,7 +2,23 @@
 
 Date: 2026-10-22. P0 was explicitly authorized. This bounded session completed source investigation and offline identity tooling; live feasibility is **not established**. Owner disposition on continuation beyond P0: **PENDING**. P1 and all later phases remain held.
 
-## Current execution-profile and loader-build checkpoint
+## Scheduler and ownership checkpoint
+
+The owner authorized resolving scheduler context and ownership while retaining all guards. Sol and parent traced the original descriptor → registered system record → batch → indirect actor callback, including its RCX iterator → stack query frame → manager relation. Both inline and worker dispatch exist. The GameServer Scene frame holds a shared lock across the normal update/scheduler path; joins provide static evidence for stack-frame lifetime on that path, not all exceptional paths or actual session identity. See [exact-build relation evidence](../../evidence/p0/profile-investigation/README.md).
+
+This changes the safe implementation boundary: an actor-entry hook may be investigated as bounded telemetry, but is not a general gameplay dispatcher. The existing `EcsWriteGuard` requires the same Scene lock to be zero before exclusive acquisition; on the shared-lock path it must return `ecs-scene-frame-busy`. Do not bypass the guard, spin for exclusive access inside the callback, retain borrowed frame pointers, or infer ownership from a remembered thread ID.
+
+A separate diagnostic bootstrap now composes the strict file/startup guards, a current-entry adapter and bounded telemetry. The production execution profile remains refused. Static scanning verifies 60 selected exact-build relations; eight collector tests pass. Adapter fixtures cover 26 refusals, seven signed displacements including the actual -200, register/flags/shadow-space preservation, and 301 virtual-unwind contexts. Concurrent telemetry passes normal, ASan/UBSan and TSan checks. Synthetic publication verifies unchanged targets on refusal, occupied-RIP rejection, preserved suspend counts and original continuation after disable. Positive synthetic startup composition and unchanged production-DLL refusal also pass. The real 120-second automatic disable passed (main observed 120014 ms; post-disable snapshot 120111 ms), with original continuation still returning correctly. See [diagnostic build and results](../../probes/p0-shroudforge-diagnostic/README.md).
+
+No game was launched or diagnostic installed. Actual session ownership, raised exceptions, native Windows and exhaustive injected platform failures remain untested. The diagnostic records counters only; it cannot establish player/world identity or any downstream capability. Code and unwind storage remain pinned through process exit; disable never unpatches or frees them. A short post-disable sampling delay is explicitly not a quiescence proof.
+
+A [copy-only backup rehearsal](../../evidence/p0/backup-rehearsal.json) verified 35 files (2,349,782 bytes), restored them into a separate empty directory and compared hashes. Original saves were unchanged. The private backup remains outside Git at `~/.local/share/EnshroudedCompanion/p0-backups/20261022T221655Z`. In-game recovery, Steam Cloud behavior and shared-template reset remain NOT_RUN.
+
+**Recommendation: HOLD. RUNTIME HOLD; OBSERVATION / QUEST / ACTOR / BUILDING NOT_RUN.** The next operational gate is the owner-assisted, unmodified-game offline reset check in [the probe plan](NOOP_HOOK_PLAN.md). The artifact stays labelled `NOT_INSTALLABLE` until that gate and the exact live-job specification are complete. No production profile is promoted and no P1 work begins.
+
+Scheduler/adapter/diagnostic work has used approximately 45–60 minutes elapsed across this continuation and its interrupted predecessor, with parallel Sol/Luna reviews; this is an estimate, not billing. Compiler/test commands were individually bounded at 30–60 seconds, with whole build jobs at 120 seconds and the real-expiry composition job capped at 210 seconds. Exact token/cost accounting is unavailable. The approved 5–10 developer-day ceiling and two-day subsystem stop threshold are not exhausted; no multi-day process is running.
+
+## Previous execution-profile and loader-build checkpoint
 
 The owner authorized further current-build hook investigation and the complete loader build, keeping all safety guards. **Overall recommendation remains HOLD.** Required selected-path binaries now cross-build: `winmm.dll`, `kfc-runtime.dll`, the Rust runtime, launcher and updater. Frontend inputs also build. The final bootstrap preserves all 180 original absolute system-DLL forwarders. Actual native provider/bootstrap and Rust DLL synthetic-host tests pass under isolated Proton Wine. See [native build evidence](../../evidence/p0/build-investigation/README.md) and [Rust evidence](../../evidence/p0/build-investigation/RUST_BUILD.md). This supersedes earlier build failures below; it is not an official release package or in-game compatibility result.
 
@@ -53,7 +69,7 @@ The local client manifest is Steam app `1203620`, build `26082781`; executable S
 
 | Capability | Verdict | Evidence | Blockers |
 | --- | --- | --- | --- |
-| RUNTIME | HOLD; live NOT_RUN | Selected-path binaries build; actual DLL synthetic refusal/load tests pass; exact read-profile match only | Scheduler/query ABI and execution profile unvalidated; in-game load/disable/restart and reset not demonstrated |
+| RUNTIME | HOLD; live NOT_RUN | Selected-path binaries build; actual DLL synthetic refusal/load tests pass; exact read-profile match only | Diagnostic adapter/build and synthetic composition tested; production execution profile absent; in-game load/disable/restart and reset not demonstrated |
 | OBSERVATION | NOT_RUN | Source contains bounded ECS readers; no actual snapshots collected | RUNTIME gate; owner/entity/world identity, health/position semantics, sustained freshness and reload behavior unproven |
 | QUEST | NOT_RUN | No scoped quest API established by targeted source review | Runtime/observation gates; personal/world scope unresolved; second client unavailable |
 | ACTOR | NOT_RUN | Generic candidate SpawnEntity path inspected as building-prop operation, not NPC control | Identity/authority gate; NPC ownership, navigation, combat and cleanup path unproven; second client unavailable |
@@ -67,7 +83,7 @@ Overall HOLD reflects missing test prerequisites and unresolved technical surfac
 - Sol inspected pinned public source for four candidates; parent spot-checked loader stubs, profile identity and fallback guards. Luna prepared the [scenario matrix](SCENARIOS.md); parent reviewed and corrected missing acceptance cases.
 - Read local manifest and executable identity, and extracted only allowlisted version strings from an existing log. No private saves/raw logs/binaries are committed.
 - Implemented the [offline identity collector](../../tools/p0_fingerprint.py). Three focused synthetic-input tests pass; this is input/hash/privacy validation, not a simulated native companion.
-- **Nothing was exercised in-game by this task.** Production DLLs were cross-built and loaded only in synthetic hosts as described above; no backup was made/restored; no actor, quest, resource or world state was modified. All live cases in the matrix remain NOT_RUN.
+- **Nothing was exercised in-game by this task.** Production DLLs were cross-built and loaded only in synthetic hosts as described above; a private copy backup and separate-directory restore rehearsal passed; no actor, quest, resource or world state was modified. All live cases in the matrix remain NOT_RUN.
 
 ## Evidence and revisions
 
@@ -84,7 +100,7 @@ Network clones were bounded at 30 seconds each; fingerprint and targeted tests w
 
 ## Recommended next task
 
-**Resume DYL-136 by establishing the current scheduler/query-frame contract and a reviewed execution adapter for build 26082781.** The selected-path binaries now build, but deployment and successful game initialization remain unvalidated. Keep this source investigation bounded to 0.5–1 developer-day initially, stopping by the two-day subsystem limit if no reproducible route emerges. Only then request the offline reset demonstration and perform a short load/disable/restart test. Expected initial engineering effort: 0.5–1 focused developer-day, conditional on toolchain and guard complexity; stop/report rather than exceed the subsystem limit. Record the exact job command, output, timeout, process owner and safety assertions before launch.
+**Continue DYL-136 with the owner-assisted offline reset check, then a separately specified 60–120-second diagnostic load/capture/disable/exit and adapter-disabled restart.** Allow 15–30 minutes of owner time and up to half a focused developer-day for installation, bounded observation, cleanup and evidence review, conditional on passing reset/admission. Stop on guard refusal or unexpected state; do not weaken checks. A diagnostic pass still does not qualify the absent production execution profile or downstream APIs.
 
 Only after RUNTIME passes, attempt the smallest read-only identity/snapshot slice of DYL-137. Two-client quest/replication coverage remains blocked unless authorized second-client access becomes available or the owner explicitly approves a precisely documented reduced verification scope. Neither an observer-only product nor second-client automation is implemented here. No P1 task is recommended to start yet.
 
