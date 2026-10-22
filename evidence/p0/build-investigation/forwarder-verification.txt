@@ -1,0 +1,3 @@
+PASS: all 180 final linked forwarder targets exactly equal source pragma targets.
+PASS: final tested quoted-target bootstrap copied to local staging; no game installation.
+SHA256=7a2b672d93428ec2e2bec03407a6009e171b9e2c762dd1d88ec92f80497bc711

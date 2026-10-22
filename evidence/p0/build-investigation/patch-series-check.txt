@@ -1,0 +1,1 @@
+PASS: both patches apply to pinned clean source; all 18 changed files match the built checkout.

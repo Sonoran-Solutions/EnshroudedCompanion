@@ -1,0 +1,49 @@
+diff --git a/modules/game-runtime/native/CMakeLists.txt b/modules/game-runtime/native/CMakeLists.txt
+index 7c0ed24..e85f3be 100644
+--- a/modules/game-runtime/native/CMakeLists.txt
++++ b/modules/game-runtime/native/CMakeLists.txt
+@@ -72,12 +72,12 @@ set(generated_dir "${CMAKE_CURRENT_BINARY_DIR}/generated")
+ file(MAKE_DIRECTORY "${generated_dir}")
+ set(profile_resource_rc "${generated_dir}/embedded_profiles.rc")
+ set(profile_resource_header "${generated_dir}/embedded_profile_ids.h")
+-set(profile_rc_content "#include <windows.h>\n")
++set(profile_rc_content "")
+ file(TO_CMAKE_PATH "${zydis_SOURCE_DIR}/LICENSE" zydis_license_path)
+ file(TO_CMAKE_PATH "${zydis_SOURCE_DIR}/dependencies/zycore/LICENSE" zycore_license_path)
+ string(APPEND profile_rc_content
+-    "\"ZYDIS_LICENSE\" RCDATA \"${zydis_license_path}\"\n"
+-    "\"ZYCORE_LICENSE\" RCDATA \"${zycore_license_path}\"\n")
++    "1 RCDATA \"${zydis_license_path}\"\n"
++    "2 RCDATA \"${zycore_license_path}\"\n")
+ set(profile_header_content "#pragma once\nnamespace KfcRuntimeEmbedded {\ninline constexpr int profile_resource_ids[] = {")
+ set(resource_read_header_content "inline constexpr int resource_read_profile_ids[] = {")
+ 
+@@ -171,6 +171,7 @@ add_library(kfc-runtime SHARED
+     player-input/apply_building_input.cpp
+     ../../transport/native/steam_network.cpp
+     "${profile_resource_rc}")
++set_target_properties(kfc-runtime PROPERTIES PREFIX "")
+ target_include_directories(kfc-runtime PRIVATE
+     "${generated_dir}"
+     "${CMAKE_CURRENT_SOURCE_DIR}"
+diff --git a/modules/transport/native/steam_network.cpp b/modules/transport/native/steam_network.cpp
+index 5302044..dc2453a 100644
+--- a/modules/transport/native/steam_network.cpp
++++ b/modules/transport/native/steam_network.cpp
+@@ -5,6 +5,7 @@
+ #include <cstring>
+ #include <atomic>
+ #include <charconv>
++#include <filesystem>
+ #include <fstream>
+ #include <iterator>
+ #include <map>
+@@ -186,7 +187,7 @@ bool parse_steam_id(const std::string& value, size_t start, uint64_t& id) {
+ bool read_authenticated_server_peers(std::vector<uint64_t>& peers) {
+     std::wstring path;
+     if (!server_log_path(path)) return false;
+-    std::ifstream log(path);
++    std::ifstream log{std::filesystem::path(path)};
+     if (!log) return false;
+     std::map<std::string, uint64_t> live;
+     std::set<uint64_t> authenticated;

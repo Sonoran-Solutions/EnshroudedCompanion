@@ -1,0 +1,55 @@
+
+added 27 packages, and audited 28 packages in 2s
+
+9 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+npm notice run shroudforge-modloader-ui@1.0.0 build
+npm notice run npm run crowdin:progress && npm run locale:check && npm run flags:build && vite build && vite build --mode updater
+node:internal/modules/cjs/loader:1520
+  throw err;
+  ^
+
+Error: Cannot find module '/home/dq/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node_modules/npm/bin/npm-prefix.js'
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1517:15)
+    at wrapResolveFilename (node:internal/modules/cjs/loader:1071:27)
+    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1095:10)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1122:12)
+    at Module._load (node:internal/modules/cjs/loader:1294:5)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47 {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: []
+}
+
+Node.js v24.19.0
+Could not determine Node.js install directory
+npm notice run shroudforge-modloader-ui@1.0.0 build
+npm notice run npm run crowdin:progress && npm run locale:check && npm run flags:build && vite build && vite build --mode updater
+npm notice run shroudforge-modloader-ui@1.0.0 crowdin:progress
+npm notice run node ../../../dev/build/capture_crowdin_progress.mjs
+Crowdin progress was not refreshed because CROWDIN_PERSONAL_TOKEN is not set. Wrote an unavailable entry for each local target locale.
+npm notice run shroudforge-modloader-ui@1.0.0 locale:check
+npm notice run node scripts/check-locales.mjs
+Locale validation passed: 719 keys, 4 locales.
+npm notice run shroudforge-modloader-ui@1.0.0 flags:build
+npm notice run node scripts/generate-flags.mjs
+Generated 4 locale SVG flags.
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 110 modules transformed.
+rendering chunks...
+computing gzip size...
+../../../build/ui/modloader/index.html  2,337.56 kB │ gzip: 1,403.90 kB
+
+✓ built in 497ms
+vite v8.3.4 building client environment for updater...
+transforming...
+✓ 35 modules transformed.
+rendering chunks...
+computing gzip size...
+../../../build/ui/updater/updater.html  528.93 kB │ gzip: 147.72 kB
+
+✓ built in 174ms

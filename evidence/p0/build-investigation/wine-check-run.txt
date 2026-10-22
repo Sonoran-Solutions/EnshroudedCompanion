@@ -1,0 +1,12 @@
+PASS: exact system32 winmm forwarder host exit=0
+PASS: unrelated host DllMain exit=0
+PASS: enshrouded.exe strict identity refusal exit=66
+016c:trace:loaddll:build_module Loaded L"Z:\\tmp\\p0-native-checks.qAWyBT\\bootstrap\\forward_probe.exe" at 0000000140000000: native
+016c:trace:loaddll:build_module Loaded L"Z:\\tmp\\p0-native-checks.qAWyBT\\bootstrap\\winmm.dll" at 00006FFFFF310000: native
+016c:trace:loaddll:build_module Loaded L"c:\\windows\\system32\\winmm.dll" at 00006FFFFF230000: builtin
+018c:err:module:loader_init "winmm.dll" failed to initialize, aborting
+018c:err:module:loader_init Initializing dlls for L"Z:\\tmp\\p0-native-checks.qAWyBT\\bootstrap\\enshrouded.exe" failed, status c0000142
+types=0/0{reflected_ecs_types=0,registered_storage_types=0,registrations=0} component_index_discovery=scanning(0/0,layouts=0,templates=0,restarts=0) profile=missing-exact-sha256-profile game_thread=unavailable entity_hooks{actor-placement=0/0,building-dispatch=0/0,prop-update-requests=0,completed=0,removal{phase=0,success=0,thread=0,owner=0}} voxel_context=waiting context_probe{revision=world-context-session-20261009-a2,source=none,global=profile-unavailable,actor=not-observed,prop-updates=0,cursor=0} regi
+types=0/0{reflected_ecs_types=0,registered_storage_types=0,registrations=0} component_index_discovery=scanning(0/0,layouts=0,templates=0,restarts=0) profile=missing-exact-sha256-profile game_thread=unavailable entity_hooks{actor-placement=0/0,building-dispatch=0/0,prop-update-requests=0,completed=0,removal{phase=0,success=0,thread=0,owner=0}} voxel_context=waiting context_probe{revision=world-context-session-20261009-a2,source=none,global=profile-unavailable,actor=not-observed,prop-updates=0,cursor=0} regi
+types=0/0{reflected_ecs_types=0,registered_storage_types=0,registrations=0} component_index_discovery=scanning(0/0,layouts=0,templates=0,restarts=0) profile=missing-exact-sha256-profile game_thread=unavailable entity_hooks{actor-placement=0/0,building-dispatch=0/0,prop-update-requests=0,completed=0,removal{phase=0,success=0,thread=0,owner=0}} voxel_context=waiting context_probe{revision=world-context-session-20261009-a2,source=none,global=profile-unavailable,actor=not-observed,prop-updates=0,cursor=0} regi
+PASS: ABI-12 provider loaded, refused unknown image, actor/building hooks inactive

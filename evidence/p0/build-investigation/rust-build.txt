@@ -1,0 +1,907 @@
+warning: modules/mod-runtime/Cargo.toml: file `<PINNED_SOURCE>/modules/mod-runtime/../../dev/profiles/inspect/export_kfc_resources.rs` found to be present in multiple build targets:
+  * `example` target `export_kfc_resources`
+  * `example` target `inspect_attribute_resources`
+  * `example` target `inspect_building_inputs`
+warning: `shroudforge-api` (manifest) generated 1 warning
+    Updating crates.io index
+ Downloading crates ...
+  Downloaded adler2 v2.0.1
+  Downloaded block-buffer v0.10.4
+  Downloaded pkg-config v0.3.34
+  Downloaded profiling v1.0.18
+  Downloaded proc-macro2-diagnostics v0.10.1
+  Downloaded potential_utf v0.1.6
+  Downloaded dlopen2_derive v0.4.3
+  Downloaded ref-cast-impl v1.0.27
+  Downloaded base64 v0.22.1
+  Downloaded bumpalo v3.20.3
+  Downloaded crc v3.4.0
+  Downloaded bit-set v0.8.0
+  Downloaded avif-serialize v0.8.9
+  Downloaded float-cmp v0.9.0
+  Downloaded autocfg v1.5.1
+  Downloaded bitflags v1.3.2
+  Downloaded deflate64 v0.1.12
+  Downloaded powerfmt v0.2.0
+  Downloaded proc-macro-crate v2.0.2
+  Downloaded pulp-wasm-simd-flag v0.1.1
+  Downloaded rustc-hash v2.1.3
+  Downloaded raw-window-handle v0.6.2
+  Downloaded bytecount v0.6.9
+  Downloaded gdk-pixbuf v0.18.5
+  Downloaded cipher v0.4.4
+  Downloaded either v1.18.0
+  Downloaded av1-grain v0.2.5
+  Downloaded errno v0.3.14
+  Downloaded reborrow v0.5.5
+  Downloaded futures-channel v0.3.34
+  Downloaded camino v1.2.6
+  Downloaded cpufeatures v0.3.1
+  Downloaded equator-macro v0.4.2
+  Downloaded siphasher v1.0.3
+  Downloaded cpufeatures v0.2.17
+  Downloaded generic-array v0.14.7
+  Downloaded futures-core v0.3.34
+  Downloaded serde_urlencoded v0.7.1
+  Downloaded ref-cast v1.0.27
+  Downloaded fs2 v0.4.3
+  Downloaded quick-error v2.0.1
+  Downloaded gdkx11 v0.18.2
+  Downloaded dunce v1.0.5
+  Downloaded proc-macro-crate v1.3.1
+  Downloaded crypto-common v0.1.7
+  Downloaded bit_field v0.10.3
+  Downloaded field-offset v0.3.6
+  Downloaded rustc_version v0.4.1
+  Downloaded gdkwayland-sys v0.18.2
+  Downloaded futures-task v0.3.34
+  Downloaded same-file v1.0.6
+  Downloaded crossbeam-utils v0.8.23
+  Downloaded serde_spanned v0.6.9
+  Downloaded strict-num v0.1.1
+  Downloaded simd_helpers v0.1.0
+  Downloaded dirs v7.0.0
+  Downloaded qoi v0.4.1
+  Downloaded borrow-or-share v0.2.4
+  Downloaded sha1 v0.10.7
+  Downloaded dpi v0.1.2
+  Downloaded byteorder-lite v0.1.0
+  Downloaded stable_deref_trait v1.2.1
+  Downloaded dirs-sys v0.5.0
+  Downloaded equivalent v1.0.2
+  Downloaded form_urlencoded v1.2.2
+  Downloaded sync_wrapper v1.0.2
+  Downloaded thread_local v1.1.10
+  Downloaded cfg_aliases v0.2.2
+  Downloaded color_quant v1.1.0
+  Downloaded equator v0.4.2
+  Downloaded proc-macro-error-attr v1.0.4
+  Downloaded futures-io v0.3.34
+  Downloaded gdkx11-sys v0.18.2
+  Downloaded profiling-procmacros v1.0.18
+  Downloaded cairo-sys-rs v0.18.2
+  Downloaded constant_time_eq v0.3.1
+  Downloaded futures-sink v0.3.34
+  Downloaded futures-macro v0.3.34
+  Downloaded gdk-pixbuf-sys v0.18.0
+  Downloaded subtle v2.6.1
+  Downloaded cfg-if v1.0.5
+  Downloaded idna_adapter v1.2.2
+  Downloaded crossbeam-deque v0.8.8
+  Downloaded as-slice v0.2.1
+  Downloaded crc-catalog v2.5.0
+  Downloaded digest v0.10.7
+  Downloaded fastrand v2.5.0
+  Downloaded fax v0.2.7
+  Downloaded bitflags v2.13.2
+  Downloaded itoa v1.0.18
+  Downloaded find-msvc-tools v0.1.13
+  Downloaded system-deps v6.2.2
+  Downloaded new_debug_unreachable v1.0.6
+  Downloaded num-cmp v0.1.0
+  Downloaded option-ext v0.2.0
+  Downloaded percent-encoding v2.3.2
+  Downloaded time-core v0.1.9
+  Downloaded tower-service v0.3.3
+  Downloaded version-compare v0.2.1
+  Downloaded rgb v0.8.53
+  Downloaded thiserror-impl v2.0.20
+  Downloaded quinn-udp v0.5.15
+  Downloaded rand_core v0.10.1
+  Downloaded wasm-bindgen-shared v0.2.128
+  Downloaded windows-interface v0.59.3
+  Downloaded winapi-util v0.1.11
+  Downloaded windows-implement v0.60.2
+  Downloaded bytemuck_derive v1.12.1
+  Downloaded unicode-vo v0.1.0
+  Downloaded utf8_iter v1.0.4
+  Downloaded version_check v0.9.5
+  Downloaded webview2-com-macros v0.8.1
+  Downloaded windows-link v0.2.1
+  Downloaded zeroize_derive v1.5.0
+  Downloaded bit-vec v0.8.0
+  Downloaded data-url v0.3.2
+  Downloaded dlopen2 v0.8.2
+  Downloaded static_assertions v1.1.0
+  Downloaded thiserror v2.0.20
+  Downloaded email_address v0.2.9
+  Downloaded futures-executor v0.3.34
+  Downloaded quote v1.0.47
+  Downloaded thiserror-impl v1.0.69
+  Downloaded deranged v0.5.8
+  Downloaded cfg-expr v0.15.8
+  Downloaded font-types v0.12.5
+  Downloaded displaydoc v0.2.7
+  Downloaded polycool v0.4.0
+  Downloaded simd-adler32 v0.3.10
+  Downloaded fontconfig-parser v0.5.8
+  Downloaded javascriptcore-rs v1.1.2
+  Downloaded rand_pcg v0.10.2
+  Downloaded ravif v0.13.0
+  Downloaded target-lexicon v0.12.16
+  Downloaded euclid v0.22.14
+  Downloaded rustversion v1.0.23
+  Downloaded simplecss v0.2.2
+  Downloaded bytemuck v1.25.2
+  Downloaded shlex v2.0.1
+  Downloaded synstructure v0.14.0
+  Downloaded slab v0.4.12
+  Downloaded chacha20 v0.10.2
+  Downloaded sha2 v0.10.9
+  Downloaded soup3-sys v0.5.0
+  Downloaded thiserror v1.0.69
+  Downloaded num-integer v0.1.47
+  Downloaded roxmltree v0.20.0
+  Downloaded tracing-log v0.2.0
+  Downloaded svgtypes v0.16.1
+  Downloaded referencing v0.33.0
+  Downloaded ouroboros v0.18.5
+  Downloaded rustls-pki-types v1.15.1
+  Downloaded scopeguard v1.2.0
+  Downloaded proc-macro-error v1.0.4
+  Downloaded cookie v0.18.2
+  Downloaded webview2-com v0.39.1
+  Downloaded bzip2 v0.6.1
+  Downloaded getrandom v0.2.17
+  Downloaded built v0.8.1
+  Downloaded fdeflate v0.3.7
+  Downloaded pango-sys v0.18.0
+  Downloaded toml_datetime v0.6.3
+  Downloaded crossbeam-epoch v0.9.21
+  Downloaded fluent-uri v0.3.2
+  Downloaded untrusted v0.9.0
+  Downloaded ppmd-rust v1.5.0
+  Downloaded tower-layer v0.3.3
+  Downloaded xmlwriter v0.1.0
+  Downloaded semver v1.0.28
+  Downloaded windows-targets v0.53.5
+  Downloaded windows-collections v0.3.2
+  Downloaded y4m v0.8.0
+  Downloaded tempfile v3.27.0
+  Downloaded soup3 v0.5.0
+  Downloaded gobject-sys v0.18.0
+  Downloaded hyper-rustls v0.27.10
+  Downloaded smallvec v1.16.1
+  Downloaded anyhow v1.0.104
+  Downloaded gif v0.14.2
+  Downloaded aligned-vec v0.6.4
+  Downloaded arg_enum_proc_macro v0.3.4
+  Downloaded zstd v0.13.3
+  Downloaded lebe v0.5.3
+  Downloaded aligned v0.4.3
+  Downloaded once_cell v1.21.4
+  Downloaded num-rational v0.4.2
+  Downloaded pin-project-lite v0.2.17
+  Downloaded serde_derive v1.0.229
+  Downloaded socket2 v0.6.5
+  Downloaded tinystr v0.8.4
+  Downloaded want v0.3.1
+  Downloaded sharded-slab v0.1.7
+  Downloaded slotmap v1.1.1
+  Downloaded proc-macro2 v1.0.107
+  Downloaded windows-version v0.1.7
+  Downloaded zerofrom-derive v0.1.8
+  Downloaded heck v0.4.1
+  Downloaded num-iter v0.1.46
+  Downloaded v_frame v0.3.9
+  Downloaded zune-inflate v0.2.54
+  Downloaded cairo-rs v0.18.5
+  Downloaded crc32fast v1.5.2
+  Downloaded num-conv v0.2.2
+  Downloaded tokio-macros v2.7.2
+  Downloaded liblzma v0.4.8
+  Downloaded num-complex v0.4.6
+  Downloaded num v0.4.3
+  Downloaded winres v0.1.12
+  Downloaded vsimd v0.8.0
+  Downloaded getrandom v0.3.4
+  Downloaded hound v3.5.1
+  Downloaded http-body v1.1.0
+  Downloaded walkdir v2.5.0
+  Downloaded lru-slab v0.1.3
+  Downloaded bitstream-io v4.10.0
+  Downloaded arrayvec v0.7.8
+  Downloaded ryu v1.0.23
+  Downloaded zune-core v0.5.3
+  Downloaded serde_core v1.0.229
+  Downloaded getrandom v0.4.3
+  Downloaded maybe-rayon v0.1.1
+  Downloaded memoffset v0.9.1
+  Downloaded num-derive v0.4.2
+  Downloaded tinyvec v1.13.3
+  Downloaded toml v0.5.11
+  Downloaded glib-macros v0.18.5
+  Downloaded mlua-sys v0.10.0
+  Downloaded hmac v0.12.1
+  Downloaded unicode-ident v1.0.26
+  Downloaded webkit2gtk-sys v2.0.2
+  Downloaded aliasable v0.1.3
+  Downloaded pbkdf2 v0.12.2
+  Downloaded uuid-simd v0.8.0
+  Downloaded wasm-bindgen-macro v0.2.128
+  Downloaded yoke-derive v0.8.3
+  Downloaded arrayref v0.3.9
+  Downloaded gdk-sys v0.18.2
+  Downloaded zmij v1.0.23
+  Downloaded rand v0.10.3
+  Downloaded memmap2 v0.9.11
+  Downloaded atomic-waker v1.1.2
+  Downloaded toml v0.8.2
+  Downloaded windows-core v0.62.2
+  Downloaded windows-future v0.3.2
+  Downloaded lazy_static v1.5.0
+  Downloaded pastey v0.1.1
+  Downloaded pico-args v0.5.0
+  Downloaded heck v0.5.0
+  Downloaded bytes v1.12.1
+  Downloaded http-body-util v0.1.5
+  Downloaded zstd-safe v7.3.0
+  Downloaded fontdb v0.24.0
+  Downloaded ipnet v2.12.2
+  Downloaded windows-numerics v0.3.1
+  Downloaded windows-strings v0.5.1
+  Downloaded windows-threading v0.2.1
+  Downloaded block_compression v0.6.0
+  Downloaded unicode-bidi v0.3.18
+  Downloaded libbz2-rs-sys v0.2.5
+  Downloaded roxmltree v0.21.1
+  Downloaded resvg v0.48.1
+  Downloaded yoke v0.8.3
+  Downloaded gtk3-macros v0.18.2
+  Downloaded inout v0.1.4
+  Downloaded gdk v0.18.2
+  Downloaded crossbeam-channel v0.5.17
+  Downloaded flate2 v1.1.10
+  Downloaded icu_collections v2.3.0
+  Downloaded x11 v2.21.0
+  Downloaded dbus v0.9.12
+  Downloaded lock_api v0.4.14
+  Downloaded outref v0.5.2
+  Downloaded imgref v1.12.3
+  Downloaded rayon-core v1.13.0
+  Downloaded zerovec-derive v0.11.6
+  Downloaded tracing-attributes v0.1.31
+  Downloaded serde v1.0.229
+  Downloaded tokio-rustls v0.26.5
+  Downloaded nu-ansi-term v0.50.3
+  Downloaded try-lock v0.2.5
+  Downloaded httparse v1.10.1
+  Downloaded image-webp v0.2.4
+  Downloaded zerofrom v0.1.8
+  Downloaded loop9 v0.1.5
+  Downloaded ahash v0.8.12
+  Downloaded miniz_oxide v0.9.1
+  Downloaded windows-result v0.4.1
+  Downloaded yansi v1.0.1
+  Downloaded num-traits v0.2.19
+  Downloaded tiny-skia-path v0.12.0
+  Downloaded parking_lot v0.12.5
+  Downloaded unicode-script v0.5.8
+  Downloaded ouroboros_macro v0.18.5
+  Downloaded cc v1.4.7
+  Downloaded base64 v0.23.1
+  Downloaded paste v1.0.15
+  Downloaded imagesize v0.15.0
+  Downloaded javascriptcore-rs-sys v1.1.1
+  Downloaded noop_proc_macro v0.3.0
+  Downloaded quinn v0.11.12
+  Downloaded rustls-webpki v0.103.15
+  Downloaded writeable v0.6.4
+  Downloaded no_std_io2 v0.9.4
+  Downloaded zune-jpeg v0.5.15
+  Downloaded parking_lot_core v0.9.12
+  Downloaded glib-sys v0.18.1
+  Downloaded raw-cpuid v11.6.0
+  Downloaded webkit2gtk v2.0.2
+  Downloaded fraction v0.15.4
+  Downloaded fancy-regex v0.16.2
+  Downloaded http v1.5.0
+  Downloaded icu_properties v2.3.0
+  Downloaded zerotrie v0.2.5
+  Downloaded icu_provider v2.3.1
+  Downloaded which v8.0.6
+  Downloaded atk v0.18.2
+  Downloaded jobserver v0.1.35
+  Downloaded pango v0.18.3
+  Downloaded zopfli v0.8.3
+  Downloaded icu_normalizer_data v2.3.0
+  Downloaded log v0.4.34
+  Downloaded time-macros v0.2.32
+  Downloaded hyper-util v0.1.20
+  Downloaded weezl v0.1.12
+  Downloaded atk-sys v0.18.2
+  Downloaded tiff v0.11.3
+  Downloaded icu_locale_core v2.3.0
+  Downloaded uuid v1.26.1
+  Downloaded gtk-sys v0.18.2
+  Downloaded zerocopy-derive v0.8.57
+  Downloaded zeroize v1.9.0
+  Downloaded litemap v0.8.3
+  Downloaded memchr v2.8.3
+  Downloaded wasm-bindgen v0.2.128
+  Downloaded x11-dl v2.21.0
+  Downloaded half v2.7.1
+  Downloaded itertools v0.14.0
+  Downloaded tracing-core v0.1.36
+  Downloaded reqwest v0.12.28
+  Downloaded winnow v0.5.40
+  Downloaded toml_edit v0.20.2
+  Downloaded futures-util v0.3.34
+  Downloaded url v2.5.8
+  Downloaded toml_edit v0.19.15
+  Downloaded gio-sys v0.18.1
+  Downloaded miniz_oxide v0.8.9
+  Downloaded zerovec v0.11.8
+  Downloaded zip v4.6.1
+  Downloaded png v0.18.1
+  Downloaded tower-http v0.6.11
+  Downloaded moxcms v0.8.1
+  Downloaded indexmap v2.14.2
+  Downloaded hyper v1.11.1
+  Downloaded aes v0.8.4
+  Downloaded jsonschema v0.33.0
+  Downloaded pulp v0.22.3
+  Downloaded regex v1.13.1
+  Downloaded num-bigint v0.4.8
+  Downloaded typenum v1.20.1
+  Downloaded aho-corasick v1.1.5
+  Downloaded unicode-segmentation v1.13.3
+  Downloaded hashbrown v0.17.1
+  Downloaded kurbo v0.13.1
+  Downloaded libm v0.2.16
+  Downloaded serde_json v1.0.151
+  Downloaded rayon v1.12.0
+  Downloaded mio v1.2.3
+  Downloaded tower v0.5.3
+  Downloaded wasm-bindgen-macro-support v0.2.128
+  Downloaded bstr v1.13.1
+  Downloaded wry v0.57.0
+  Downloaded idna v1.1.0
+  Downloaded mlua v0.11.6
+  Downloaded webpki-roots v1.0.9
+  Downloaded zlib-rs v0.6.8
+  Downloaded exr v1.74.2
+  Downloaded tiny-skia v0.12.0
+  Downloaded nom v8.0.0
+  Downloaded harfrust v0.12.0
+  Downloaded glib v0.18.5
+  Downloaded time v0.3.55
+  Downloaded zerocopy v0.8.57
+  Downloaded image v0.25.10
+  Downloaded usvg v0.48.1
+  Downloaded quinn-proto v0.11.18
+  Downloaded gio v0.18.4
+  Downloaded icu_properties_data v2.3.0
+  Downloaded syn v1.0.109
+  Downloaded av-scenechange v0.14.1
+  Downloaded tracing-subscriber v0.3.23
+  Downloaded skrifa v0.44.0
+  Downloaded syn v3.0.6
+  Downloaded syn v2.0.119
+  Downloaded tao v0.37.0
+  Downloaded rustls v0.23.45
+  Downloaded regex-syntax v0.8.11
+  Downloaded rustix v1.1.5
+  Downloaded gtk v0.18.2
+  Downloaded zstd-sys v2.1.0+zstd.1.5.7
+  Downloaded libc v0.2.189
+  Downloaded tracing v0.1.44
+  Downloaded tokio v1.53.1
+  Downloaded read-fonts v0.41.0
+  Downloaded icu_normalizer v2.3.0
+  Downloaded luajit-src v210.6.6+707c12b
+  Downloaded libdbus-sys v0.2.7
+  Downloaded regex-automata v0.4.18
+  Downloaded winapi v0.3.9
+  Downloaded pxfm v0.1.30
+  Downloaded windows_x86_64_gnu v0.53.1
+  Downloaded lua-src v550.0.0
+  Downloaded linux-raw-sys v0.12.1
+  Downloaded winapi-x86_64-pc-windows-gnu v0.4.0
+  Downloaded rav1e v0.8.1
+  Downloaded ring v0.17.14
+  Downloaded liblzma-sys v0.4.9
+  Downloaded webview2-com-sys v0.39.1
+  Downloaded windows-sys v0.60.2
+  Downloaded windows-sys v0.61.2
+  Downloaded windows v0.62.2
+   Compiling proc-macro2 v1.0.107
+   Compiling quote v1.0.47
+   Compiling unicode-ident v1.0.26
+   Compiling cfg-if v1.0.5
+   Compiling version_check v0.9.5
+   Compiling serde_core v1.0.229
+   Compiling libc v0.2.189
+   Compiling windows-link v0.2.1
+   Compiling syn v3.0.6
+   Compiling syn v2.0.119
+   Compiling memchr v2.8.3
+   Compiling stable_deref_trait v1.2.1
+   Compiling smallvec v1.16.1
+   Compiling jobserver v0.1.35
+   Compiling bytemuck_derive v1.12.1
+   Compiling shlex v2.0.1
+   Compiling find-msvc-tools v0.1.13
+   Compiling cc v1.4.7
+   Compiling bytemuck v1.25.2
+   Compiling autocfg v1.5.1
+   Compiling num-traits v0.2.19
+   Compiling synstructure v0.14.0
+   Compiling once_cell v1.21.4
+   Compiling zerofrom-derive v0.1.8
+   Compiling yoke-derive v0.8.3
+   Compiling generic-array v0.14.7
+   Compiling zerofrom v0.1.8
+   Compiling windows-sys v0.61.2
+   Compiling yoke v0.8.3
+   Compiling itoa v1.0.18
+   Compiling typenum v1.20.1
+   Compiling log v0.4.34
+   Compiling zerovec-derive v0.11.6
+   Compiling zerovec v0.11.8
+   Compiling num-integer v0.1.47
+   Compiling displaydoc v0.2.7
+   Compiling serde v1.0.229
+   Compiling serde_derive v1.0.229
+   Compiling zerocopy v0.8.57
+   Compiling num-bigint v0.4.8
+   Compiling crypto-common v0.1.7
+   Compiling zerocopy-derive v0.8.57
+   Compiling hashbrown v0.17.1
+   Compiling equivalent v1.0.2
+   Compiling pkg-config v0.3.34
+   Compiling indexmap v2.14.2
+   Compiling num-rational v0.4.2
+   Compiling tinystr v0.8.4
+   Compiling thiserror v2.0.20
+   Compiling writeable v0.6.4
+   Compiling litemap v0.8.3
+   Compiling icu_locale_core v2.3.0
+   Compiling zerotrie v0.2.5
+   Compiling potential_utf v0.1.6
+   Compiling percent-encoding v2.3.2
+   Compiling icu_normalizer_data v2.3.0
+   Compiling subtle v2.6.1
+   Compiling utf8_iter v1.0.4
+   Compiling icu_properties_data v2.3.0
+   Compiling simd-adler32 v0.3.10
+   Compiling icu_collections v2.3.0
+   Compiling icu_provider v2.3.1
+   Compiling num-complex v0.4.6
+   Compiling thiserror-impl v2.0.20
+   Compiling bitflags v2.13.2
+   Compiling zmij v1.0.23
+   Compiling cpufeatures v0.2.17
+   Compiling crossbeam-utils v0.8.23
+   Compiling serde_json v1.0.151
+   Compiling icu_properties v2.3.0
+   Compiling icu_normalizer v2.3.0
+   Compiling adler2 v2.0.1
+   Compiling pin-project-lite v0.2.17
+   Compiling crc32fast v1.5.2
+   Compiling idna_adapter v1.2.2
+   Compiling parking_lot_core v0.9.12
+   Compiling idna v1.1.0
+   Compiling block-buffer v0.10.4
+   Compiling getrandom v0.4.3
+   Compiling arrayvec v0.7.8
+   Compiling scopeguard v1.2.0
+   Compiling getrandom v0.3.4
+   Compiling lock_api v0.4.14
+   Compiling digest v0.10.7
+   Compiling miniz_oxide v0.9.1
+   Compiling crossbeam-epoch v0.9.21
+   Compiling base64 v0.22.1
+   Compiling ref-cast v1.0.27
+   Compiling zlib-rs v0.6.8
+   Compiling parking_lot v0.12.5
+   Compiling zstd-sys v2.1.0+zstd.1.5.7
+   Compiling aho-corasick v1.1.5
+   Compiling flate2 v1.1.10
+   Compiling ref-cast-impl v1.0.27
+   Compiling ahash v0.8.12
+   Compiling lazy_static v1.5.0
+   Compiling crossbeam-deque v0.8.8
+   Compiling winapi-x86_64-pc-windows-gnu v0.4.0
+   Compiling regex-syntax v0.8.11
+   Compiling regex-automata v0.4.18
+   Compiling num-iter v0.1.46
+   Compiling tracing-core v0.1.36
+   Compiling winapi v0.3.9
+   Compiling either v1.18.0
+   Compiling rayon-core v1.13.0
+   Compiling bit-vec v0.8.0
+   Compiling borrow-or-share v0.2.4
+   Compiling fluent-uri v0.3.2
+   Compiling bit-set v0.8.0
+   Compiling num v0.4.3
+   Compiling uuid v1.26.1
+   Compiling equator-macro v0.4.2
+   Compiling zeroize_derive v1.5.0
+   Compiling zstd-safe v7.3.0
+   Compiling vsimd v0.8.0
+   Compiling outref v0.5.2
+   Compiling uuid-simd v0.8.0
+   Compiling zeroize v1.9.0
+   Compiling equator v0.4.2
+   Compiling referencing v0.33.0
+   Compiling fraction v0.15.4
+   Compiling fancy-regex v0.16.2
+   Compiling regex v1.13.1
+   Compiling email_address v0.2.9
+   Compiling inout v0.1.4
+   Compiling tracing-attributes v0.1.31
+   Compiling fastrand v2.5.0
+   Compiling paste v1.0.15
+   Compiling bytes v1.12.1
+   Compiling bytecount v0.6.9
+   Compiling num-cmp v0.1.0
+   Compiling anyhow v1.0.104
+   Compiling jsonschema v0.33.0
+   Compiling tempfile v3.27.0
+   Compiling tracing v0.1.44
+   Compiling cipher v0.4.4
+   Compiling fs2 v0.4.3
+   Compiling aligned-vec v0.6.4
+   Compiling sha2 v0.10.9
+   Compiling shroudforge-loader-config v1.0.0 (<PINNED_SOURCE>/modules/loader-config)
+   Compiling v_frame v0.3.9
+   Compiling aes v0.8.4
+   Compiling rayon v1.12.0
+   Compiling miniz_oxide v0.8.9
+   Compiling as-slice v0.2.1
+   Compiling quick-error v2.0.1
+   Compiling libm v0.2.16
+   Compiling built v0.8.1
+   Compiling zstd v0.13.3
+   Compiling av-scenechange v0.14.1
+   Compiling rav1e v0.8.1
+   Compiling aligned v0.4.3
+   Compiling fdeflate v0.3.7
+   Compiling half v2.7.1
+   Compiling profiling-procmacros v1.0.18
+   Compiling arg_enum_proc_macro v0.3.4
+   Compiling windows-interface v0.59.3
+   Compiling windows-implement v0.60.2
+   Compiling no_std_io2 v0.9.4
+   Compiling nom v8.0.0
+   Compiling windows-strings v0.5.1
+   Compiling windows-result v0.4.1
+   Compiling pulp v0.22.3
+   Compiling y4m v0.8.0
+   Compiling zune-core v0.5.3
+   Compiling pastey v0.1.1
+   Compiling weezl v0.1.12
+   Compiling av1-grain v0.2.5
+   Compiling zune-jpeg v0.5.15
+   Compiling windows-core v0.62.2
+   Compiling bitstream-io v4.10.0
+   Compiling profiling v1.0.18
+   Compiling png v0.18.1
+   Compiling maybe-rayon v0.1.1
+   Compiling http v1.5.0
+   Compiling itertools v0.14.0
+   Compiling raw-cpuid v11.6.0
+   Compiling rgb v0.8.53
+   Compiling num-derive v0.4.2
+   Compiling simd_helpers v0.1.0
+   Compiling imgref v1.12.3
+   Compiling pulp-wasm-simd-flag v0.1.1
+   Compiling noop_proc_macro v0.3.0
+   Compiling time-core v0.1.9
+   Compiling byteorder-lite v0.1.0
+   Compiling new_debug_unreachable v1.0.6
+   Compiling futures-core v0.3.34
+   Compiling num-conv v0.2.2
+   Compiling color_quant v1.1.0
+   Compiling reborrow v0.5.5
+   Compiling gif v0.14.2
+   Compiling time-macros v0.2.32
+   Compiling image-webp v0.2.4
+   Compiling loop9 v0.1.5
+   Compiling avif-serialize v0.8.9
+   Compiling zune-inflate v0.2.54
+   Compiling liblzma-sys v0.4.9
+   Compiling powerfmt v0.2.0
+   Compiling pxfm v0.1.30
+   Compiling bit_field v0.10.3
+   Compiling fax v0.2.7
+   Compiling lebe v0.5.3
+   Compiling deranged v0.5.8
+   Compiling time v0.3.55
+   Compiling exr v1.74.2
+   Compiling tiff v0.11.3
+   Compiling moxcms v0.8.1
+   Compiling ravif v0.13.0
+   Compiling form_urlencoded v1.2.2
+   Compiling socket2 v0.6.5
+   Compiling mio v1.2.3
+   Compiling ring v0.17.14
+   Compiling qoi v0.4.1
+   Compiling tokio-macros v2.7.2
+   Compiling windows-threading v0.2.1
+   Compiling futures-sink v0.3.34
+   Compiling windows-future v0.3.2
+   Compiling tokio v1.53.1
+   Compiling image v0.25.10
+   Compiling windows-numerics v0.3.1
+   Compiling windows-collections v0.3.2
+   Compiling hmac v0.12.1
+   Compiling winapi-util v0.1.11
+   Compiling camino v1.2.6
+   Compiling libbz2-rs-sys v0.2.5
+   Compiling bumpalo v3.20.3
+   Compiling zopfli v0.8.3
+   Compiling bzip2 v0.6.1
+   Compiling same-file v1.0.6
+   Compiling pbkdf2 v0.12.2
+   Compiling windows v0.62.2
+   Compiling liblzma v0.4.8
+   Compiling url v2.5.8
+   Compiling http-body v1.1.0
+   Compiling rustls-pki-types v1.15.1
+   Compiling tracing-log v0.2.0
+   Compiling sharded-slab v0.1.7
+   Compiling sha1 v0.10.7
+   Compiling nu-ansi-term v0.50.3
+   Compiling semver v1.0.28
+   Compiling getrandom v0.2.17
+   Compiling thread_local v1.1.10
+   Compiling ppmd-rust v1.5.0
+   Compiling futures-io v0.3.34
+   Compiling httparse v1.10.1
+   Compiling untrusted v0.9.0
+   Compiling futures-task v0.3.34
+   Compiling deflate64 v0.1.12
+   Compiling constant_time_eq v0.3.1
+   Compiling slab v0.4.12
+   Compiling futures-util v0.3.34
+   Compiling zip v4.6.1
+   Compiling tracing-subscriber v0.3.23
+   Compiling webview2-com-sys v0.39.1
+   Compiling walkdir v2.5.0
+   Compiling shroudforge-game-assets v1.0.0 (<PINNED_SOURCE>/modules/game-files)
+   Compiling try-lock v0.2.5
+   Compiling tower-service v0.3.3
+   Compiling rustls v0.23.45
+   Compiling want v0.3.1
+   Compiling shroudforge-package v1.0.0 (<PINNED_SOURCE>/modules/modloader)
+   Compiling shroudforge-logging v1.0.0 (<PINNED_SOURCE>/modules/logging)
+   Compiling rustls-webpki v0.103.15
+   Compiling futures-channel v0.3.34
+   Compiling windows-version v0.1.7
+   Compiling cookie v0.18.2
+   Compiling dpi v0.1.2
+   Compiling atomic-waker v1.1.2
+   Compiling raw-window-handle v0.6.2
+   Compiling hyper v1.11.1
+   Compiling toml v0.5.11
+   Compiling sync_wrapper v1.0.2
+   Compiling crossbeam-channel v0.5.17
+   Compiling webview2-com-macros v0.8.1
+   Compiling which v8.0.6
+   Compiling wry v0.57.0
+   Compiling unicode-segmentation v1.13.3
+   Compiling tower-layer v0.3.3
+   Compiling ipnet v2.12.2
+   Compiling hyper-util v0.1.20
+   Compiling tower v0.5.3
+   Compiling tao v0.37.0
+   Compiling luajit-src v210.6.6+707c12b
+   Compiling webview2-com v0.39.1
+   Compiling winres v0.1.12
+   Compiling tokio-rustls v0.26.5
+   Compiling webpki-roots v1.0.9
+   Compiling kfc-base v0.2.0 (<PINNED_SOURCE>/kfc-parser/crates/kfc-base)
+warning: unused import: `collections::HashMap`
+ --> kfc-parser/crates/kfc-base/src/container/writer.rs:1:27
+  |
+1 | use std::{borrow::Borrow, collections::HashMap, fs::File, io::{BufWriter, Cursor, Seek, SeekFrom, Write}, path::{Path, PathBuf}};
+  |                           ^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused import: `Hash32`
+ --> kfc-parser/crates/kfc-base/src/container/writer.rs:3:13
+  |
+3 | use crate::{Hash32, container::header::ResourceChunkInfo, guid::{ContentHash, ResourceId}, io::{WriteExt, WriteSeekExt}, reflection::...
+  |             ^^^^^^
+
+   Compiling lua-src v550.0.0
+   Compiling font-types v0.12.5
+   Compiling slotmap v1.1.1
+   Compiling float-cmp v0.9.0
+   Compiling ryu v1.0.23
+   Compiling dunce v1.0.5
+warning: `kfc-base` (lib) generated 2 warnings (run `cargo fix --lib -p kfc-base` to apply 2 suggestions)
+   Compiling mlua-sys v0.10.0
+   Compiling serde_urlencoded v0.7.1
+   Compiling strict-num v0.1.1
+   Compiling read-fonts v0.41.0
+   Compiling kfc-resource v0.2.0 (<PINNED_SOURCE>/kfc-parser/crates/kfc-resource)
+   Compiling hyper-rustls v0.27.10
+   Compiling tower-http v0.6.11
+   Compiling http-body-util v0.1.5
+   Compiling shroudforge-ui-resources v1.0.0 (<PINNED_SOURCE>/modules/ui-resources)
+   Compiling block_compression v0.6.0
+   Compiling polycool v0.4.0
+   Compiling proc-macro2-diagnostics v0.10.1
+   Compiling windows_x86_64_gnu v0.53.1
+   Compiling arrayref v0.3.9
+   Compiling hound v3.5.1
+   Compiling shroudforge-runtime-diagnostics v1.0.0 (<PINNED_SOURCE>/modules/runtime-diagnostics)
+   Compiling rustversion v1.0.23
+   Compiling kfc-content v0.2.0 (<PINNED_SOURCE>/kfc-parser/crates/kfc-content)
+   Compiling tiny-skia-path v0.12.0
+warning: unused import: `kfc::guid::ContentHash`
+ --> kfc-parser/crates/kfc-content/src/impact/object.rs:2:5
+  |
+2 | use kfc::guid::ContentHash;
+  |     ^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: hiding a lifetime that's elided elsewhere is confusing
+  --> kfc-parser/crates/kfc-content/src/impact/nodes.rs:65:25
+   |
+65 |     fn get_impact_nodes(&self) -> HashMap<u32, ImpactNode>;
+   |                         ^^^^^                  ^^^^^^^^^^ the same lifetime is hidden here
+   |                         |
+   |                         the lifetime is elided here
+   |
+   = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+   = note: `#[warn(mismatched_lifetime_syntaxes)]` on by default
+help: use `'_` for type paths
+   |
+65 |     fn get_impact_nodes(&self) -> HashMap<u32, ImpactNode<'_>>;
+   |                                                          ++++
+
+warning: hiding a lifetime that's elided elsewhere is confusing
+  --> kfc-parser/crates/kfc-content/src/impact/nodes.rs:91:25
+   |
+91 |     fn get_impact_nodes(&self) -> HashMap<u32, ImpactNode> {
+   |                         ^^^^^                  ^^^^^^^^^^ the same lifetime is hidden here
+   |                         |
+   |                         the lifetime is elided here
+   |
+   = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+help: use `'_` for type paths
+   |
+91 |     fn get_impact_nodes(&self) -> HashMap<u32, ImpactNode<'_>> {
+   |                                                          ++++
+
+warning: hiding a lifetime that's elided elsewhere is confusing
+   --> kfc-parser/crates/kfc-content/src/impact/bytecode/parser.rs:260:13
+    |
+260 |     fn next(&self) -> Token {
+    |             ^^^^^     ^^^^^ the same lifetime is hidden here
+    |             |
+    |             the lifetime is elided here
+    |
+    = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+help: use `'_` for type paths
+    |
+260 |     fn next(&self) -> Token<'_> {
+    |                            ++++
+
+warning: hiding a lifetime that's elided elsewhere is confusing
+   --> kfc-parser/crates/kfc-content/src/impact/bytecode/parser.rs:265:15
+    |
+265 |     fn expect(&self, kind: TokenKind) -> Result<Token, ParseError> {
+    |               ^^^^^ the lifetime is elided here ^^^^^ the same lifetime is hidden here
+    |
+    = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+help: use `'_` for type paths
+    |
+265 |     fn expect(&self, kind: TokenKind) -> Result<Token<'_>, ParseError> {
+    |                                                      ++++
+
+warning: hiding a lifetime that's elided elsewhere is confusing
+   --> kfc-parser/crates/kfc-content/src/impact/bytecode/parser.rs:300:14
+    |
+300 |     fn next0(&self) -> Token {
+    |              ^^^^^     ^^^^^ the same lifetime is hidden here
+    |              |
+    |              the lifetime is elided here
+    |
+    = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+help: use `'_` for type paths
+    |
+300 |     fn next0(&self) -> Token<'_> {
+    |                             ++++
+
+warning: hiding a lifetime that's elided elsewhere is confusing
+   --> kfc-parser/crates/kfc-content/src/impact/bytecode/text.rs:120:22
+    |
+120 |     fn get_call_type(&self, index: Hash32) -> Option<&ImpactNode> {
+    |                      ^^^^^                           ^^^^^^^^^^^
+    |                      |                               ||
+    |                      |                               |the same lifetime is hidden here
+    |                      |                               the same lifetime is elided here
+    |                      the lifetime is elided here
+    |
+    = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+help: use `'_` for type paths
+    |
+120 |     fn get_call_type(&self, index: Hash32) -> Option<&ImpactNode<'_>> {
+    |                                                                 ++++
+
+   Compiling kurbo v0.13.1
+   Compiling reqwest v0.12.28
+warning: `kfc-content` (lib) generated 7 warnings (run `cargo fix --lib -p kfc-content` to apply 7 suggestions)
+   Compiling shroudforge-window-management v1.0.0 (<PINNED_SOURCE>/modules/window-management)
+   Compiling shroudforge-news v1.0.0 (<PINNED_SOURCE>/modules/notifications)
+   Compiling memmap2 v0.9.11
+   Compiling siphasher v1.0.3
+   Compiling tinyvec v1.13.3
+   Compiling yansi v1.0.1
+   Compiling fontdb v0.24.0
+   Compiling svgtypes v0.16.1
+   Compiling shroudforge-release-feed v1.0.0 (<PINNED_SOURCE>/modules/updater/release-feed)
+   Compiling kfc v0.2.0 (<PINNED_SOURCE>/kfc-parser/crates/kfc)
+   Compiling skrifa v0.44.0
+   Compiling harfrust v0.12.0
+   Compiling simplecss v0.2.2
+   Compiling bstr v1.13.1
+   Compiling roxmltree v0.21.1
+   Compiling rustc-hash v2.1.3
+   Compiling imagesize v0.15.0
+   Compiling unicode-bidi v0.3.18
+   Compiling pico-args v0.5.0
+   Compiling base64 v0.23.1
+   Compiling xmlwriter v0.1.0
+   Compiling unicode-vo v0.1.0
+   Compiling data-url v0.3.2
+   Compiling heck v0.4.1
+   Compiling unicode-script v0.5.8
+   Compiling usvg v0.48.1
+   Compiling ouroboros_macro v0.18.5
+   Compiling mlua v0.11.6
+   Compiling windows-targets v0.53.5
+   Compiling tiny-skia v0.12.0
+   Compiling aliasable v0.1.3
+   Compiling shroudforge-api v1.0.0 (<PINNED_SOURCE>/modules/mod-runtime)
+   Compiling static_assertions v1.1.0
+   Compiling crc-catalog v2.5.0
+   Compiling crc v3.4.0
+   Compiling ouroboros v0.18.5
+   Compiling resvg v0.48.1
+   Compiling windows-sys v0.60.2
+   Compiling shroudforge-steam-networking v1.0.0 (<PINNED_SOURCE>/modules/transport)
+   Compiling shroudforge-runtime-bridge v1.0.0 (<PINNED_SOURCE>/modules/game-runtime/bridge)
+   Compiling shroudforge-compatibility v1.0.0 (<PINNED_SOURCE>/modules/game-runtime/compatibility)
+   Compiling shroudforge-modloader v1.0.0 (<PINNED_SOURCE>/modules/entrypoints/loader)
+   Compiling shroudforge-updater v1.0.0 (<PINNED_SOURCE>/modules/updater)
+   Compiling shroudforge-player-name v1.0.0 (<PINNED_SOURCE>/modules/player-name)
+   Compiling shroudforge-modloader-ui v1.0.0 (<PINNED_SOURCE>/modules/modloader/ui)
+error: failed to run custom build command for `shroudforge-updater v1.0.0 (<PINNED_SOURCE>/modules/updater)`
+
+Caused by:
+  process didn't exit successfully: `<ISOLATED_TOOLCHAIN>/rust-target/release/build/shroudforge-updater-46475d28c811f2bb/build-script-build_windows_app_icon` (exit status: 1)
+  --- stdout
+  cargo:rerun-if-changed=<PINNED_SOURCE>/assets/shroudforge.ico
+  package.metadata does not exist
+
+  --- stderr
+  Error: Os { code: 2, kind: NotFound, message: "No such file or directory" }
+warning: build failed, waiting for other jobs to finish...

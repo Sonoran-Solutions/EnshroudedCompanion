@@ -1,0 +1,11 @@
+Bootstrap tests (Proton Experimental Wine 11; fresh task-owned prefixes under /tmp; WINEDLLOVERRIDES=winmm=n,b forces the local proxy):
+- Forwarder invocation: a synthetic host imported timeGetTime from a local DLL named winmm.dll and returned 0. Wine loader trace shows the local proxy loaded native and its absolute forwarder resolved to c:\windows\system32\winmm.dll (Wine builtin).
+- Unrelated synthetic host imported ShroudforgeStop, loaded the same exact absolute-forwarder candidate, and returned 0.
+- The identical tiny host file copied to the guarded name enshrouded.exe failed bootstrap DLL initialization with status c0000142 and Wine returned 66. This exercises the strict identity refusal before startup.
+- Earlier unquoted DEF experiment generated winmm.Function self-forwarders and recursed. It is explicitly not the candidate or evidence of success. The final quoted DEF preserves c:\windows\system32\winmm.Function and the synthetic timeGetTime call verified resolution.
+
+Provider test (a separate fresh task-owned prefix):
+- Synthetic provider_probe.exe loads staged kfc-runtime.dll with LOAD_LIBRARY_SEARCH_DLL_LOAD_DIR | LOAD_LIBRARY_SEARCH_DEFAULT_DIRS.
+- ABI 12 exports resolve. KfcRuntimeInitialize returns false with profile=missing-exact-sha256-profile; hooks are not installed. Probe returns 0 for expected refusal.
+
+No Enshrouded executable/process, owner installation directory, game prefix, or live game was used. The tests ran only in task-owned prefixes and temporary synthetic hosts.
