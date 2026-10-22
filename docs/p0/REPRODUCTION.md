@@ -32,3 +32,5 @@ Run only the smallest applicable rows in [scenario matrix](SCENARIOS.md). Captur
 Follow-up: Steam update in progress and source-confirmed startup safety blockers prevent launch. See [runtime preflight](RUNTIME_PREFLIGHT.md) and the [disabled lifecycle package](../../probes/shroudforge/README.md). Refresh identities only after the update completes.
 
 Current checkpoint: update completed and identity is unchanged. Follow the [guard-patch reproduction](../../patches/shroudforge/README.md) for synthetic tests only. Current-build execution symbols are missing from the pinned source, so no game launch/reset is requested.
+
+Latest continuation: [native build](../../evidence/p0/build-investigation/README.md), [Rust build](../../evidence/p0/build-investigation/RUST_BUILD.md), and [static profile scanner](../../evidence/p0/profile-investigation/README.md) contain bounded reproduction commands. Selected-path binaries build; game testing remains held on scheduler/query ABI evidence.

@@ -100,3 +100,7 @@ A fixture pass or cross-compiler syntax pass is not a supported release. Keep
 RUNTIME HOLD and all live assertions NOT_RUN until exact symbols and the
 complete artifact are validated. Do not install a mixture of patched source
 and an unmodified prebuilt runtime.
+
+## Subsequent build result
+
+Apply `0002-p0-cross-build-portability.patch` after `0001` to the same source pin. The provider, bootstrap, Rust runtime, launcher and updater now cross-build. [Build reproduction and actual DLL tests](../../evidence/p0/build-investigation/README.md) supersede the earlier full-build NOT_RUN note above. This is still not an approved deployable runtime: the current execution-hook context/profile remains unvalidated. No guard was relaxed to obtain these artifacts.

@@ -2,7 +2,20 @@
 
 Date: 2026-10-22. P0 was explicitly authorized. This bounded session completed source investigation and offline identity tooling; live feasibility is **not established**. Owner disposition on continuation beyond P0: **PENDING**. P1 and all later phases remain held.
 
-## Guard implementation checkpoint — current result
+## Current execution-profile and loader-build checkpoint
+
+The owner authorized further current-build hook investigation and the complete loader build, keeping all safety guards. **Overall recommendation remains HOLD.** Required selected-path binaries now cross-build: `winmm.dll`, `kfc-runtime.dll`, the Rust runtime, launcher and updater. Frontend inputs also build. The final bootstrap preserves all 180 original absolute system-DLL forwarders. Actual native provider/bootstrap and Rust DLL synthetic-host tests pass under isolated Proton Wine. See [native build evidence](../../evidence/p0/build-investigation/README.md) and [Rust evidence](../../evidence/p0/build-investigation/RUST_BUILD.md). This supersedes earlier build failures below; it is not an official release package or in-game compatibility result.
+
+[Current-build investigation](../../evidence/p0/profile-investigation/README.md) establishes that all six historical full hook signatures have **zero matches**. The scanner derives 722 named current descriptors and traces an actor callback descriptor through its getter and registration helper into a mutable system record. The unresolved boundary is the scheduler's indirect invocation, incoming query frame and active-world/thread/lifetime contract. The old generic trampoline cannot simply be moved to these function entries. No execution profile was fabricated, approved or installed. Six synthetic collector tests pass; descriptor candidates remain `callable=false`.
+
+**RUNTIME: HOLD; OBSERVATION, QUEST, ACTOR and BUILDING: NOT_RUN. Nothing works in-game by demonstrated evidence yet.** No game launch, game-prefix use, live memory access, save change or world mutation occurred. The offline reset check is not requested yet. The next technical slice is a bounded scheduler/query-frame investigation and reviewed current ABI adapter, followed by a no-op hook probe only after exact guards, fixture review and verified offline reset. Existing P0 authorization covers this work; no additional permission loop is inferred.
+
+Build review rejected an initial self-referencing multimedia forwarder artifact. Quoting the exact original absolute targets fixed it; all 180 final targets were compared with source, and an actual forwarded `timeGetTime` call passed. The provider refused an unknown host with `missing-exact-sha256-profile`; the bootstrap rejected a synthetic executable named `enshrouded.exe`; the Rust DLL loaded, resolved four exports, refused null inputs and unloaded. These synthetic checks do not exercise successful game initialization, updater behavior, restart/disable or real symbol resolution. Native Windows behavior and the static link's duplicate-section warnings remain review limitations.
+
+This continuation used approximately 15 minutes elapsed with parallel Sol/Luna work (estimate). Native build attempts were capped at five minutes/two jobs; bootstrap commands at 30 seconds; Rust initial build and corrected retry at five minutes/two jobs; frontend jobs at 120 seconds; isolated Wine cases at 30–60 seconds. All completed. Local Rust compilation cache is about 1.2 GiB; exact token/cost use is unavailable. The approved 5–10 developer-day budget and two-day subsystem stop limit are not exhausted. No multi-day job or P1 work is running.
+
+## Historical guard implementation checkpoint
+
 
 The owner explicitly requested resolving the loader guards. [Patch and reproduction](../../patches/shroudforge/README.md) implement pre-bootstrap exact client identity, strict SHA/PE profile selection, required-hook/resource failure propagation, and attach-failure rollback/cleanup. No unsafe symbol checks were removed. Initial code/evidence: `4919b51e0acc5d7a2a75b7215af654946ae45f28`; final tested rollback correction: `a9b0661c33cde9abcb90f0e2e04bd6405303218c`.
 
@@ -40,7 +53,7 @@ The local client manifest is Steam app `1203620`, build `26082781`; executable S
 
 | Capability | Verdict | Evidence | Blockers |
 | --- | --- | --- | --- |
-| RUNTIME | HOLD; live NOT_RUN | Guard patch passes focused tests; post-update identity matches read-only profile | Exact execution profile absent; full production artifact not built/validated; reset not demonstrated |
+| RUNTIME | HOLD; live NOT_RUN | Selected-path binaries build; actual DLL synthetic refusal/load tests pass; exact read-profile match only | Scheduler/query ABI and execution profile unvalidated; in-game load/disable/restart and reset not demonstrated |
 | OBSERVATION | NOT_RUN | Source contains bounded ECS readers; no actual snapshots collected | RUNTIME gate; owner/entity/world identity, health/position semantics, sustained freshness and reload behavior unproven |
 | QUEST | NOT_RUN | No scoped quest API established by targeted source review | Runtime/observation gates; personal/world scope unresolved; second client unavailable |
 | ACTOR | NOT_RUN | Generic candidate SpawnEntity path inspected as building-prop operation, not NPC control | Identity/authority gate; NPC ownership, navigation, combat and cleanup path unproven; second client unavailable |
@@ -54,7 +67,7 @@ Overall HOLD reflects missing test prerequisites and unresolved technical surfac
 - Sol inspected pinned public source for four candidates; parent spot-checked loader stubs, profile identity and fallback guards. Luna prepared the [scenario matrix](SCENARIOS.md); parent reviewed and corrected missing acceptance cases.
 - Read local manifest and executable identity, and extracted only allowlisted version strings from an existing log. No private saves/raw logs/binaries are committed.
 - Implemented the [offline identity collector](../../tools/p0_fingerprint.py). Three focused synthetic-input tests pass; this is input/hash/privacy validation, not a simulated native companion.
-- **Nothing was exercised in-game by this task.** No production runtime DLL was built or loaded; no backup was made/restored; no actor, quest, resource or world state was modified. All live cases in the matrix remain NOT_RUN.
+- **Nothing was exercised in-game by this task.** Production DLLs were cross-built and loaded only in synthetic hosts as described above; no backup was made/restored; no actor, quest, resource or world state was modified. All live cases in the matrix remain NOT_RUN.
 
 ## Evidence and revisions
 
@@ -71,8 +84,10 @@ Network clones were bounded at 30 seconds each; fingerprint and targeted tests w
 
 ## Recommended next task
 
-**Resume DYL-136 by establishing independently validated execution hooks/layouts for build 26082781 and a complete production artifact.** Keep this source investigation bounded to 0.5–1 developer-day initially, stopping by the two-day subsystem limit if no reproducible route emerges. Only then request the offline reset demonstration and perform a short load/disable/restart test. Expected initial engineering effort: 0.5–1 focused developer-day, conditional on toolchain and guard complexity; stop/report rather than exceed the subsystem limit. Record the exact job command, output, timeout, process owner and safety assertions before launch.
+**Resume DYL-136 by establishing the current scheduler/query-frame contract and a reviewed execution adapter for build 26082781.** The selected-path binaries now build, but deployment and successful game initialization remain unvalidated. Keep this source investigation bounded to 0.5–1 developer-day initially, stopping by the two-day subsystem limit if no reproducible route emerges. Only then request the offline reset demonstration and perform a short load/disable/restart test. Expected initial engineering effort: 0.5–1 focused developer-day, conditional on toolchain and guard complexity; stop/report rather than exceed the subsystem limit. Record the exact job command, output, timeout, process owner and safety assertions before launch.
 
 Only after RUNTIME passes, attempt the smallest read-only identity/snapshot slice of DYL-137. Two-client quest/replication coverage remains blocked unless authorized second-client access becomes available or the owner explicitly approves a precisely documented reduced verification scope. Neither an observer-only product nor second-client automation is implemented here. No P1 task is recommended to start yet.
 
 The evidence PR must remain open and unmerged with auto-merge disabled. This report closes the present blocked checkpoint, not the unexecuted live acceptance work. Linear tickets retain unresolved acceptance criteria and link to the evidence; none is represented as a capability pass.
+
+Current build/profile code and evidence commit: `158ec77`. This supersedes the earlier unbuilt-artifact limitation, while retaining RUNTIME HOLD and all live checks NOT_RUN.

@@ -37,3 +37,5 @@ Only metadata HTTP fetch (`timeout 30 curl .../releases?per_page=5`) and local s
 ## Superseding guard-work result
 
 The [strict patch](../../patches/shroudforge/README.md) addresses the identified guard defects and passes focused tests at `a9b0661` (following initial patch `4919b51`). Post-update fingerprint is unchanged. However, the matching 26082781 profile has only read/resource layouts, not execution hooks; the stricter runtime correctly refuses it. The complete production DLL bundle remains unbuilt/unvalidated. The earlier source observations remain evidence about unmodified upstream, not claims that the patch was installed.
+
+Latest continuation at `158ec77`: all required selected-path binaries cross-build; actual native/Rust DLL synthetic tests pass. [Current report](REPORT.md) supersedes the unbuilt-artifact limitation. The current scheduler/query ABI and execution profile remain unvalidated, so live testing and offline reset are still deferred.
