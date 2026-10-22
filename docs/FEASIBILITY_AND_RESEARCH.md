@@ -81,3 +81,5 @@ No legal permission, license compatibility, anti-cheat status or public-server a
 The [report](p0/REPORT.md) records all capabilities NOT_RUN, including voxel and prop construction independently. Matching a binary profile is not passing runtime validation.
 
 The follow-up [runtime preflight](p0/RUNTIME_PREFLIGHT.md) establishes source-level RUNTIME HOLD for the stock selected loader's startup ordering/refusal behavior. No runtime result is inferred. A Steam update makes the earlier local identity historical until re-collected.
+
+Guard work clarified the profile distinction: `client/26082781.json` is `read-validated` with no `hooks`/`ecsLayout`. The only client execution profile in the pinned source is older `1076226.json`. A matching executable hash therefore establishes read-profile identity, not executable action support. The [strict patch](../patches/shroudforge/README.md) must refuse it. Fresh post-update identity is unchanged; see [guard evidence](../evidence/p0/guards/VALIDATION.md).

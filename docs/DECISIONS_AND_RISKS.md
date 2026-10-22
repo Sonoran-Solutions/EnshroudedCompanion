@@ -79,3 +79,7 @@ ShroudForge `3ed90de1` is the single selected investigation candidate based on i
 ## P0 disposable-session clarification and update
 
 Owner authorizes the default character and any shared-player world loaded OFFLINE, reporting that these sessions reset to baseline on exit/reopen. This supersedes waiting for a newly created world. Reset is not yet observed; actor/construction gates still require demonstrated recovery and character-state isolation. Steam is updating Enshrouded, so previous file identities are historical. Source inspection establishes RUNTIME HOLD for strict startup refusal in stock ShroudForge; live tests remain NOT_RUN. See [runtime preflight](p0/RUNTIME_PREFLIGHT.md). No runtime installed, guard disabled or game launched.
+
+## Guard fix request and outcome
+
+Owner requested resolving loader guards before being guided through the offline reset. Guard patch `4919b51` now checks identity before startup patching, requires exact execution profiles, propagates required initialization failures and cleans up attach failures. Focused native/fixture checks pass; no game test implied. Updated Steam identity is unchanged, but the matching profile is read-only and lacks execution definitions. Full DLL cross-build also remains unvalidated. RUNTIME stays HOLD; no reset check requested yet. No fallback, old-offset reuse or provenance promotion is authorized by a guard fix.

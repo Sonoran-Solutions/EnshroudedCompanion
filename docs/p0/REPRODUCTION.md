@@ -30,3 +30,5 @@ Prerequisites:
 Run only the smallest applicable rows in [scenario matrix](SCENARIOS.md). Capture timestamped expected/actual results, command and process ownership, exit status and cleanup. Record absent APIs as unresolved; do not substitute raw writes, teleportation, visual labels, or save edits. Subsequent read-only, actor and construction jobs remain gated as specified in the tickets. Stop after P0; P1 requires a separate owner disposition.
 
 Follow-up: Steam update in progress and source-confirmed startup safety blockers prevent launch. See [runtime preflight](RUNTIME_PREFLIGHT.md) and the [disabled lifecycle package](../../probes/shroudforge/README.md). Refresh identities only after the update completes.
+
+Current checkpoint: update completed and identity is unchanged. Follow the [guard-patch reproduction](../../patches/shroudforge/README.md) for synthetic tests only. Current-build execution symbols are missing from the pinned source, so no game launch/reset is requested.

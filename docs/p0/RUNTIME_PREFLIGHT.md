@@ -33,3 +33,7 @@ Smallest route now: finish Steam update; independently re-fingerprint; retain th
 ## Process accounting
 
 Only metadata HTTP fetch (`timeout 30 curl .../releases?per_page=5`) and local source reads/searches/PATH checks ran. Metadata saved outside the project at `/tmp/enshrouded-p0-source-review/shroudforge-releases.json`. No installs, executable downloads/launches, builds, game/save modifications or new long-running processes. Only this new project report was written; no commit. No owned process remains.
+
+## Superseding guard-work result
+
+The [strict patch](../../patches/shroudforge/README.md) addresses the identified guard defects and passes focused tests at `a9b0661` (following initial patch `4919b51`). Post-update fingerprint is unchanged. However, the matching 26082781 profile has only read/resource layouts, not execution hooks; the stricter runtime correctly refuses it. The complete production DLL bundle remains unbuilt/unvalidated. The earlier source observations remain evidence about unmodified upstream, not claims that the patch was installed.

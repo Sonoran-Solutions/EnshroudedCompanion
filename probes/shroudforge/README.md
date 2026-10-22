@@ -49,3 +49,5 @@ pass follows from it. Restore/reset semantics must be verified before mutations.
 Validation so far: JSON syntax and manual mapping to pinned upstream interfaces.
 Lua parsing, upstream package validation and actual runtime execution: NOT_RUN
 (no Lua or documented Windows build toolchain available on PATH).
+
+The [strict guard patch](../../patches/shroudforge/README.md) now passes focused synthetic tests. Deployment remains held: the exact current-build execution profile is absent, and the complete production artifact is unbuilt. This lifecycle probe remains disabled and untested in-game.
